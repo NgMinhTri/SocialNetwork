@@ -50,7 +50,7 @@ if($num>0){
     http_response_code(200);
   
     // show products data in json format
-    echo json_encode($products_arr);
+    echo json_encode($products_arr['name']);
 }
   
 // no products found will be here

@@ -1,8 +1,8 @@
-﻿<?php include 'inc/header.php';?>
+<?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>Danh sách câu hỏi</h2>
+                <h2>Danh sách câu hỏi chưa duyệt</h2>
                 <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
@@ -13,6 +13,7 @@
 							<th>Mô tả</th>
 							<th>Trạng thái</th>
 							<th>Action</th>
+							
 						</tr>
 					</thead>
 					<tbody>

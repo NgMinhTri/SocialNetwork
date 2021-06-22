@@ -1,3 +1,5 @@
+
+
 <?php
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache"); 
@@ -17,6 +19,7 @@
     <link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
     <!-- BEGIN: load jquery -->
     <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
+    
     <script type="text/javascript" src="js/jquery-ui/jquery.ui.core.min.js"></script>
     <script src="js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
     <script src="js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
@@ -53,7 +56,12 @@
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
                             <li>Hello Admin</li>
-                            <li><a href="#">Logout</a></li>
+                            <?php 
+                                if(isset($_GET['action']) && $_GET['action']=='logout'){
+                                    Session::destroy();
+                                }
+                             ?>
+                            <li><a href="./login.php">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,11 +73,11 @@
         </div>
         <div class="grid_12">
             <ul class="nav main">
-                <li class="ic-dashboard"><a href="index.php"><span>Dashboard</span></a> </li>
-                <li class="ic-form-style"><a href=""><span>User Profile</span></a></li>
-				<li class="ic-typography"><a href="changepassword.php"><span>Change Password</span></a></li>
-				<li class="ic-grid-tables"><a href="inbox.php"><span>Inbox</span></a></li>
-                <li class="ic-charts"><a href="../user/index.php"><span>Visit Website</span></a></li>
+                <li class="ic-dashboard"><a href="index.php"><span>Trang chủ</span></a> </li>
+                <li class="ic-form-style"><a href="userprofile.php"><span>Thông tin User</span></a></li>
+				<li class="ic-typography"><a href="changepassword.php"><span>Thay đổi mật khẩu</span></a></li>
+				<!-- <li class="ic-grid-tables"><a href="inbox.php"><span>Inbox</span></a></li> -->
+                <li class="ic-charts"><a href="../index.php"><span>Xem Website</span></a></li>
             </ul>
         </div>
         <div class="clear">

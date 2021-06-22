@@ -3,7 +3,7 @@ class Database{
   
     // specify your own database credentials
     private $host = "localhost:3306";
-    private $db_name = "demoapiphp";
+    private $db_name = "socialnetworking";
     private $username = "root";
     private $password = "123456789";
     public $conn;

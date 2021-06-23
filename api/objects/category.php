@@ -55,6 +55,60 @@ class Category{
       
         return false;
     }
+
+    // update the product
+    function update(){
+      
+        // update query
+        $query = "UPDATE
+                    " . $this->table_name . "
+                SET
+                    catName = :catName
+                WHERE
+                    ID = :ID";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $this->catName=htmlspecialchars(strip_tags($this->catName));
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+      
+        // bind new values
+        $stmt->bindParam(':catName', $this->catName);
+        $stmt->bindParam(':ID', $this->ID);
+      
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+      
+        return false;
+    }
+
+    // delete the product
+    function delete(){
+      
+        // delete query
+        $query = "DELETE FROM " . $this->table_name . " WHERE ID = ?";
+      
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+      
+        // bind id of record to delete
+        $stmt->bindParam(1, $this->ID);
+      
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+      
+        return false;
+    }
+
             
 }
 ?>

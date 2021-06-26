@@ -22,26 +22,29 @@ $data = json_decode(file_get_contents("php://input"));
   
 // make sure data is not empty
 if(
-    !empty($data->catName)){
+    !empty($data->catName) &&
+    !empty($data->description)
+){
   
     // set product property values
     $category->catName = $data->catName;
+    $category->description = $data->description;
   
     // create the product
-    if($category->create()){
+    if($result = $category->create()){
   
         // set response code - 201 created
         http_response_code(201);
   
         // tell the user
-        echo json_encode(array("message" => "Category was created."));
+        echo $result;
     }
   
     // if unable to create the product, tell the user
-    else{
-        http_response_code(503);
-        echo json_encode(array("message" => "Unable to create category."));
-    }
+    // else{
+    //     http_response_code(503);
+    //     echo json_encode(array("message" => "Unable to create category."));
+    // }
 }
   
 // tell the user data is incomplete

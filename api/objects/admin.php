@@ -1,3 +1,4 @@
+
 <?php
 // 'user' object
 class User{
@@ -51,6 +52,7 @@ function create(){
     // execute the query, also check if query was successful
     if($stmt->execute()){
         return true;
+           
     }
  
     return false;

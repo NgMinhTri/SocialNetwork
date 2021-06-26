@@ -8,6 +8,7 @@ class Category{
     // object properties
     public $ID;
     public $catName;
+    public $description;
     public $numberOfQuestions;
 
   
@@ -19,7 +20,7 @@ class Category{
     public function readAll(){
         //select all data
         $query = "SELECT
-                    ID, catName, numberOfQuestions
+                    ID, catName, numberOfQuestions, description
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -33,27 +34,55 @@ class Category{
      // create product
     function create(){
       
-        // query to insert record
-        $query = "INSERT INTO
+        // // query to insert record
+        // $query = "INSERT INTO
+        //             " . $this->table_name . "
+        //         SET
+        //             catName=:catName
+        //         where catName != catName";
+      
+        // // prepare query
+        // $stmt = $this->conn->prepare($query);
+      
+        // // sanitize
+        // $this->catName=htmlspecialchars(strip_tags($this->catName));
+      
+        // // bind values
+        // $stmt->bindParam(":catName", $this->catName);
+      
+        // // execute query
+        // if($stmt->execute()){
+        //     return true;
+        // }
+      
+        // return false;
+        $query = "SELECT
+                    catName
+                FROM
+                    " . $this->table_name . "
+                WHERE
+                    catName = :catName";
+        $stmt = $this->conn->prepare($query);
+        $this->catName=htmlspecialchars(strip_tags($this->catName));
+        $stmt->bindParam(":catName", $this->catName);
+        $stmt->execute();
+        if($stmt->rowCount() > 0){
+            return 2;
+        }
+        else{
+            $sql = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    catName=:catName";
-      
-        // prepare query
-        $stmt = $this->conn->prepare($query);
-      
-        // sanitize
-        $this->catName=htmlspecialchars(strip_tags($this->catName));
-      
-        // bind values
-        $stmt->bindParam(":catName", $this->catName);
-      
-        // execute query
-        if($stmt->execute()){
-            return true;
+                    catName =:catName, description =:description";
+            $cat = $this->conn->prepare($sql);
+            $this->catName=htmlspecialchars(strip_tags($this->catName));
+            $this->description=htmlspecialchars(strip_tags($this->description));
+            $cat->bindParam(":catName", $this->catName);
+            $cat->bindParam(":description", $this->description);
+            if($cat->execute()){
+                return 1;
+            }           
         }
-      
-        return false;
     }
 
     // update the product

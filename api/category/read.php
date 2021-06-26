@@ -28,6 +28,7 @@ if($num>0){
         $category_item=array(
             "ID" => $ID,
             "catName" => $catName,
+            "description" => $description,
             "numberOfQuestions" => html_entity_decode($numberOfQuestions)
         );
         array_push($categories_arr["records"], $category_item);

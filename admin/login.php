@@ -96,7 +96,8 @@ $(document).ready(function(){
                 // lưu trữ JWT vào Cookie
                 setCookie("jwt", result.jwt, 1);     
                 // hiển thị trang index nếu login thành công
-                showIndexPage();                 
+                showIndexPage();  
+                             
             },
             // lỗi nếu dăng nhập không thành công
             error: function(xhr, resp, text){
@@ -116,6 +117,7 @@ $(document).ready(function(){
              window.location.href ="index.php"; 
         })
     }
+    
 
     // Hàm Get Cookie
     function getCookie(cname){

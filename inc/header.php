@@ -10,7 +10,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
                 <title>Social Network</title>
-
                 <link rel="shortcut icon" href="images/favicon.png" />
 
 
@@ -45,7 +44,7 @@
             </a>
             <span class="tag-line">Social Network</span>
           </div>
-
+          
           <!-- Start of Main Navigation -->
           <nav class="main-nav">
             <div class="menu-top-menu-container">
@@ -73,6 +72,31 @@
                   </ul>
                 </li>
                 <li><a href="contact.php">Liên hệ</a></li>
+                <?php if($_COOKIE['jwt']==""){
+                    echo "
+                      <li>
+                      <a href='#'>Login/ Register</a>
+                      <ul class='sub-menu'>
+                        <li><a href='log-in.php'>Login</a></li>
+                        <li><a href='register.php'>Register</a></li>
+                      </ul>
+                      </li>";
+                      
+                    }
+                    else {
+                      echo "
+                      <li>
+                      <a href='#'>";
+                      echo $_COOKIE['name'];
+                      echo
+                      "</a>
+                      <ul class='sub-menu'>
+                        <li><a href='profile.php'>Profile</a></li>
+                        <li><a href='log-in.php'>Logout</a></li>
+                      </ul>
+                      </li>";}
+                ?>
+                
               </ul>
             </div>
           </nav>

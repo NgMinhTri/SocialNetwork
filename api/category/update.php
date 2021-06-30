@@ -25,7 +25,7 @@ $category->ID = $data->ID;
   
 // set product property values
 $category->catName = $data->catName;
-  
+$category->description = $data->description;
 // update the product
 if($category->update()){
   
@@ -33,11 +33,8 @@ if($category->update()){
     http_response_code(200);
   
     // tell the user
-    echo json_encode(array(
-    	"message" => "Danh mục câu hỏi đã được cập nhật.",
-    	"catName" => "$category->catName",
-    	"ID" => "$category->ID"
-    ));
+    // echo json_encode(array("message" => "Danh mục câu hỏi đã được cập nhật."));
+    echo json_encode(array("message" => "Product was updated."));
 
 }
   

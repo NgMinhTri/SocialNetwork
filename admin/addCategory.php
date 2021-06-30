@@ -42,6 +42,7 @@ $(document).ready(function(){
         var form_data=JSON.stringify(addcategory_form.serializeObject());
     
         // submit dữ liệu tới link api 
+        
         $.ajax({
             url: "../api/category/create.php",
             type : "POST",

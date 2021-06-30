@@ -9,7 +9,7 @@ class Category{
     public $ID;
     public $catName;
     public $description;
-    public $numberOfQuestions;
+    // public $numberOfQuestions;
 
   
     public function __construct($db){
@@ -34,28 +34,6 @@ class Category{
      // create product
     function create(){
       
-        // // query to insert record
-        // $query = "INSERT INTO
-        //             " . $this->table_name . "
-        //         SET
-        //             catName=:catName
-        //         where catName != catName";
-      
-        // // prepare query
-        // $stmt = $this->conn->prepare($query);
-      
-        // // sanitize
-        // $this->catName=htmlspecialchars(strip_tags($this->catName));
-      
-        // // bind values
-        // $stmt->bindParam(":catName", $this->catName);
-      
-        // // execute query
-        // if($stmt->execute()){
-        //     return true;
-        // }
-      
-        // return false;
         $query = "SELECT
                     catName
                 FROM
@@ -92,7 +70,8 @@ class Category{
         $query = "UPDATE
                     " . $this->table_name . "
                 SET
-                    catName = :catName
+                    catName = :catName,
+                    description = :description
                 WHERE
                     ID = :ID";
       
@@ -100,12 +79,16 @@ class Category{
         $stmt = $this->conn->prepare($query);
       
         // sanitize
-        $this->catName=htmlspecialchars(strip_tags($this->catName));
         $this->ID=htmlspecialchars(strip_tags($this->ID));
+        $this->catName=htmlspecialchars(strip_tags($this->catName));
+        $this->description=htmlspecialchars(strip_tags($this->description));
+        
       
         // bind new values
-        $stmt->bindParam(':catName', $this->catName);
         $stmt->bindParam(':ID', $this->ID);
+        $stmt->bindParam(':catName', $this->catName);
+        $stmt->bindParam(':description', $this->description);
+        
       
         // execute the query
         if($stmt->execute()){
@@ -138,6 +121,65 @@ class Category{
         return false;
     }
 
-            
+    function readOne(){
+      
+        // query to read single record
+        $query = "SELECT
+                    ID, catName, description
+                FROM
+                    " . $this->table_name . " 
+                           
+                WHERE
+                    ID =  ?
+                LIMIT
+                    0,1";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+      
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->ID);
+      
+        // execute query
+        $stmt->execute();
+      
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        // set values to object properties
+        $this->catName = $row['catName'];
+        $this->description = $row['description'];
+    } 
+
+      // search products
+    function search($keywords){
+      
+        // select all query
+        $query = "SELECT
+                    ID, catName, description
+                FROM
+                    " . $this->table_name . " 
+                    
+                WHERE
+                    catName LIKE ? OR description LIKE ? 
+                ";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $keywords=htmlspecialchars(strip_tags($keywords));
+        $keywords = "%{$keywords}%";
+      
+        // bind
+        $stmt->bindParam(1, $keywords);
+        $stmt->bindParam(2, $keywords);
+        // $stmt->bindParam(3, $keywords);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }          
 }
 ?>

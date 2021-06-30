@@ -1,3 +1,4 @@
+
 <?php include 'inc/header.php';?>
                 <main>
                     <div class="container-fluid px-4">
@@ -77,6 +78,7 @@
                                             <th>Office</th>
                                             <th>Age</th>
                                             <th>Start date</th>
+                                            <th>Salary</th>
                                             <th>Salary</th>
                                         </tr>
                                     </thead>

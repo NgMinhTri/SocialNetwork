@@ -13,6 +13,7 @@ include_once '../libs/php-jwt-master/src/BeforeValidException.php';
 include_once '../libs/php-jwt-master/src/ExpiredException.php';
 include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once '../libs/php-jwt-master/src/JWT.php';
+
 use \Firebase\JWT\JWT;
  
 // retrieve gieve jwt here
@@ -35,6 +36,7 @@ if($jwt){
             "message" => "Access granted.",
             "data" => $decoded->data
         )); 
+         
     }
     // catch will be here
     // if decode fails, it means jwt is invalid

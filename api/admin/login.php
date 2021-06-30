@@ -1,3 +1,4 @@
+
 <?php
 // required headers
 header("Access-Control-Allow-Origin: http://localhost:8080/Login_LogOutPH_PAPI/");
@@ -61,7 +62,7 @@ if($email_exists && password_verify($data->password, $user->password)){
                 "jwt" => $jwt
             )
         );
-    //Session::set('adminlogin', true);
+   
 }
 // login failed will be here
 // login failed

@@ -4,11 +4,11 @@ $(document).ready(function(){
  
         var keywords = $(this).find(":input[name='keywords']").val();
  
-        $.getJSON("../api/category/search.php?s=" + keywords, function(data){
+        $.getJSON("../api/user/search.php?s=" + keywords, function(data){
  
             readProductsTemplate(data, keywords);
  
-            changePageTitle("Tìm kiếm danh mục: " + keywords);
+            changePageTitle("Tìm kiếm User: " + keywords);
  
         });
  

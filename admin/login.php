@@ -29,10 +29,8 @@
                                                 <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
-                                            <!-- <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label class="form-check-label" for="inputRememberPassword">Nhớ mật khẩu</label>
-                                            </div> -->
+                                           
+                                            <div id="response"></div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.php">Quên mật khẩu?</a>
                                                 <button type='submit' class='btn btn-primary'>Đăng nhập</button>
@@ -101,8 +99,7 @@ $(document).ready(function(){
             },
             // lỗi nếu dăng nhập không thành công
             error: function(xhr, resp, text){
-            alert("Email hoặc mật khẩu không đúng");
-            //login_form.find('input').val('');
+             $('#response').html("<div class='alert alert-danger'>Email hoặc mật khẩu không đúng!</div>");
             }
         });
         return false;

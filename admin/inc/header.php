@@ -44,7 +44,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Cài đặt</a></li>
-                        <li><a class="dropdown-item" href="#!">Nhật ký hoạt động</a></li>
+                        <li><a class="dropdown-item" href="./change-password.php">Cập nhật mật khẩu</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">Đăng xuất</a></li>
                     </ul>
@@ -82,14 +82,14 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
+                                        Câu hỏi
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.php">Login</a>
-                                            <a class="nav-link" href="register.php">Register</a>
-                                            <a class="nav-link" href="password.php">Forgot Password</a>
+                                            <a class="nav-link" href="Question.php">Danh sách câu hỏi</a>
+                                            <a class="nav-link" href="register.php">Danh sách chưa duyệt</a>
+                                            <!-- <a class="nav-link" href="password.php">Forgot Password</a> -->
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">

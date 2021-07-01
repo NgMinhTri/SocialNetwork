@@ -31,7 +31,7 @@ $(document).ready(function(){
 					        <!-- description field -->
 					        <tr>
 					            <td>Mô tả</td>
-					            <td><textarea name='description' class='form-control' required>` + description + `</textarea></td>
+					            <td><textarea rows="8" cols="100" name='description' class='form-control' required>` + description + `</textarea></td>
 					        </tr>					 					        
 					 
 					        <tr>

@@ -4,7 +4,7 @@
 	<title>Login V16</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 <!--===============================================================================================-->
@@ -34,6 +34,10 @@
 							Login
 						</button>
 					</div>
+                    <div id='response'></div>
+                    <div class="d-flex justify-content-center links">
+					Don't have an account?<a href="register.php">Sign Up</a>
+				    </div>
 
 				</form>
 			</div>

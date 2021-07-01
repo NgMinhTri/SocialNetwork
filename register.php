@@ -5,6 +5,7 @@
 	<title>Login V16</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
@@ -52,7 +53,9 @@
 							Register
 						</button>
 					</div>
-
+					<div class="d-flex justify-content-center links">
+					Already had an account?<a href="log-in.php">Login</a>
+				    </div>
 				</form>
 			</div>
 		</div>

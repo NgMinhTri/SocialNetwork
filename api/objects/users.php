@@ -122,5 +122,47 @@ class User{
         // return false if email does not exist in the database
         return false;
     }
-}
+
 // update() method will be here
+
+// update a user record
+    public function update(){
+    
+        // if password needs to be updated    
+        // if no posted password, do not update the password
+        $query = "UPDATE " . $this->table_name . "
+                SET
+                    password = :password
+                WHERE id = :id";
+    
+        // prepare the query
+        $stmt = $this->conn->prepare($query);
+    
+        // sanitize
+        // $this->firstname=htmlspecialchars(strip_tags($this->firstname));
+        // $this->lastname=htmlspecialchars(strip_tags($this->lastname));
+        // $this->email=htmlspecialchars(strip_tags($this->email));
+    
+        // // bind the values from the form
+        // $stmt->bindParam(':firstname', $this->firstname);
+        // $stmt->bindParam(':lastname', $this->lastname);
+        // $stmt->bindParam(':email', $this->email);
+    
+        // hash the password before saving to database
+        if(!empty($this->password)){
+            $this->password=htmlspecialchars(strip_tags($this->password));
+            $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+            $stmt->bindParam(':password', $password_hash);
+        }
+    
+        // unique ID of record to be edited
+        $stmt->bindParam(':id', $this->id);
+    
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+    
+        return false;
+    }
+}

@@ -94,7 +94,7 @@ $(document).ready(function(){
          // on error, tell the user sign up failed
          $('#response').html("<div class='alert alert-danger'>Incorrect Username or Password</div>");
      }
-});
+    });
     // http request will be here
 
     return false;

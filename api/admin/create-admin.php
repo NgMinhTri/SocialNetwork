@@ -13,7 +13,7 @@ include_once '../objects/admin.php';
 $database = new Database();
 $db = $database->getConnection();
  
-$admin = new User($db);
+$admin = new Admin($db);
  
 $data = json_decode(file_get_contents("php://input"));
  

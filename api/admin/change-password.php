@@ -19,7 +19,7 @@ include_once '../objects/admin.php';
 $database = new Database();
 $db = $database->getConnection();
  
-$admin = new User($db);
+$admin = new Admin($db);
  
 $data = json_decode(file_get_contents("php://input"));
 
@@ -28,9 +28,9 @@ $jwt=isset($data->jwt) ? $data->jwt : "";
 if($jwt){ 
     try
     {
-        $decoded = JWT::decode($jwt, $key, array('HS256')); 
-        $admin->Id = $decoded->data->Id;
-        $admin->password = $data->password;      
+        $decoded = JWT::decode($jwt, $key, array('HS256'));        
+        $admin->password = $data->password;  
+        $admin->Id = $decoded->data->Id;    
        
         if($admin->updatePassword() == true)
         {
@@ -45,14 +45,14 @@ if($jwt){
                    "email" => $admin->email              
                 )
             );
-
-            http_response_code(200);
+          
             $jwt = JWT::encode($token, $key);
+             http_response_code(200);
             echo json_encode(
-            array(
-                "message" => "Password Admin was updated.",
-                "jwt" => $jwt
-                )
+              array(
+                  "message" => "Password Admin was updated.",
+                  "jwt" => $jwt
+                  )
             );  
         }
         else
@@ -64,15 +64,15 @@ if($jwt){
          
     }
 
-	catch (Exception $e){	 
+  catch (Exception $e){  
 
-	    http_response_code(401); 
+      http_response_code(401); 
 
-	    echo json_encode(array(
-	        "message" => "Access denied.",
-	        "error" => $e->getMessage()
-	    ));
-	}
+      echo json_encode(array(
+          "message" => "Access denied.",
+          "error" => $e->getMessage()
+      ));
+  }
 }
 
 else{

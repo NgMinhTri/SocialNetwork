@@ -23,7 +23,7 @@ class User{
  
     // create() method will be here
     // used by select drop-down list
-    public function read(){
+    public function readListUserForAdmin(){
         //select all data
         $query = "SELECT
                     ID, firstname, lastname, username, email, phonenumber

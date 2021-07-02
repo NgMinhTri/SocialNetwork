@@ -14,7 +14,7 @@ $db = $database->getConnection();
 // initialize object
 $user = new User($db);
 // query categorys
-$stmt = $user->read();
+$stmt = $user->readListUserForAdmin();
 $num = $stmt->rowCount();
   
 // check if more than 0 record found

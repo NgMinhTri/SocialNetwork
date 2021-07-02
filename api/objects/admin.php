@@ -1,6 +1,6 @@
 
 <?php
-class User{
+class Admin{
  
     // database connection and table name
     private $conn;
@@ -121,10 +121,13 @@ function passwordExists(){
 
     $this->Id =htmlspecialchars(strip_tags($this->Id));
 
-    $this->password=htmlspecialchars(strip_tags($this->password));  
-    $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
-    $stmt->bindParam(':password', $password_hash);
+    if(!empty($this->password)){
 
+        $this->password=htmlspecialchars(strip_tags($this->password));  
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(':password', $password_hash);
+    }
+    
     $stmt->bindParam(':Id', $this->Id);
 
     if($stmt->execute()){

@@ -13,6 +13,7 @@ function showProducts(){
  
     // get list of products from the API
     $.getJSON("../api/user/read.php", function(data){
+        
  
         // html for listing products
         readProductsTemplate(data, "");

@@ -24,17 +24,17 @@ if($num>0){
         extract($row);
   
         $question_item = array(
-            "ID" =>  $question->id,
-            "catName" => $question->catName,
-            // "UserName" => $question->UserName,
-            "Title" => $question->Title,
-            "Description" => $question->Description,
-            "CreateDate" => $question->CreateDate,
-            "LastModifiedDate" => $question->LastModifiedDate,
-            "NumberOfComments" => $question->NumberOfComments,
-            "NumberOfVotes" => $question->NumberOfVotes,
-            "NumberOfReports" => $question->NumberOfReports,
-            "Status" => $question->Status 
+            "ID" =>  $ID,
+            "catName" => $catName,
+            "UserName" => $UserName,
+            "Title" => $Title,
+            "Description" => $Description,
+            "CreateDate" => $CreateDate,
+            "LastModifiedDate" => $LastModifiedDate,
+            "NumberOfComments" => $NumberOfComments,
+            "NumberOfVotes" => $NumberOfVotes,
+            "NumberOfReports" => $NumberOfReports,
+            "Status" => $Status 
         ); 
         array_push($question_arr["records"], $question_item);
     }

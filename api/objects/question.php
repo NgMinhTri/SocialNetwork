@@ -7,7 +7,7 @@ class Question{
     private $table_name = "questions";
  
     // object properties
-    public $id;
+    public $ID;
     public $catId;
     public $userId;
     public $Title;
@@ -117,42 +117,38 @@ class Question{
     }  
 
       // search products
-    function search($keywords){
-      
-
+    function search($keywords){     
       $query = "SELECT
-                    q.ID, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                    q.ID, c.catName, u.UserName, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.Status, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes
                 FROM
                     " . $this->table_name . " q
                     
-                    
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
                      WHERE
                        q.Title LIKE ?  
-                       OR q.Description LIKE ? 
+                       OR q.Description LIKE ? OR q.CreateDate LIKE ? OR q.LastModifiedDate LIKE ? OR c.catName LIKE ? OR u.UserName LIKE ?
 
                     ORDER BY
                     q.CreateDate DESC"; 
-
        
-      
-        // prepare query statement
         $stmt = $this->conn->prepare($query);
       
-        // sanitize
         $keywords=htmlspecialchars(strip_tags($keywords));
         $keywords = "%{$keywords}%";
       
-        // bind
         $stmt->bindParam(1, $keywords);
         $stmt->bindParam(2, $keywords);
-        // $stmt->bindParam(3, $keywords);
-        // $stmt->bindParam(4, $keywords);
-        // $stmt->bindParam(5, $keywords);
-        // $stmt->bindParam(6, $keywords);
+        $stmt->bindParam(3, $keywords);
+        $stmt->bindParam(4, $keywords);
+        $stmt->bindParam(5, $keywords);
+        $stmt->bindParam(6, $keywords);
       
-        // execute query
-        $stmt->execute();
-      
+        $stmt->execute();     
         return $stmt;
     }     
 

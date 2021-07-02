@@ -69,16 +69,68 @@ function emailExists(){
  
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
  
-        $this->id = $row['Id'];
+        $this->Id = $row['Id'];
         $this->firstname = $row['firstname'];
         $this->lastname = $row['lastname'];
         $this->password = $row['password'];
- 
-        // return true because email exists in the database
         return true;
     }
-    // return false if email does not exist in the database
+    return false;
+}
+
+function passwordExists(){
+ 
+    $query = "SELECT Id, firstname, lastname, email
+            FROM " . $this->table_name . "
+            WHERE password = ?
+            LIMIT 0,1";
+ 
+    $stmt = $this->conn->prepare( $query );
+ 
+    $this->password=htmlspecialchars(strip_tags($this->password));
+ 
+    $stmt->bindParam(1, $this->password);
+ 
+    $stmt->execute();
+ 
+    $num = $stmt->rowCount();
+ 
+    if($num>0){
+ 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+        $this->id = $row['Id'];
+        $this->firstname = $row['firstname'];
+        $this->lastname = $row['lastname'];
+        $this->email = $row['email'];
+        return true;
+    }
     return false;
 }
  
+
+ function updatePassword(){
+ 
+    $query = "UPDATE " . $this->table_name . "
+            SET
+                password = :password
+
+            WHERE Id =: Id";
+ 
+    $stmt = $this->conn->prepare($query);
+
+    $this->Id =htmlspecialchars(strip_tags($this->Id));
+
+    $this->password=htmlspecialchars(strip_tags($this->password));  
+    $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+    $stmt->bindParam(':password', $password_hash);
+
+    $stmt->bindParam(':Id', $this->Id);
+
+    if($stmt->execute()){
+        return true;          
+    }
+ 
+    return false;
+}
 }

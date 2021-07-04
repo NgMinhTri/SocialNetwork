@@ -2,10 +2,10 @@
 <?php include 'inc/header.php';?>
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Thêm danh mục mới</h1>
+                        <h2 class="mt-4">Thêm danh mục mới</h2>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
+                            <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Add Category</li>
                         </ol>
                       
                         <form id='addCategory_form'>

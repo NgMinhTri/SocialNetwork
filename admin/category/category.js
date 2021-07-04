@@ -4,7 +4,7 @@ function readProductsTemplate(data, keywords){
     var read_products_html=`
         <!-- search products form -->
         <form id='search-product-form' action='#' method='post'>
-        <div class='input-group pull-left w-50-pct'>
+        <div class='input-group pull-left w-30-pct'>
  
             <input type='text' value='` + keywords + `' name='keywords' class='form-control product-search-keywords' placeholder='Tìm kiếm danh mục...' />
  

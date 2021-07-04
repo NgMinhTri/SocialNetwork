@@ -16,11 +16,9 @@ function readProductsTemplate(data, keywords){
  
         </div>
         </form>
- 
+        </br>
         <!-- when clicked, it will load the create product form -->
-        <div id='create-product' class='btn btn-primary pull-right m-b-15px create-product-button'>
-            <span class='glyphicon glyphicon-plus'></span> Thêm mới
-        </div>
+        
  
         <!-- start table -->
         <table class='table table-bordered table-hover'>

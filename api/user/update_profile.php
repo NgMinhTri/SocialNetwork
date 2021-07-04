@@ -68,7 +68,9 @@ if($jwt){
                         "id" => $user->id,
                         "firstname" => $user->firstname,
                         "lastname" => $user->lastname,
-                        "email" => $user->email
+                        "email" => $user->email,
+                        "firstname" => $user->firstname,
+                        "phonenumber" => $user->phonenumber
                     )
                 );
                 $jwt = JWT::encode($token, $key);

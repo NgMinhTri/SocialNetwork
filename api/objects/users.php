@@ -22,13 +22,12 @@ class User{
     }
     function read(){
         // select all query
-        $name=$_COOKIE['name'];
         $query = "SELECT id, firstname, lastname, username, email, password, phonenumber
-        FROM " . $this->table_name . " WHERE username = '" . $name. "'";
+        FROM " . $this->table_name . " WHERE id = :id";
       
         // prepare query statement
         $stmt = $this->conn->prepare($query);
-      
+        $stmt->bindParam(':id', $this->id);
         // execute query
         $stmt->execute();
       
@@ -84,7 +83,7 @@ class User{
     function emailExists(){
     
         // query to check if email exists
-        $query = "SELECT id, username, lastname, password
+        $query = "SELECT id, username, lastname, password, firstname, phonenumber
                 FROM " . $this->table_name . "
                 WHERE email = ?
                 LIMIT 0,1";
@@ -115,6 +114,8 @@ class User{
             $this->username = $row['username'];
             $this->password = $row['password'];
             $this->lastname = $row['lastname'];
+            $this->firstname = $row['firstname'];
+            $this->phonenumber = $row['phonenumber'];
             // return true because email exists in the database
             return true;
         }
@@ -125,6 +126,36 @@ class User{
 
 // update() method will be here
 
+
+    function passwordExists(){
+    
+        $query = "SELECT Id, firstname, lastname, email
+                FROM " . $this->table_name . "
+                WHERE password = ?
+                LIMIT 0,1";
+    
+        $stmt = $this->conn->prepare( $query );
+    
+        $this->password=htmlspecialchars(strip_tags($this->password));
+    
+        $stmt->bindParam(1, $this->password);
+    
+        $stmt->execute();
+    
+        $num = $stmt->rowCount();
+    
+        if($num>0){
+    
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            $this->id = $row['id'];
+            $this->firstname = $row['firstname'];
+            $this->lastname = $row['lastname'];
+            $this->email = $row['email'];
+            return true;
+        }
+        return false;
+    }
 // update a user record
     public function update(){
     
@@ -137,7 +168,6 @@ class User{
     
         // prepare the query
         $stmt = $this->conn->prepare($query);
-    
         // sanitize
         // $this->firstname=htmlspecialchars(strip_tags($this->firstname));
         // $this->lastname=htmlspecialchars(strip_tags($this->lastname));
@@ -164,5 +194,26 @@ class User{
         }
     
         return false;
+    }
+
+    public function questionOfUser(){
+        $query = "SELECT
+        q.id, q.Title, q.Description, q.CreateDate, q.NumberOfComments , q.Status
+        FROM
+            questions q,
+            " . $this->table_name . " u 
+            WHERE q.userId=u.id AND u.id = ? 
+        ORDER BY
+            q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id);        
+
+        
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
     }
 }

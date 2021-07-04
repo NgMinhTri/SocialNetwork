@@ -18,7 +18,6 @@
             <!-- </div>
                     </div> -->
             <!-- </div> -->
-
         </div>
         <!-- <div class="col-md-8"> -->
         <div class="card mb-3">
@@ -85,15 +84,44 @@
 
 <script>
 $(document).ready(function() {
-    $.getJSON("http://localhost/SOCIALNETWORK/api/user/read.php", function(data) {
-        $("#fname").html(`<div>` + data.firstname + `</div>`);
-        $("#lname").html(`<div>` + data.lastname + `</div>`);
-        $("#email").html(`<div>` + data.email + `</div>`);
-        $("#username").html(`<div>` + data.username + `</div>`);
-        $("#phone").html(`<div>` + data.phonenumber + `</div>`);
-        $("#fullname").html(`<div>` + data.firstname + `</div>`);
-    });
+    var jwt = getCookie('jwt');
+    $.post("http://localhost/SOCIALNETWORK/api/user/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
+        $("#fname").html(`<div>` + result.data.firstname + `</div>`);
+        $("#lname").html(`<div>` + result.data.lastname + `</div>`);
+        $("#email").html(`<div>` + result.data.email + `</div>`);
+        $("#username").html(`<div>` + result.data.username + `</div>`);
+        $("#phone").html(`<div>` + result.data.phonenumber + `</div>`);
+        $("#fullname").html(`<div>` + result.data.firstname + `</div>`);
+ // html form for updating user account will be here
+    })
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('GET', 'http://localhost/SOCIALNETWORK/api/user/read.php')
+    // xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+    // xhr.send(JSON.stringify(jwt))
+    // $.getJSON("http://localhost/SOCIALNETWORK/api/user/read.php",function(data){
+    //     $("#fname").html(`<div>` + data.firstname + `</div>`);
+    //     $("#lname").html(`<div>` + data.lastname + `</div>`);
+    //     $("#email").html(`<div>` + data.email + `</div>`);
+    //     $("#username").html(`<div>` + data.username + `</div>`);
+    //     $("#phone").html(`<div>` + data.phonenumber + `</div>`);
+    //     $("#fullname").html(`<div>` + data.firstname + `</div>`);
+    // });
 
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
 
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 });
 </script>

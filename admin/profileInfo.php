@@ -32,18 +32,44 @@
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 <script type="text/javascript">
 	$(document).ready(function() {
-	
-    $.getJSON("../api/admin/profile.php", function(data) {
+
+	  var jwt = getCookie('jwt');
+
+    $.post("../api/admin/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
     	var read_admin_profile=`
-		<button class='btn btn-primary m-r-10px edit-admin-button' data-id='` + data.Id + `'>
+		<button class='btn btn-primary m-r-10px edit-admin-button' data-id='` + result.data.Id + `'>
         <span class='glyphicon glyphicon-eye-open'></span> Cập nhật
     	</button> `;
-        $("#fname").html(`<div>` + data.firstname + `</div>`);
-        $("#lname").html(`<div>` + data.lastname + `</div>`);
-        $("#email").html(`<div>` + data.email + `</div>`);
+        $("#fname").html(`<div>` + result.data.firstname + `</div>`);
+        $("#lname").html(`<div>` + result.data.lastname + `</div>`);
+        $("#email").html(`<div>` + result.data.email + `</div>`);
         $("#action").html(read_admin_profile);
     });
 
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 
     $(document).on('click', '.edit-admin-button', function(){
 
@@ -94,7 +120,7 @@
         contentType : 'application/json',
         data : form_data,
         success : function(result) {
-
+            setCookie("jwt", result.jwt, 1);   
             alert("Cập nhật thông tin admin thành công");
             window.location.href ="profileInfo.php"; 
         },

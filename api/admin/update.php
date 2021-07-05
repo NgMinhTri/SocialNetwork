@@ -15,10 +15,10 @@ $admin = new Admin($db);
   
 $data = json_decode(file_get_contents("php://input"));
   
-$admin->Id = $data->Id;
 $admin->firstname = $data->firstname;
 $admin->lastname = $data->lastname;
 $admin->email = $data->email;
+$admin->Id = $data->Id;
 
 if($admin->update()){
 
@@ -33,4 +33,3 @@ else{
   
     echo json_encode(array("message" => "Không thể cập nhật thông tin Admin."));
 }
-?>

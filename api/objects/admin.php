@@ -173,25 +173,27 @@ class Admin{
 
     public function update(){
      
-        $query = "UPDATE " . $this->table_name . "
+        $query = " UPDATE 
+                    " . $this->table_name . "
                 SET
                     firstname =: firstname,
                     lastname =: lastname,
                     email = :email
-
+                    
                 WHERE Id =: Id ";
      
         $stmt = $this->conn->prepare($query);
-
-        $this->Id =htmlspecialchars(strip_tags($this->Id));     
+    
         $this->firstname =htmlspecialchars(strip_tags($this->firstname));
         $this->lastname =htmlspecialchars(strip_tags($this->lastname));
         $this->email =htmlspecialchars(strip_tags($this->email));
+        $this->Id =htmlspecialchars(strip_tags($this->Id)); 
    
-        $stmt->bindParam(':Id', $this->Id);
+        
         $stmt->bindParam(':firstname', $this->firstname);
         $stmt->bindParam(':lastname', $this->lastname);
         $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':Id', $this->Id);
 
         if($stmt->execute()){
             return true;          

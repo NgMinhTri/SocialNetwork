@@ -1,5 +1,5 @@
 
-
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <?php include 'inc/header.php';?>
 <?php include 'inc/wrapper.php';?>
 
@@ -30,126 +30,15 @@
                     >
                     <span class="like-count">66</span>
                   </li>
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php">WordPress Site Maintenance</a>
-                    </h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">15</span>
-                  </li>
-                  <li class="article-entry video">
-                    <h4><a href="single.php">Meta Tags in WordPress</a></h4>
-                    <span class="article-meta"
-                      >23 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">8</span>
-                  </li>
-                  <li class="article-entry image">
-                    <h4>
-                      <a href="single.php">WordPress in Your Language</a>
-                    </h4>
-                    <span class="article-meta"
-                      >22 Feb, 2013 in
-                      <a href="#" title="View all posts in Advanced Techniques"
-                        >Advanced Techniques</a
-                      ></span
-                    >
-                    <span class="like-count">6</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4><a href="single.php">Know Your Sources</a></h4>
-                    <span class="article-meta"
-                      >22 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">2</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4><a href="single.php">Validating a Website</a></h4>
-                    <span class="article-meta"
-                      >21 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">3</span>
-                  </li>
+                         
+                  
                 </ul>
               </section>
 
               <section class="span4 articles-list">
                 <h3>Chủ đề mới nhất</h3>
                 <ul class="articles">
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php"
-                        >Integrating WordPress with Your Website</a
-                      >
-                    </h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a
-                        href="#"
-                        title="View all posts in Server &amp; Database"
-                        >Server &amp; Database</a
-                      ></span
-                    >
-                    <span class="like-count">66</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4><a href="single.php">Using Javascript</a></h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a href="#" title="View all posts in Advanced Techniques"
-                        >Advanced Techniques</a
-                      ></span
-                    >
-                    <span class="like-count">18</span>
-                  </li>
-                  <li class="article-entry image">
-                    <h4><a href="single.php">Using Images</a></h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a
-                        href="#"
-                        title="View all posts in Designing in WordPress"
-                        >Designing in WordPress</a
-                      ></span
-                    >
-                    <span class="like-count">7</span>
-                  </li>
-                  <li class="article-entry video">
-                    <h4><a href="single.php">Using Video</a></h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in WordPress Plugins"
-                        >WordPress Plugins</a
-                      ></span
-                    >
-                    <span class="like-count">7</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php">WordPress Site Maintenance</a>
-                    </h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">15</span>
-                  </li>
+                  
                   <li class="article-entry standard">
                     <h4>
                       <a href="single.php"
@@ -171,13 +60,20 @@
           <!-- end of page content -->
 
           <!-- start of sidebar -->
+           <div id='create-ask'style="
+              height: 30px;
+              width: 100px;
+              padding: 10px;
+              margin: 20px;
+              font-size: 15px;
+              text-align: center;
+              " class='btn btn-primary pull-right m-b-15px create-ask-button'>
+            <span class='glyphicon glyphicon-plus'></span> Đặt câu hỏi
+          </div>
+          </br>
+          </br>
           <aside class="span4 page-sidebar">
-            <section class="widget">
-              <div class="support-widget">
-                <h3 class="title">Đặt câu hỏi</h3>
-                
-              </div>
-            </section>
+            
 
             <section class="widget">
               <div class="quick-links-widget">

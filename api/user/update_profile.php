@@ -2,7 +2,7 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
@@ -36,7 +36,7 @@ $data = json_decode(file_get_contents("php://input"));
  
 // get jwt
 $jwt=isset($data->jwt) ? $data->jwt : "";
-
+ 
 // decode jwt here
 // if jwt is not empty
 if($jwt){
@@ -52,50 +52,49 @@ if($jwt){
         // $user->firstname = $data->firstname;
         // $user->lastname = $data->lastname;
         // $user->email = $data->email;
+        $user->password = $data->password;
         $user->id = $decoded->data->id;
-        $stmt = $user->read();
-
-        $num = $stmt->rowCount();
+        
         // update user will be here
         // update the user record
-        if ($num>0) {
+        if($user->update()){
             // regenerate jwt will be here
             // we need to re-generate jwt because user details might be different
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                // extract row
-                // this will make $row['name'] to
-                // just $name only
-                extract($row);
-          //q.id, q.Title, q.Description, q.CreateDate, q.NumberOfComments , q.Status 
-                $user_item=array(
-                    "id" => $id,
-                    "firstname" => $firstname,
-                    "lastname" => $lastname,
-                    "username" => $username,
-                    "email" => $email,
-                    "password" => $password,
-                    "phonenumber" =>$phonenumber
+                $token = array(
+                    "iat" => $issued_at,
+                    "exp" => $expiration_time,
+                    "iss" => $issuer,
+                    "data" => array(
+                        "id" => $user->id,
+                        "firstname" => $user->firstname,
+                        "lastname" => $user->lastname,
+                        "email" => $user->email,
+                        "firstname" => $user->firstname,
+                        "phonenumber" => $user->phonenumber
+                    )
                 );
+                $jwt = JWT::encode($token, $key);
+                
+                // set response code
+                http_response_code(200);
+                
+                // response in json format
+                echo json_encode(
+                        array(
+                            "message" => "User was updated.",
+                            "jwt" => $jwt
+                        )
+                    );
+                }
+                        
+                        // message if unable to update user
+            else{
+                // set response code
+                http_response_code(401);
+            
+                // show error message
+                echo json_encode(array("message" => "Unable to update user."));
             }
-          
-            // set response code - 200 OK
-            http_response_code(200);
-          
-            // show products data in json format
-            echo json_encode($user_item);
-        }
-          
-        // no products found will be here
-        else {
-          
-            // set response code - 404 Not found
-            http_response_code(404);
-          
-            // tell the user no products found
-            echo json_encode(
-                array("message" => "No user found.")
-            );
-        }
     }
  
     // catch failed decoding will be here
@@ -124,4 +123,3 @@ else{
     echo json_encode(array("message" => "Access denied."));
 }
 ?>
-    

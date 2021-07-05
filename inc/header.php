@@ -24,11 +24,23 @@
                 <link rel='stylesheet' id='responsive-css-css'  href='css/responsive.css?ver=1.0' type='text/css' media='all' />
                 <link rel='stylesheet' id='pretty-photo-css-css'  href='js/prettyphoto/prettyPhoto.css?ver=3.1.4' type='text/css' media='all' />
                 <link rel='stylesheet' id='main-css-css'  href='css/main.css?ver=1.0' type='text/css' media='all' />
+                <link rel="stylesheet" href="css/profile.css"/>
 
+                
+                
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+              <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
                 <!-- php5 shim, for IE6-8 support of php5 elements -->
                 <!--[if lt IE 9]>
                 <script src="js/php5.js"></script>
                 <![endif]-->
+                <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+                <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+                <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 
@@ -44,7 +56,7 @@
             </a>
             <span class="tag-line">Social Network</span>
           </div>
-          
+
           <!-- Start of Main Navigation -->
           <nav class="main-nav">
             <div class="menu-top-menu-container">
@@ -92,6 +104,7 @@
                       "</a>
                       <ul class='sub-menu'>
                         <li><a href='profile.php'>Profile</a></li>
+                        <li><a href='history.php'>History</a></li>
                         <li><a href='log-in.php'>Logout</a></li>
                       </ul>
                       </li>";}

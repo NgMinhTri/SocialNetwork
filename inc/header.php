@@ -30,17 +30,17 @@
                 
     <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
               <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
               <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-              <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script> -->
                 <!-- php5 shim, for IE6-8 support of php5 elements -->
                 <!--[if lt IE 9]>
                 <script src="js/php5.js"></script>
                 <![endif]-->
-                <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+                <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
                 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-                <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+                <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
 </head>
 

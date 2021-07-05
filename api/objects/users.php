@@ -92,47 +92,7 @@ class User{
 
 // create() method will be here
 
-// create new user record
-    function create(){
-    
-        // insert query
-        $query = "INSERT INTO " . $this->table_name . "
-                SET
-                    firstname  = :firstname,
-                    lastname  = :lastname,
-                    username = :username,
-                    password  = :password,
-                    email = :email,
-                    phonenumber= :phonenumber";
-    
-        // prepare the query
-        $stmt = $this->conn->prepare($query);
-    
-        // sanitize
-        $this->firstname=htmlspecialchars(strip_tags($this->firstname));
-        $this->lastname=htmlspecialchars(strip_tags($this->lastname));
-        $this->email=htmlspecialchars(strip_tags($this->email));
-        $this->password=htmlspecialchars(strip_tags($this->password));
-        $this->username=htmlspecialchars(strip_tags($this->username));
-        $this->phonenumber=htmlspecialchars(strip_tags($this->phonenumber));
-        // bind the values
-        $stmt->bindParam(':firstname', $this->firstname);
-        $stmt->bindParam(':lastname', $this->lastname);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':phonenumber', $this->phonenumber);
-    
-        // hash the password before saving to database
-        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
-        $stmt->bindParam(':password', $password_hash);
-    
-        // execute the query, also check if query was successful
-        if($stmt->execute()){
-            return true;
-        }
 
-        return false;
-    }
 
     // emailExists() method will be here
     // check if given email exist in the database

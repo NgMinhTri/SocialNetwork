@@ -29,7 +29,7 @@
 
 <main>                  
 <div class="container-fluid px-4"> 
-	<div id="response"></div>
+	
     <!-- <h1 class="mt-4">Danh sách danh mục câu hỏi</h1> -->
     <div id="app">
     	

@@ -16,7 +16,7 @@ function readProductsTemplate(data, keywords){
  
         </div>
         </form>
- 
+        </br>
         <!-- when clicked, it will load the create product form -->
         <div id='approve-product' class='btn btn-primary pull-right m-b-15px approve-product-button'>
             <span ></span> Danh sách chưa duyệt

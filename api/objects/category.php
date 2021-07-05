@@ -9,7 +9,7 @@ class Category{
     public $ID;
     public $catName;
     public $description;
-    // public $numberOfQuestions;
+    public $numberOfQuestions;
 
   
     public function __construct($db){
@@ -40,13 +40,16 @@ class Category{
                     " . $this->table_name . "
                 WHERE
                     catName = :catName";
+
         $stmt = $this->conn->prepare($query);
         $this->catName=htmlspecialchars(strip_tags($this->catName));
         $stmt->bindParam(":catName", $this->catName);
         $stmt->execute();
+
         if($stmt->rowCount() > 0){
             return 2;
         }
+        
         else{
             $sql = "INSERT INTO
                     " . $this->table_name . "

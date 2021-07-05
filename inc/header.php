@@ -87,7 +87,7 @@
                       echo "
                       <li>
                       <a href='#'>";
-                      echo $_COOKIE['name'];
+                      // echo $_COOKIE['name'];
                       echo
                       "</a>
                       <ul class='sub-menu'>

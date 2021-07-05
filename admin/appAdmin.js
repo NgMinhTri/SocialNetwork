@@ -5,7 +5,7 @@ $(document).ready(function(){
         <div class='container'>
  
             <div class='page-header'>
-                <h2 id='page-title'>Danh sách</h2>
+              
             </div>
             
             <!-- this is where the contents will be shown. -->

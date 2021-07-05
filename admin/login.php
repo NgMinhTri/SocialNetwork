@@ -76,7 +76,8 @@ $(document).ready(function(){
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
-    setCookie("jwt", "", 1);   
+    setCookie("jwt", "", 1); 
+    setCookie("email", "", 1);  
      
      // hàm xử lý khi nhấn nút submit đăng nhập
     $(document).on('submit', '#login_form_admin', function(){    
@@ -111,6 +112,7 @@ $(document).ready(function(){
         // xác thực token
         var jwt = getCookie('jwt');
         $.post("../api/admin/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
+            setCookie("email", result.data.email, 1);
              window.location.href ="index.php"; 
         })
     }

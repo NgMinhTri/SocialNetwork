@@ -216,4 +216,22 @@ class User{
       
         return $stmt;
     }
+
+    public function answerOfUser(){
+        $query = "SELECT comments.createdDate,comments.content, questions.Title, questions.Description 
+        FROM comments," . $this->table_name . ", questions  
+        WHERE comments.questionId=questions.ID and comments.ownerUserId=" . $this->table_name . ".ID and " . $this->table_name . ".ID=? 
+        ORDER BY
+        comments.createdDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id);        
+
+        
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
 }

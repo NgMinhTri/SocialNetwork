@@ -21,9 +21,9 @@
                 <div class="panel-body">
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-filter"
+                            <button id="Question-bnt" type="button" class="btn btn-success btn-filter"
                                 data-target="pagado">Question</button>
-                            <button type="button" class="btn btn-warning btn-filter"
+                            <button id="Answer-bnt" type="button" class="btn btn-warning btn-filter"
                                 data-target="pendiente">Answer</button>
                         </div>
                     </div></br> </br> </br></br>
@@ -50,10 +50,15 @@ $(document).ready(function() {
     $.post("http://localhost/SOCIALNETWORK/api/user/validate_token.php", JSON.stringify({
         jwt: jwt
     })).done(function(result) {
-        console.log(result.data.id);
-        $.getJSON("http://localhost/SOCIALNETWORK/api/user/reportQuestions.php?id=" + result.data.id,
-            function(data) {
-                var html = `<tbody>
+        var html="";
+        $(document).on('click', '#Question-bnt', function() {
+            $("#question").html("");
+            // categories api call will be here
+            console.log(result.data.id);
+            $.getJSON("http://localhost/SOCIALNETWORK/api/user/reportQuestions.php?id=" + result
+                .data.id,
+                function(data) {
+                    html = `<tbody>
                     <tr data-status="question" class="selected">
                         <td class ="ta">
                             <h5>Status</h5><hr>
@@ -71,9 +76,9 @@ $(document).ready(function() {
                             <h5>Created Date</h5><hr>
                         </td>
                     </tr></tbody>`;
-                $.each(data.records, function(key, val) {
-                    // read products button will be here
-                    html += `<tbody>
+                    $.each(data.records, function(key, val) {
+                        // read products button will be here
+                        html += `<tbody>
                     <tr data-status="question" class="selected">
                                         <td class ="ta">
                                             <h6>` + val.Status + `</h6>
@@ -81,13 +86,11 @@ $(document).ready(function() {
                                         <td class ="ta">
                                             <h6>` + val.NumberOfComments + `</h6>
                                         </td>
-                                        <td class ="ta"s>
+                                        <td class ="ta">
                                             <div class="media">
-                                                <div class="media-body">
-                
+                                                <div class="media-body">                
                                                     <h4> ` + val.Title + `
-                                                    </h4>
-                                                    
+                                                    </h4>                                                    
                                                 </div>
                                             </div>
                                         </td>
@@ -98,9 +101,58 @@ $(document).ready(function() {
                                             <h5>` + val.CreateDate + `</h5>
                                         </td>
                             </tr> </tbody>`;
+                    });
+                    $("#question").html(html);
                 });
-                $("#question").html(html);
-            });
+        });
+        $(document).on('click', '#Answer-bnt', function() {
+            // categories api call will be here
+            $("#question").html("");
+            console.log(result.data.id);
+            $.getJSON("http://localhost/SOCIALNETWORK/api/user/reportAnswer.php?id=" + result
+                .data.id,
+                function(data) {
+                    html = `<tbody>
+                    <tr data-status="question" class="selected">
+                        <td class ="ta">
+                            <h5>Title</h5><hr>
+                        </td>
+                        <td class ="ta">
+                            <h5>Question</h5><hr>
+                        </td>
+                        <td class ="ta">
+                            <h5>Answer</h5><hr>
+                        </td>
+                        <td class ="ta">
+                            <h5>Created Date</h5><hr>
+                        </td>
+                    </tr></tbody>`;
+                    $.each(data.records, function(key, val) {
+                        // read products button will be here
+                        html += `<tbody>
+                    <tr data-status="question" class="selected">
+                                        <td class ="ta">
+                                            <h5>` + val.Question + `</h5>
+                                        </td>
+                                        <td class ="ta">
+                                            <h5>` + val.Description + `</h5>
+                                        </td>
+                                        <td class ="ta">
+                                                           
+                                            <h5> ` + val.Content + `
+                                            </h5>                                                    
+                        
+                                        </td>
+                                        <td class ="ta">
+                                            <h5>` + val.CreateDate + `</h5>
+                                        </td>
+                            </tr> </tbody>`;
+                    });
+                    $("#question").html(html);
+                });
+                
+        });
+        
     })
     // const xhr = new XMLHttpRequest();
     // xhr.open('GET', 'http://localhost/SOCIALNETWORK/api/user/read.php')

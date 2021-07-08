@@ -18,17 +18,17 @@ class Admin{
         $this->conn = $db;
     }
 
-    function readOneByEmail(){      
-        $email = $_COOKIE['email'];
-        $query = "SELECT Id, firstname, lastname,email
-        FROM " . $this->table_name . " WHERE email = '" . $email. "'";
+    // function readOneByEmail(){      
+    //     $email = $_COOKIE['email'];
+    //     $query = "SELECT Id, firstname, lastname,email
+    //     FROM " . $this->table_name . " WHERE email = '" . $email. "'";
       
-        $stmt = $this->conn->prepare($query);
+    //     $stmt = $this->conn->prepare($query);
       
-        $stmt->execute();
+    //     $stmt->execute();
       
-        return $stmt;
-    }
+    //     return $stmt;
+    // }
 
     function readOne(){
         
@@ -152,7 +152,7 @@ class Admin{
                 SET
                     password = :password
 
-                WHERE Id =: Id";
+                WHERE Id = :Id";
      
         $stmt = $this->conn->prepare($query);
 
@@ -176,11 +176,11 @@ class Admin{
         $query = " UPDATE 
                     " . $this->table_name . "
                 SET
-                    firstname =: firstname,
-                    lastname =: lastname,
+                    firstname = :firstname,
+                    lastname = :lastname,
                     email = :email
                     
-                WHERE Id =: Id ";
+                WHERE Id = :Id ";
      
         $stmt = $this->conn->prepare($query);
     

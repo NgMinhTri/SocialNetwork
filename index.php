@@ -60,15 +60,9 @@
           <!-- end of page content -->
 
           <!-- start of sidebar -->
-           <div id='create-ask'style="
-              height: 30px;
-              width: 100px;
-              padding: 10px;
-              margin: 20px;
-              font-size: 15px;
-              text-align: center;
-              " class='btn btn-primary pull-right m-b-15px create-ask-button'>
-            <span class='glyphicon glyphicon-plus'></span> Đặt câu hỏi
+           <div id='create-ask' style="height: 30px;width: 100px;padding: 10px;margin: 20px;font-size: 15px; text-align: center;" class='btn btn-primary pull-right m-b-15px create-ask-button'>
+             <a href="ask.php" style="color: white"> Đặt câu hỏi</a>
+
           </div>
           </br>
           </br>

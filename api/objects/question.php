@@ -53,6 +53,36 @@ class Question{
         return $stmt;
     }
 
+    // create question
+    function create(){
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET
+                    Title=:Title, Description=:Description, catId=:catId, userId=:userId,
+                    CreateDate = NOW() , Status = 0 ";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $this->Title=htmlspecialchars(strip_tags($this->Title));;
+        $this->Description=htmlspecialchars(strip_tags($this->Description));
+        $this->catId=htmlspecialchars(strip_tags($this->catId));
+        $this->userId=htmlspecialchars(strip_tags($this->userId));
+        // $this->CreateDate=htmlspecialchars(strip_tags($this->CreateDate));
+      
+        // bind values
+        $stmt->bindParam(":Title", $this->Title);
+        $stmt->bindParam(":Description", $this->Description);
+        $stmt->bindParam(":catId", $this->catId);
+        $stmt->bindParam(":userId", $this->userId);
+        // $stmt->bindParam(":CreateDate", $this->CreateDate);
+      
+        if($stmt->execute()){
+            return true;
+        }     
+        return false;
+          
+    }
     public function readQuestionNotApprove(){
         // select all query
         $query = "SELECT

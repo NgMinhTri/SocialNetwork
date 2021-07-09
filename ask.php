@@ -1,85 +1,83 @@
+
 <?php include 'inc/header.php';?>
 <?php include 'inc/wrapper.php';?>
-<script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+<!-- Start of Page Container -->
+<div class="page-container">
+  <div class="container">
+    <div class="row">	
+      <!-- start of page content -->
+      <div class="span8 page-content">
+        <article class="type-page hentry clearfix">
+          <h1 class="post-title"> <a href="#">Câu hỏi</a></h1>                     
+        </article>
+             <form action="#" method="post" id="commentform">                                
+                  <div>
+                    <label >Tiêu đề *</label>
+                    <input class="span4" type="text" name="Title" minlength="10" size="22" required />
+                  </div>
 
-    <!-- Start of Page Container -->
-    <div class="page-container">
-      <div class="container">
-        <div class="row">	
-          <!-- start of page content -->
-          <div class="span8 page-content">
-            <article class="type-page hentry clearfix">
-              <h1 class="post-title"> <a href="#">Câu hỏi</a></h1>                     
-            </article>
+                  <div >
+                    <label >Danh mục *</label>
+                    <select id="Category" name='catId' class='span4'  required></select>
+                  </div>
 
-            <form id="createQuestionForm" class="row" action="" method="post">
 
-                <div class="span2"> <label for="name">Tiêu đề<span>*</span> </label></div>
-                <div class="span6">
-                  <input type="text" required name="Title" id="Title" class="required input-xlarge" value="" title="*Nhập tiêu đề"
-                  />
-                </div>
+                  <div>
+                    <label >Mô tả *</label>
+                    <textarea id="Description" class="span8" required name="Description" cols="58" rows="10" required></textarea>
+                  </div>
 
-                <div class="span2"><label for="email">Danh mục<span>*</span></label></div>
-                <div class="span6">
-                  <input type="text" required name="category" id="category" class="required input-xlarge"
-                    title="* Chọn danh mục"/>
-                </div>
+                  </br>
 
-                <div class="span2"><label for="message">Mô tả <span>*</span> </label></div>
-                <div class="span6">
-                  <textarea name="Description" required id="Description" class="required span6" rows="20"  title="* Nhập mô tả câu hỏi"></textarea>
-                </div>
-
-                <div class="span2"><label for="attachment">Tệp đính kèm</label></div>
-                <div class="span6" id="attachment_items">
-                	<a id="btn_add_attachment" href="#" class="btn btn-success" style="margin: 3px; margin-left: 0px">Thêm đính kèm</a>
-                </div>
-
-                </br>
-
-                <div class="span6 offset2 bm30">
-                  <input type="submit" name="submit" value="Tạo câu hỏi" class="btn btn-inverse"/>
-                </div>
-                <div id="response"></div>
-              <!-- <div class="span6 offset2 error-container"></div>
-              <div class="span8 offset2" id="message-sent"></div> -->
-            </form>
-          </div>        
-        </div>
-      </div>
+                  <div>
+                    <input class="btn"  type="submit" value="Gửi câu hỏi"/>
+                  </div>
+                   </br>
+                  <div id="response"></div>
+            </form>           
+      </div>        
     </div>
-
+  </div>
+</div>
 <?php include 'inc/footer.php';?>
+
+<script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {	
+$(document).ready(function() {  
 
-  	
+    $.getJSON("api/category/read.php", function(data){
+        var categories_options_html=`<select>`;
+            $.each(data.records, function(key, val){
+                categories_options_html+=`<option value='` + val.ID + `'>` + val.catName + `</option>`;
+            });
+            categories_options_html+=`</select>`;
+            $("#Category").html(categories_options_html);
+    });
 
-    // $(document).on('submit', '#createQuestionForm', function(){    
-    //     var addcategory_form=$(this);
-    //     var form_data=JSON.stringify(addcategory_form.serializeObject());    
-        
-    //     $.ajax({
-    //         url: "../api/question/create.php",
-    //         type : "POST",
-    //         contentType : 'application/json',
-    //         data : form_data,
-    //         success : function(result){  
-    //         //alert("Thêm danh mục câu hỏi thành công");
-    //         $('#response').html("<div class='alert alert-success'>Đặt câu hỏi thành công.</div>");
 
-                          
-    //         }
-    //         // lỗi nếu dăng nhập không thành công
-    //         error: function(xhr, resp, text){
-    //         $('#response').html("<div class='alert alert-danger'>Đặt câu hỏi thất bại. Vui lòng thử lại.</div>");
-    //         }
-    //     });
-    //     return false;
-    // });
+    $(document).on('submit', '#commentform', function(){           
+        var addquestion_form = $(this);
+        var jwt = getCookie('jwt');
+        var createQuestion = addquestion_form.serializeObject()
+        createQuestion.jwt = jwt;
+
+        var form_data = JSON.stringify(createQuestion);
+        $.ajax({
+            url: "api/question/create.php",
+            type : "POST",
+            contentType : 'application/json',
+            data : form_data,
+            success : function(result){  
+                $('#response').html("<div class='alert alert-success'>Đặt câu hỏi thành công.Vui lòng đợi Admin duyệt </div>");                         
+            },
+            error: function(xhr, resp, text){
+                $('#response').html("<div class='alert alert-danger'>Đặt câu hỏi thất bại. Vui lòng thử lại.</div>");
+                }
+        });
+        return false;
+    });
      
-    // hàm biến giá trị form thành dạng json
     $.fn.serializeObject = function(){
      
         var o = {};
@@ -96,11 +94,27 @@ $(document).ready(function() {
         });
         return o;
     };
-    
+    // Hàm Get Cookie
+    function getCookie(cname){
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' '){
+                c = c.substring(1);
+            }
+     
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
     CKEDITOR.replace('Description');
-    $('#btn_add_attachment').off('click').on('click', function(){
-      $('#attachment_items').prepend('<p><input type="file"  name="attachment" /></p>');
-      return false;
-    });
-});		
+    // $('#btn_add_attachment').off('click').on('click', function(){
+    //   $('#attachment_items').prepend('<p><input type="file"  name="attachment" /></p>');
+    //   return false;
+    // });
+});     
 </script>

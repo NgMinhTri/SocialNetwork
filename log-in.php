@@ -20,7 +20,7 @@
 				<form class="login100-form validate-form p-b-33 p-t-5" id='login_form'>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="email" name='email' placeholder="User name">
+						<input class="input100" type="email" name='email' placeholder="Email">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 

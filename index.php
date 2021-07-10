@@ -1,5 +1,4 @@
 
-<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <?php include 'inc/header.php';?>
 <?php include 'inc/wrapper.php';?>
 
@@ -13,47 +12,16 @@
             <div class="row separator">
               <section class="span4 articles-list">
                 <h3>Chủ đề nổi bậc</h3>
-                <ul class="articles">
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php"
-                        >Integrating WordPress with Your Website</a
-                      >
-                    </h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a
-                        href="#"
-                        title="View all posts in Server &amp; Database"
-                        >Server &amp; Database</a
-                      ></span
-                    >
-                    <span class="like-count">66</span>
-                  </li>
-                         
-                  
-                </ul>
+               <div class="OK">                  
+                </div>
               </section>
+
+
 
               <section class="span4 articles-list">
                 <h3>Chủ đề mới nhất</h3>
-                <ul class="articles">
-                  
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php"
-                        >WordPress CSS Information and Techniques</a
-                      >
-                    </h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in Theme Development"
-                        >Theme Development</a
-                      ></span
-                    >
-                    <span class="like-count">1</span>
-                  </li>
-                </ul>
+                <div class="OK">                  
+                </div>
               </section>
             </div>
           </div>
@@ -112,5 +80,28 @@
     </div>
     <!-- End of Page Container -->
 <?php include 'inc/footer.php';?>
-    
+
+                                 <!-- Code Javascript -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {  
+
+    $.getJSON("api/question/read.php", function(data){
+      var read_question_html=`<ul class="articles">`;
+      $.each(data.records, function(key, val){
+         read_question_html+=`
+            <li class="article-entry standard">
+              <h4>
+                <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
+              </h4>
+              <span class="article-meta">` + val.CreateDate +`
+                
+              <span class="like-count">1</span>
+            </li>`;          
+      });
+       read_question_html+=`<ul class="articles">`; 
+        $(".OK").html(read_question_html);  
+    });    
+});   
+</script>   
 

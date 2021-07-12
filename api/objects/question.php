@@ -24,6 +24,122 @@ class Question
     {
         $this->conn = $db;
     }
+    public function read(){
+        // select all query
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+                ORDER BY
+                    q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    // create question
+    function create(){
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET
+                    Title=:Title, Description=:Description, catId=:catId, userId=:userId,
+                    CreateDate = NOW() , Status = 0 ";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $this->Title=htmlspecialchars(strip_tags($this->Title));;
+        $this->Description=htmlspecialchars(strip_tags($this->Description));
+        $this->catId=htmlspecialchars(strip_tags($this->catId));
+        $this->userId=htmlspecialchars(strip_tags($this->userId));
+        // $this->CreateDate=htmlspecialchars(strip_tags($this->CreateDate));
+      
+        // bind values
+        $stmt->bindParam(":Title", $this->Title);
+        $stmt->bindParam(":Description", $this->Description);
+        $stmt->bindParam(":catId", $this->catId);
+        $stmt->bindParam(":userId", $this->userId);
+        // $stmt->bindParam(":CreateDate", $this->CreateDate);
+      
+        if($stmt->execute()){
+            return true;
+        }     
+        return false;
+          
+    }
+    public function readQuestionNotApprove(){
+        // select all query
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+                    WHERE q.Status = 0
+                    ORDER BY
+                        q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    function readOne(){
+
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+                     WHERE
+                        q.ID =  ?
+                    LIMIT
+                        0,1";     
+      
+        $stmt = $this->conn->prepare( $query );
+      
+        $stmt->bindParam(1, $this->ID);
+      
+        $stmt->execute();
+      
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        // set values to object properties
+        $this->catName = $row['catName'];
+        $this->Description = $row['Description'];
+        $this->Title = $row['Title'];
+        $this->UserName = $row['UserName'];
+        $this->CreateDate = $row['CreateDate'];
+        $this->LastModifiedDate = $row['LastModifiedDate'];
+        $this->NumberOfVotes = $row['NumberOfVotes'];
+        $this->NumberOfReports = $row['NumberOfReports'];
+        $this->NumberOfComments = $row['NumberOfComments'];
+        $this->Status = $row['Status'];
+    }  
 
     // search products
     function search($keywords){
@@ -57,6 +173,46 @@ class Question
         $stmt->execute();
     
         return $stmt;
+    }
+    function delete(){
+      
+        $query = "DELETE FROM " . $this->table_name . " WHERE ID = ?";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+      
+        $stmt->bindParam(1, $this->ID);
+      
+        if($stmt->execute()){
+            return true;
+        }
+      
+        return false;
+    }  
+
+    // approve the product
+    function approve(){
+      
+        // update query
+        $query = "UPDATE
+                    " . $this->table_name . "
+                SET
+                    Status = 1
+                WHERE
+                    ID = :ID";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+       
+        $stmt->bindParam(':ID', $this->ID);
+            
+        if($stmt->execute()){
+            return true;
+        }
+      
+        return false;
     }
 }
 ?>

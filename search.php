@@ -20,7 +20,7 @@
 $keywords=isset($_GET["keywords"]) ? $_GET["keywords"] : "";
 ?>
 
-
+ 
 <script>
 var html = `<ul class="articles">`;
 // var keywords = $('#search-product-form').find(":input[name='keywords']").val();
@@ -34,7 +34,7 @@ $.getJSON("http://localhost/SOCIALNETWORK/api/question/search.php?s=" + keywords
     $.each(data.records, function(key, val) {
         html += `<li class="article-entry standard">
                             <h4>
-                                <a href="single.php">` + val.Title + `</a>
+                            <a href="single.php?questionId=` + val.id +`">` + val.Title +`</a>
                             </h4>
                             <span class="article-meta">` + val.CreateDate + ` in
                                 <a href="#" title="View all posts in Server &amp; Database">` + val.category_name + `</a></span>

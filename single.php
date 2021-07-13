@@ -26,7 +26,7 @@
 
           <div class="post-meta clearfix">
             <span class="date" id="CreateDate"></span>
-            <span class="category"><a href="#" class="catName""></a></span>
+            <span class="category"><a href="#" class="catName"></a></span>
             <span class="comments"><a class="numberComment">0</a> comments</span>
             <span class="like-count">0</span>
           </div>
@@ -90,11 +90,13 @@
 
 <?php include 'inc/footer.php';?>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
 <script type="text/javascript">
 $(document).ready(function() { 
 
     var ID = location.search.replace('?questionId=', '');   
-    LoadComment();
+    LoadCommentFirstpage();
     LoadVotePerQuestion();
 
     $.getJSON("api/question/read_one.php?ID=" + ID, function(data){
@@ -106,53 +108,87 @@ $(document).ready(function() {
     });
 
     
-    function LoadComment(){
-      $.getJSON("api/comment/readByQuestionId.php?questionId=" + ID, function(data){
+    function LoadCommentFirstpage(){
+      var json_url="http://localhost:8080/socialnetwork/api/comment/read_paging.php?questionId=" +ID;
+      LoadComment(json_url);    
+    }
+
+    function LoadComment(json_url){
+      $.getJSON(json_url, function(data){
         var i = 0;
         var read_comment_html = `<ol class="commentlist">`;
         $.each(data.records, function(key, val){
            read_comment_html+=`
            <li class="comment even thread-even depth-1" id="li-comment-2">
-                <article id="comment-2">
-                  <a href="#">
-                    <img alt="" src="images/avatar2.png" class="avatar avatar-60 photo" height="60" width="60"/>
-                  </a>
+              <article id="comment-2">
+                <a href="#">
+                  <img alt="" src="images/avatar2.png" class="avatar avatar-60 photo" height="60" width="60"/>
+                </a>
 
-                  <div class="comment-meta">
-                    <h5 class="author">
-                      <cite class="fn">
-                        <a href="#" rel="external nofollow" class="url" >
-                        `+val.UserName+`
-                        </a>
-                      </cite>
-                      <a class="comment-reply-link" href="#">- Reply</a>
-                    </h5>
-
-                    <p class="date">
-                      <a href="#">
-                        <time datetime="2013-02-26T13:18:47+00:00">`+val.createdDate+`</time>
+                <div class="comment-meta">
+                  <h5 class="author">
+                    <cite class="fn">
+                      <a href="#" rel="external nofollow" class="url" >
+                      `+val.UserName+`
                       </a>
-                    </p>
-                  </div>
-                  <!-- end .comment-meta -->
+                    </cite>
+                    <a class="comment-reply-link" href="#">- Reply</a>
+                  </h5>
 
-                  <div class="comment-body">
-                    <p>
-                      `+val.content+`
-                    </p>
-                  </div>
-                  <!-- end of comment-body -->
-                </article>
-                <!-- end of comment -->
-              </li>
-              `; 
-              i = i+1;
+                  <p class="date">
+                    <a href="#">
+                      <time datetime="2013-02-26T13:18:47+00:00">`+val.createdDate+`</time>
+                    </a>
+                  </p>
+                </div>
+                <!-- end .comment-meta -->
+
+                <div class="comment-body">
+                  <p>
+                    `+val.content+`
+                  </p>
+                </div>
+                <!-- end of comment-body -->
+              </article>
+              <!-- end of comment -->
+            </li>`; 
+          i = i+1;
         });
         read_comment_html+=` </ol>`; 
+        // pagination
+        if(data.paging){
+          read_comment_html+="<ul class='pagination'>";
+       
+            // first page
+            if(data.paging.first!=""){
+              read_comment_html+="<li class='page-item'><a data-page='" + data.paging.first + "'>First Page</a></li>";
+            }
+     
+            // loop through pages
+            $.each(data.paging.pages, function(key, val){
+              var active_page=val.current_page=="yes" ? "class='active'" : "";
+              read_comment_html+="<li  " + active_page + "><a data-page='" + val.url + "'>" + val.page + "</a></li>";
+            });
+     
+            // last page
+            if(data.paging.last!=""){
+              read_comment_html+="<li class='page-item'><a data-page='" + data.paging.last + "'>Last Page</a></li>";
+            }
+          read_comment_html+="</ul>";
+        }
+
           $("#listComment").html(read_comment_html);  
           $(".numberComment").html(i);
       });
     }
+
+    $(document).on('click', '.pagination li', function(){
+
+      var json_url=$(this).find('a').attr('data-page');
+
+      LoadComment(json_url);
+    });
+
 
     //Hàm gửi comment
     $(document).on('submit', '#commentform', function(){    
@@ -175,7 +211,7 @@ $(document).ready(function() {
           data : form_data,
           success : function(result){  
             $('#response').html("<div class='alert alert-success'>Gửi bình luận thành công!</div>"); 
-            LoadComment(); 
+            LoadCommentFirstpage(); 
                            
           },
           error: function(xhr, resp, text){

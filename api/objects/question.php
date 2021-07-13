@@ -53,6 +53,31 @@ class Question{
         return $stmt;
     }
 
+    public function readByCatId(){
+        // select all query
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+                    WHERE catId = ?
+                ORDER BY
+                    q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->catId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
     public function readApprove(){
         // select all query
         $query = "SELECT

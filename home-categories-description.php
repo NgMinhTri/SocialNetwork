@@ -9,70 +9,10 @@
           <!-- start of page content -->
           <div class="span8 page-content">
             <!-- Basic Home Page Template -->
-            <div class="row separator">
+            <!-- <div class="row separator">
               <section class="span4 articles-list">
-                <h3>Featured Articles</h3>
+                <h3>Chủ đề nổi bậc</h3>
                 <ul class="articles">
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php"
-                        >Integrating WordPress with Your Website</a
-                      >
-                    </h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a
-                        href="#"
-                        title="View all posts in Server &amp; Database"
-                        >Server &amp; Database</a
-                      ></span
-                    >
-                    <span class="like-count">66</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php">WordPress Site Maintenance</a>
-                    </h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">15</span>
-                  </li>
-                  <li class="article-entry video">
-                    <h4><a href="single.php">Meta Tags in WordPress</a></h4>
-                    <span class="article-meta"
-                      >23 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">8</span>
-                  </li>
-                  <li class="article-entry image">
-                    <h4>
-                      <a href="single.php">WordPress in Your Language</a>
-                    </h4>
-                    <span class="article-meta"
-                      >22 Feb, 2013 in
-                      <a href="#" title="View all posts in Advanced Techniques"
-                        >Advanced Techniques</a
-                      ></span
-                    >
-                    <span class="like-count">6</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4><a href="single.php">Know Your Sources</a></h4>
-                    <span class="article-meta"
-                      >22 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">2</span>
-                  </li>
                   <li class="article-entry standard">
                     <h4><a href="single.php">Validating a Website</a></h4>
                     <span class="article-meta"
@@ -87,68 +27,8 @@
               </section>
 
               <section class="span4 articles-list">
-                <h3>Latest Articles</h3>
+                <h3>Chủ đề mới nhất</h3>
                 <ul class="articles">
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php"
-                        >Integrating WordPress with Your Website</a
-                      >
-                    </h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a
-                        href="#"
-                        title="View all posts in Server &amp; Database"
-                        >Server &amp; Database</a
-                      ></span
-                    >
-                    <span class="like-count">66</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4><a href="single.php">Using Javascript</a></h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a href="#" title="View all posts in Advanced Techniques"
-                        >Advanced Techniques</a
-                      ></span
-                    >
-                    <span class="like-count">18</span>
-                  </li>
-                  <li class="article-entry image">
-                    <h4><a href="single.php">Using Images</a></h4>
-                    <span class="article-meta"
-                      >25 Feb, 2013 in
-                      <a
-                        href="#"
-                        title="View all posts in Designing in WordPress"
-                        >Designing in WordPress</a
-                      ></span
-                    >
-                    <span class="like-count">7</span>
-                  </li>
-                  <li class="article-entry video">
-                    <h4><a href="single.php">Using Video</a></h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in WordPress Plugins"
-                        >WordPress Plugins</a
-                      ></span
-                    >
-                    <span class="like-count">7</span>
-                  </li>
-                  <li class="article-entry standard">
-                    <h4>
-                      <a href="single.php">WordPress Site Maintenance</a>
-                    </h4>
-                    <span class="article-meta"
-                      >24 Feb, 2013 in
-                      <a href="#" title="View all posts in Website Dev"
-                        >Website Dev</a
-                      ></span
-                    >
-                    <span class="like-count">15</span>
-                  </li>
                   <li class="article-entry standard">
                     <h4>
                       <a href="single.php"
@@ -165,39 +45,17 @@
                   </li>
                 </ul>
               </section>
-            </div>
+            </div> -->
 
             <div class="row home-category-list-area">
               <div class="span8">
-                <h2>Categories</h2>
+                <h2>Danh mục câu hỏi</h2>
               </div>
             </div>
 
-            <div class="row-fluid top-cats">
-              <section class="span4">
-                <h4 class="category">
-                  <a href="#">WordPress for Beginners</a>
-                </h4>
-                <div class="category-description">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat
-                  </p>
-                </div>
-              </section>
+            <div id="showCategory">
 
-              <section class="span4">
-                <h4 class="category"><a href="#">Designing in WordPress</a></h4>
-                <div class="category-description">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet
-                  </p>
-                </div>
-              </section>
-
-              <section class="span4">
+              <!-- <section class="span4">
                 <h4 class="category"><a href="#">Theme Development</a></h4>
                 <div class="category-description">
                   <p>
@@ -206,69 +64,17 @@
                     magna
                   </p>
                 </div>
-              </section>
-            </div>
-            <div class="row-fluid top-cats">
-              <section class="span4">
-                <h4 class="category"><a href="#">Website Dev</a></h4>
-                <div class="category-description">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam
-                  </p>
-                </div>
-              </section>
+              </section> -->
 
-              <section class="span4">
-                <h4 class="category">
-                  <a href="#">WordPress Plugins</a>
-                </h4>
-                <div class="category-description">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                  </p>
-                </div>
-              </section>
-
-              <section class="span4">
-                <h4 class="category"><a href="#">Advanced Techniques</a></h4>
-                <div class="category-description">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut
-                  </p>
-                </div>
-              </section>
             </div>
+
+
           </div>
           <!-- end of page content -->
 
           <!-- start of sidebar -->
           <aside class="span4 page-sidebar">
-            <section class="widget">
-              <div class="support-widget">
-                <h3 class="title">Support</h3>
-                <p class="intro">
-                  Need more support? If you did not found an answer, contact us
-                  for further help.
-                </p>
-              </div>
-            </section>
-
-            <section class="widget">
-              <div class="quick-links-widget">
-                <h3 class="title">Quick Links</h3>
-                <ul id="menu-quick-links" class="menu clearfix">
-                  <li><a href="index.php">Home</a></li>
-                  <li><a href="articles-list.php">Articles List</a></li>
-                  <li><a href="faq.php">FAQs</a></li>
-                  <li><a href="contact.php">Contact</a></li>
-                </ul>
-              </div>
-            </section>
-
+          
             <section class="widget">
               <h3 class="title">Tags</h3>
               <div class="tagcloud">
@@ -300,3 +106,39 @@
     </div>
     <!-- End of Page Container -->
 <?php include 'inc/footer.php';?>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  showAllCategoryFirstpage();
+
+  function showAllCategoryFirstpage(){
+    var json_url="api/category/read.php";
+    showAllCategory(json_url);    
+  }
+
+   function showAllCategory(json_url){
+
+     $.getJSON(json_url, function(data){
+      var read_category_html=`<div>`;
+        $.each(data.records, function(key, val){             
+          read_category_html +=`
+            <section class="span4">
+                <h4 class="category"><a href="category.php?catId=` + val.ID +`">`+val.catName+`</a></h4>
+                <div class="category-description">
+                  <p>
+                    `+val.description+`
+                  </p>
+                </div>
+              </section>`;                         
+        });
+      read_category_html+=`</div>`; 
+         
+          $("#showCategory").html(read_category_html);  
+      });
+    }
+  
+
+});
+</script>

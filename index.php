@@ -24,7 +24,9 @@
           <!-- end of page content -->
 
           <!-- start of sidebar -->
-           <div id='create-ask' style="height: 30px;width: 100px;padding: 10px;margin: 20px;font-size: 15px; text-align: center;" class='btn btn-primary pull-right m-b-15px create-ask-button'>
+           <!-- <div id='create-ask' style="height: 30px;width: 100px;padding: 10px;margin: 20px;font-size: 15px; text-align: center;" class='btn btn-primary pull-right m-b-15px create-ask-button'>
+             <a href="ask.php" style="color: white"> Đặt câu hỏi</a> -->
+             <div id='create-ask'  class='btn btn-primary pull-right m-b-15px create-ask-button'>
              <a href="ask.php" style="color: white"> Đặt câu hỏi</a>
 
           </div>
@@ -85,16 +87,17 @@ $(document).ready(function() {
     showLastestApprovedQuestionFirstpage();
 
     function showAllApprovedQuestionFirstpage(){
-      var json_url="http://localhost:8080/socialnetwork/api/question/readApprove_paging.php";
+      var json_url="api/question/readApprove_paging.php";
       showAllApprovedQuestion(json_url);    
     }
 
     function showLastestApprovedQuestionFirstpage(){
-      var json_url="http://localhost:8080/socialnetwork/api/question/readLastest_paging.php";
+      var json_url="api/question/readLastest_paging.php";
       showLastestApprovedQuestion(json_url);    
     }
 
     function showAllApprovedQuestion(json_url){
+
      $.getJSON(json_url, function(data){
 
         var read_question_html=`<ul class="articles">`;
@@ -110,10 +113,10 @@ $(document).ready(function() {
             </li>`;  
                         
         });
-         read_question_html+=`<ul class="articles">`; 
+         read_question_html+=`</ul>`; 
           // pagination
           if(data.paging){
-            read_question_html+="<ul class='pagination'>";
+            read_question_html+="<ul class='pagination' id='listQuestion'>";
          
               // first page
               if(data.paging.first!=""){
@@ -155,23 +158,23 @@ $(document).ready(function() {
          read_question_html+=`<ul class="articles">`;
           // pagination
           if(data.paging){
-            read_question_html+="<ul class='paginationn'>";
+            read_question_html+="<ul class='pagination' id='listLastestQuestion'>";
          
-                // first page
-                if(data.paging.first!=""){
-                    read_question_html+="<li class='page-item'><a data-page='" + data.paging.first + "'>First Page</a></li>";
-                }
-         
-                // loop through pages
-                $.each(data.paging.pages, function(key, val){
-                    var active_page=val.current_page=="yes" ? "class='active'" : "";
-                    read_question_html+="<li  " + active_page + "><a data-page='" + val.url + "'>" + val.page + "</a></li>";
-                });
-         
-                // last page
-                if(data.paging.last!=""){
-                    read_question_html+="<li class='page-item'><a data-page='" + data.paging.last + "'>Last Page</a></li>";
-                }
+              // first page
+              if(data.paging.first!=""){
+                read_question_html+="<li class='page-item'><a data-page='" + data.paging.first + "'>First Page</a></li>";
+              }
+       
+              // loop through pages
+              $.each(data.paging.pages, function(key, val){
+                var active_page=val.current_page=="yes" ? "class='active'" : "";
+                read_question_html+="<li  " + active_page + "><a data-page='" + val.url + "'>" + val.page + "</a></li>";
+              });
+       
+              // last page
+              if(data.paging.last!=""){
+                read_question_html+="<li class='page-item'><a data-page='" + data.paging.last + "'>Last Page</a></li>";
+              }
             read_question_html+="</ul>";
           } 
           $("#readApprovedLastest").html(read_question_html);  
@@ -179,14 +182,14 @@ $(document).ready(function() {
     }
 
 
-    $(document).on('click', '.pagination li', function(){
+    $(document).on('click', '#listQuestion li', function(){
 
       var json_url=$(this).find('a').attr('data-page');
 
       showAllApprovedQuestion(json_url);
     });
 
-    $(document).on('click', '.paginationn li', function(){
+    $(document).on('click', '#listLastestQuestion li', function(){
 
       var json_url=$(this).find('a').attr('data-page');
 

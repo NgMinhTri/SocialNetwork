@@ -8,8 +8,8 @@ date_default_timezone_set('Asia/Manila');
 // variables used for jwt
 $key = "example_key";
 $issued_at = time();
-$expiration_time = $issued_at + (24 * 3600); // valid for 1 hour
-$issuer = "http://localhost/CodeOfaNinja/RestApiAuthLevel1/";
+$expiration_time = $issued_at + (24 * 3600); // valid for 1 date
+$issuer = "http://localhost:8080/socialnetwork/";
 
 // show error reporting
 ini_set('display_errors', 1);

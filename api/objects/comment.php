@@ -143,6 +143,54 @@ class Comment{
         return false;
     }  
 
+
+// read products with pagination
+    public function readPaging($from_record_num, $records_per_page){
+
+        $query = "SELECT
+                    u.UserName,c.ID, c.questionId, c.ownerUserId, c.content, c.createdDate, c.LastModifiedDate
+                FROM
+                    " . $this->table_name . " c
+                    LEFT JOIN
+                        questions q
+                            ON c.questionId = q.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON c.ownerUserId = u.ID
+                WHERE c.questionId = ?
+                ORDER BY
+                    c.createdDate DESC
+                 LIMIT ?, ?";
+            
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+      
+        // bind variable values
+        $stmt->bindParam(1, $this->questionId);
+        $stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
+      
+        // execute query
+        $stmt->execute();
+      
+        // return values from database
+        return $stmt;
+    }
+
+
+    public function count(){
+        $query = "SELECT COUNT(*) as total_rows 
+                  FROM " . $this->table_name . "
+                  WHERE questionId = ? ";
+      
+        $stmt = $this->conn->prepare( $query );
+        $stmt->bindParam(1, $this->questionId);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        return $row['total_rows'];
+    }
     
 }
 

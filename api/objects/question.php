@@ -53,13 +53,64 @@ class Question{
         return $stmt;
     }
 
+    public function readApprove(){
+        // select all query
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+                            
+                    WHERE q.Status = 1 ";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    public function readLastest(){
+        // select all query
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+
+                    WHERE q.CreateDate = current_date() AND q.Status = 1
+
+                    ORDER BY
+                    q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
     // create question
     function create(){
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
                     Title=:Title, Description=:Description, catId=:catId, userId=:userId,
-                    CreateDate = NOW() , Status = 0 ";
+                    CreateDate = CURDATE() , Status = 0 ";
       
         $stmt = $this->conn->prepare($query);
       
@@ -221,6 +272,53 @@ class Question{
         }
       
         return false;
+    }
+
+    // read products with pagination
+    public function readApprovedPaging($from_record_num, $records_per_page){
+
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+
+                    WHERE  q.Status = 1
+
+                    ORDER BY
+                    q.CreateDate DESC
+                    LIMIT ?, ?";      
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+      
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+      
+        // execute query
+        $stmt->execute();
+      
+        // return values from database
+        return $stmt;
+    }
+
+
+    public function count(){
+        $query = "SELECT COUNT(*) as total_rows 
+                  FROM " . $this->table_name . "
+                  WHERE Status = 1";
+      
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        return $row['total_rows'];
     }
 }
 

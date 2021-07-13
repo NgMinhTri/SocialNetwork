@@ -320,5 +320,53 @@ class Question{
       
         return $row['total_rows'];
     }
+
+
+    // read products with pagination
+    public function readLastestApprovedPaging($from_record_num, $records_per_page){
+
+        $query = "SELECT
+                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    LEFT JOIN
+                        dbuser u
+                            ON q.userId = u.ID
+
+                    WHERE  q.Status = 1 AND q.CreateDate = current_date() 
+
+                    ORDER BY
+                    q.CreateDate DESC
+                    LIMIT ?, ?";      
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+      
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+      
+        // execute query
+        $stmt->execute();
+      
+        // return values from database
+        return $stmt;
+    }
+
+
+    public function countLastest(){
+        $query = "SELECT COUNT(*) as total_rows 
+                  FROM " . $this->table_name . "
+                  WHERE Status = 1 AND CreateDate = current_date()";
+      
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        return $row['total_rows'];
+    }
 }
 

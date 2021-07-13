@@ -11,17 +11,13 @@
             <!-- Basic Home Page Template -->
             <div class="row separator">
               <section class="span4 articles-list">
-                <h3>Tất cả câu hỏi</h3>
-               <div id="readApproved">                  
-                </div>
+                <h3>Mới nhất trong ngày</h3>
+                <div id="readApprovedLastest"></div>
               </section>
 
-
-
               <section class="span4 articles-list">
-                <h3>Câu hỏi mới nhất</h3>
-                <div id="readApprovedLastest">                  
-                </div>
+                <h3>Tất cả câu hỏi</h3>
+                <div id="readApproved"></div>
               </section>
             </div>
           </div>
@@ -84,14 +80,21 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {  
-    showQuestionFirstpage();
-    function showQuestionFirstpage(){
+
+    showAllApprovedQuestionFirstpage();
+    showLastestApprovedQuestionFirstpage();
+
+    function showAllApprovedQuestionFirstpage(){
       var json_url="http://localhost:8080/socialnetwork/api/question/readApprove_paging.php";
-      showQuestionLastest(json_url);
-     
+      showAllApprovedQuestion(json_url);    
     }
 
-    function showQuestionLastest(json_url){
+    function showLastestApprovedQuestionFirstpage(){
+      var json_url="http://localhost:8080/socialnetwork/api/question/readLastest_paging.php";
+      showLastestApprovedQuestion(json_url);    
+    }
+
+    function showAllApprovedQuestion(json_url){
      $.getJSON(json_url, function(data){
 
         var read_question_html=`<ul class="articles">`;
@@ -112,6 +115,48 @@ $(document).ready(function() {
           if(data.paging){
             read_question_html+="<ul class='pagination'>";
          
+              // first page
+              if(data.paging.first!=""){
+                read_question_html+="<li class='page-item'><a data-page='" + data.paging.first + "'>First Page</a></li>";
+              }
+       
+              // loop through pages
+              $.each(data.paging.pages, function(key, val){
+                var active_page=val.current_page=="yes" ? "class='active'" : "";
+                read_question_html+="<li  " + active_page + "><a data-page='" + val.url + "'>" + val.page + "</a></li>";
+              });
+       
+              // last page
+              if(data.paging.last!=""){
+                read_question_html+="<li class='page-item'><a data-page='" + data.paging.last + "'>Last Page</a></li>";
+              }
+            read_question_html+="</ul>";
+          }
+          $("#readApproved").html(read_question_html);  
+      });
+    }
+
+    function showLastestApprovedQuestion(json_url){
+      $.getJSON(json_url, function(data){
+
+        var read_question_html=`<ul class="articles">`;
+
+        $.each(data.records, function(key, val){             
+          read_question_html+=`
+            <li class="article-entry standard">
+              <h4>
+                <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
+              </h4>
+              <span class="article-meta">` + val.CreateDate +`</span>
+              <span class="like-count">0</span>         
+            </li>`;  
+                        
+        });
+         read_question_html+=`<ul class="articles">`;
+          // pagination
+          if(data.paging){
+            read_question_html+="<ul class='paginationn'>";
+         
                 // first page
                 if(data.paging.first!=""){
                     read_question_html+="<li class='page-item'><a data-page='" + data.paging.first + "'>First Page</a></li>";
@@ -128,60 +173,25 @@ $(document).ready(function() {
                     read_question_html+="<li class='page-item'><a data-page='" + data.paging.last + "'>Last Page</a></li>";
                 }
             read_question_html+="</ul>";
-          }
+          } 
           $("#readApprovedLastest").html(read_question_html);  
-      });
+      });     
     }
 
+
     $(document).on('click', '.pagination li', function(){
-        // get json url
-        var json_url=$(this).find('a').attr('data-page');
- 
-        // show list of products
-        showQuestionLastest(json_url);
+
+      var json_url=$(this).find('a').attr('data-page');
+
+      showAllApprovedQuestion(json_url);
     });
 
+    $(document).on('click', '.paginationn li', function(){
 
+      var json_url=$(this).find('a').attr('data-page');
 
-    // $.getJSON(json_url, function(data){
-
-    //     var read_question_html=`<ul class="articles">`;
-
-    //     $.each(data.records, function(key, val){             
-    //       read_question_html+=`
-    //         <li class="article-entry standard">
-    //           <h4>
-    //             <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
-    //           </h4>
-    //           <span class="article-meta">` + val.CreateDate +`</span>
-    //           <span class="like-count">0</span>         
-    //         </li>`;  
-                        
-    //     });
-    //      read_question_html+=`<ul class="articles">`; 
-    //       $("#readApprovedLastest").html(read_question_html);  
-    //   });
-
-    $.getJSON("api/question/readApproved.php", function(data){
-
-      var read_question_html=`<ul class="articles">`;
-
-      $.each(data.records, function(key, val){             
-        read_question_html+=`
-          <li class="article-entry standard">
-            <h4>
-              <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
-            </h4>
-            <span class="article-meta">` + val.CreateDate +`</span>
-            <span class="like-count">0</span>         
-          </li>`;  
-                      
-      });
-       read_question_html+=`<ul class="articles">`; 
-        $("#readApproved").html(read_question_html);  
+      showLastestApprovedQuestion(json_url);
     });
-     
-    
 });   
 </script>   
 

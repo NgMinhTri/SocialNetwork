@@ -22,7 +22,7 @@
 
           
 
-          <aside class="span4 page-sidebar">
+          <!-- <aside class="span4 page-sidebar">
             
 
             <section class="widget">
@@ -61,8 +61,9 @@
                 <a href="#" class="btn btn-mini">wordpress</a>
               </div>
             </section>
-          </aside>
+          </aside> -->
           <!-- end of sidebar -->
+          <?php include 'inc/sidebar.php';?>
         </div>
       </div>
     </div>

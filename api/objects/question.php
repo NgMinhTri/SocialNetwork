@@ -20,6 +20,8 @@ class Question{
     public $Status;
     public $catName;
     public $UserName;
+    public $labelId;
+    public $labelName;
 
  
     // constructor
@@ -392,6 +394,93 @@ class Question{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
       
         return $row['total_rows'];
+    }
+
+
+
+    // create question
+    function createQuestionTag(){
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET
+                    Title=:Title, Description=:Description, catId=:catId, userId=:userId,
+                    CreateDate = CURDATE() , Status = 0 ";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->Title=htmlspecialchars(strip_tags($this->Title));;
+        $this->Description=htmlspecialchars(strip_tags($this->Description));
+        $this->catId=htmlspecialchars(strip_tags($this->catId));
+        $this->userId=htmlspecialchars(strip_tags($this->userId));
+      
+        $stmt->bindParam(":Title", $this->Title);
+        $stmt->bindParam(":Description", $this->Description);
+        $stmt->bindParam(":catId", $this->catId);
+        $stmt->bindParam(":userId", $this->userId);
+      
+        if($stmt->execute()){
+
+            $questionId = $this->conn->lastInsertId(); 
+            
+            $query = "SELECT *
+                FROM
+                    labels
+                WHERE
+                    labelName = :labelName";
+
+            $stmt = $this->conn->prepare($query);
+            $this->labelName=htmlspecialchars(strip_tags($this->labelName));
+            $stmt->bindParam(":labelName", $this->labelName);
+            $stmt->execute();
+            
+
+            if($stmt->rowCount()>0){
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->labelId = $row['ID']; 
+
+                $query = "INSERT INTO labelinquestion
+                    SET
+                        labelId  = $this->labelId,
+                        questionId = $questionId";
+             
+                $stmt = $this->conn->prepare($query);
+             
+                if($stmt->execute()){
+                    return true;
+                }
+            }
+            else{
+
+                $query = "INSERT INTO labels
+                    SET
+                        labelName  = :labelName";
+             
+                $stmt = $this->conn->prepare($query);
+             
+                $this->labelName=htmlspecialchars(strip_tags($this->labelName));
+
+                $stmt->bindParam(':labelName', $this->labelName);
+             
+                if($stmt->execute()){
+
+                    $labelId = $this->conn->lastInsertId(); 
+
+                    $query = "INSERT INTO labelinquestion
+                        SET
+                            labelId  = $labelId,
+                            questionId = $questionId";
+             
+                    $stmt = $this->conn->prepare($query);
+                 
+                    if($stmt->execute()){
+
+                        return true;
+                    }
+                }
+            }
+        }          
+        return false;
+          
     }
 }
 

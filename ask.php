@@ -27,6 +27,11 @@
                     <textarea id="Description" class="span8" required name="Description" cols="58" rows="10" required></textarea>
                   </div>
 
+                  <div>
+                    <label >Nhập tag cho câu hỏi *</label>
+                    <input class="span4" type="text" name="labelName" size="22" required />
+                  </div>
+
                   </br>
 
                   <div>
@@ -34,8 +39,10 @@
                   </div>
                    </br>
                   <div id="response"></div>
-            </form>           
-      </div>        
+            </form>   
+
+      </div>   
+      <?php include 'inc/sidebar.php';?>        
     </div>
   </div>
 </div>
@@ -64,7 +71,7 @@ $(document).ready(function() {
 
         var form_data = JSON.stringify(createQuestion);
         $.ajax({
-            url: "api/question/create.php",
+            url: "api/question/createTag.php",
             type : "POST",
             contentType : 'application/json',
             data : form_data,

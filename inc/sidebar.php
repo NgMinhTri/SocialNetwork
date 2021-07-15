@@ -7,7 +7,7 @@
       <ul id="menu-quick-links" class="menu clearfix">
         <li><a href="index.php">Home</a></li>
         <li><a href="home-categories-description.php">Danh mục</a></li>
-        <li><a href="tag.php">Tag</a></li>
+        <li><a href="home-label-description.php">Tag</a></li>
         <li><a href="ask.php">Đặt câu hỏi</a></li>
       </ul>
     </div>
@@ -35,7 +35,7 @@ $(document).ready(function(){
   $.getJSON("api/label/read.php", function(data){
     var read_label_html = `<div class="tagcloud">`;
     $.each(data.records, function(key, val){             
-      read_label_html +=`<a href="#" class="btn btn-mini">` +val.labelName+`</a>`;                    
+      read_label_html +=`<a href="label.php?labelId=` +val.ID+ `" class="btn btn-mini">` +val.labelName+`</a>`;                    
     });
     read_label_html += `</div>`;
     $(".readLabel").html(read_label_html);

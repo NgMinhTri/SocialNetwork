@@ -10,10 +10,11 @@
           <div class="span8 page-content">
             <!-- Basic Home Page Template -->
             <div class="row separator">
-              <section class="span4 articles-list">
-                <h3 >Các câu hỏi thuộc danh mục: <a id="catName"></a></h3>
-                <div id="showQuestionByCategoryID"></div>
-              </section>              
+
+              <section class="span8 articles-list">
+                <h3 >Các câu hỏi thuộc Tag: <a id="labelName"></a></h3>
+                <div id="showQuestionByLabel"></div>
+              </section>             
             </div>
           </div>
           <?php include 'inc/sidebar.php';?>
@@ -27,17 +28,15 @@
 <script type="text/javascript">
 $(document).ready(function() {  
 
-    var ID = location.search.replace('?catId=', '');
-    showQuestionByCategoryIDFirstpage();
+    var ID = location.search.replace('?labelId=', '');
+    showQuestionByLabelIDFirstpage();
 
-    function showQuestionByCategoryIDFirstpage(){
-      var json_url="api/question/readByCatId.php?catId=" +ID;
-      showQuestionByCategoryID(json_url);    
+    function showQuestionByLabelIDFirstpage(){
+      var json_url="api/question/readByLabelId.php?labelId=" +ID;
+      showQuestionByLabelID(json_url);    
     }
 
-    
-
-    function showQuestionByCategoryID(json_url){
+    function showQuestionByLabelID(json_url){
 
      $.getJSON(json_url, function(data){
 
@@ -54,14 +53,14 @@ $(document).ready(function() {
             </li>`;  
                         
         });
-          $("#showQuestionByCategoryID").html(read_question_html);  
-          $("#OK").text(catName);  
+          read_question_html+=`<ul>`;
+          $("#showQuestionByLabel").html(read_question_html);  
       });
     }
 
-      $.getJSON("api/category/read_one.php?ID=" +ID, function(data){
+      $.getJSON("api/label/read_one.php?ID=" +ID, function(data){
 
-        $("#catName").text(data.catName); 
+        $("#labelName").text(data.labelName); 
                         
       });             
 });   

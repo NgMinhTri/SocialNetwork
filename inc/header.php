@@ -52,7 +52,7 @@
                 <li class="current-menu-item"><a href="index.php">Trang chủ</a></li>
                 <li><a href="home-categories-description.php">Danh mục câu hỏi</a></li>
                 <!-- <li><a href="home-categories-articles.php">Home 3</a></li> -->
-                <li><a href="articles-list.php">Articles List</a></li>
+                <li><a href="home-label-description.php">Tags</a></li>
                 <li><a href="faq.php">FAQs</a></li>
                 <li>
                   <a href="#">Skins</a>

@@ -10,8 +10,12 @@
           <div class="span8 page-content">
             <!-- Basic Home Page Template -->
             <div class="row separator">
-              <section class="span4 articles-list">
+
+              <section class="span8 articles-list">
                 <h3 >Các câu hỏi thuộc danh mục: <a id="catName"></a></h3>
+              </section> 
+
+              <section class="span4 articles-list">
                 <div id="showQuestionByCategoryID"></div>
               </section>              
             </div>

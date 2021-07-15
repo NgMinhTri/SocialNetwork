@@ -67,7 +67,7 @@ class Question{
                     LEFT JOIN
                         dbuser u
                             ON q.userId = u.ID
-                    WHERE catId = ?
+                    WHERE catId = ? AND q.Status = 1
                 ORDER BY
                     q.CreateDate DESC";
       
@@ -80,6 +80,31 @@ class Question{
       
         return $stmt;
     }
+
+    public function readByLabelId(){
+        $query = "SELECT
+                    q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.Status
+                FROM
+                    " . $this->table_name . " q
+
+                    LEFT JOIN
+                        labelinquestion l
+                            ON q.ID = l.questionId
+                    WHERE l.labelId = ? AND q.Status = 1
+
+                ORDER BY
+                    q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->labelId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
     public function readApprove(){
         // select all query
         $query = "SELECT

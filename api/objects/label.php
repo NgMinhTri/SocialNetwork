@@ -137,6 +137,25 @@ class Label{
       
         $stmt->execute();
         return $stmt;
-    }          
+    }  
+
+     public function readLabelByQuestionId(){
+        $query = "SELECT
+                l.labelName, l.ID 
+            FROM
+                " . $this->table_name . " l
+                LEFT JOIN
+                    labelinquestion liq
+                        ON liq.labelId = l.ID
+
+                WHERE liq.questionId = ? ";     
+        $stmt = $this->conn->prepare( $query );
+      
+        $stmt->bindParam(1, $this->questionId);
+      
+        $stmt->execute();
+      
+        return $stmt;
+    }        
 }
 ?>

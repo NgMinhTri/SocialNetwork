@@ -46,10 +46,9 @@
           </form>
           <div id="responsevote"></div>
           <span class="tags">
-            <strong>Tags:&nbsp;&nbsp;</strong>
-            <a href="#" rel="tag">basic</a>,
-            <a href="#" rel="tag">setting</a>,
-            <a href="http://knowledgebase.inspirythemes.com/tag/website/"rel="tag">website</a>
+            <strong>Tags:</strong>
+            <a id="getLabelInQuestion"></a>
+           
           </span>
         </div>
 
@@ -222,43 +221,7 @@ $(document).ready(function() {
       
       return false;
     });
-
-    $.fn.serializeObject = function(){
-     
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function() {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
-    // Hàm Get Cookie
-    function getCookie(cname){
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' '){
-                c = c.substring(1);
-            }
-     
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
-   
-    
+  
     function LoadVotePerQuestion(){
       $.getJSON("api/vote/countNumberPerQuestion.php?questionId=" + ID, function(data){
 
@@ -301,6 +264,50 @@ $(document).ready(function() {
     $('#frm_vote .like-it').click(function (){
       $('#frm_vote').submit();
     });
+
+    //Get các Tag thuộc câu hỏi
+    $.getJSON("api/label/readByQuestionId.php?questionId=" +ID, function(data){
+
+      $.each(data.records, function(key, val){             
+        read_tag_html =`<a href="label.php?labelId=`+ val.ID +`" rel="tag">` +val.labelName+ `</a>`;                         
+      });
+      $("#getLabelInQuestion").html(read_tag_html);
+    });   
+
+
+    $.fn.serializeObject = function(){
+     
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    // Hàm Get Cookie
+    function getCookie(cname){
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' '){
+                c = c.substring(1);
+            }
+     
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 });    
 </script>
         

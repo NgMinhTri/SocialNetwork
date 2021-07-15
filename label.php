@@ -10,9 +10,11 @@
           <div class="span8 page-content">
             <!-- Basic Home Page Template -->
             <div class="row separator">
-
               <section class="span8 articles-list">
                 <h3 >Các câu hỏi thuộc Tag: <a id="labelName"></a></h3>
+              </section> 
+
+              <section class="span4 articles-list">
                 <div id="showQuestionByLabel"></div>
               </section>             
             </div>

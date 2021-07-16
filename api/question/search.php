@@ -26,7 +26,6 @@ if($num>0){
         $question_item = array(
             "ID" =>  $ID,
             "catName" => $catName,
-            "UserName" => $UserName,
             "Title" => $Title,
             "Description" => $Description,
             "CreateDate" => $CreateDate,

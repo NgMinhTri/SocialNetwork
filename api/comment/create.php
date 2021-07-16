@@ -14,12 +14,12 @@ include_once '../libs/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 include_once '../config/database.php';
-include_once '../objects/question.php';
+include_once '../objects/comment.php';
   
 $database = new Database();
 $db = $database->getConnection();
   
-$question = new Question($db);
+$comment = new Comment($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -29,26 +29,21 @@ if($jwt){
  
     try {
         $decoded = JWT::decode($jwt, $key, array('HS256'));
-        $question->Title = $data->Title;
-        $question->Description = $data->Description;
-        $question->catId = $data->catId;
-        $question->userId = $decoded->data->id;
-
-        foreach($data->labelName as $item) { 
-            $question->labelName = $item; 
-        }
+        $comment->ownerUserId = $decoded->data->id;
+        $comment->content = $data->content;
+        $comment->questionId = $data->questionId;
+       
         
-        if($question->create()){
+        if($comment->create()){
                
             http_response_code(201);
             
-            echo json_encode(array("message" => "Question đã được tạo."));
-            echo json_encode($data);
+            echo json_encode(array("message" => "Comment đã được tạo."));
         }                       
         else{
             http_response_code(401);
         
-            echo json_encode(array("message" => "Không thể tạo question."));
+            echo json_encode(array("message" => "Không thể tạo comment."));
         }
     }
     catch (Exception $e){

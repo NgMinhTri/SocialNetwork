@@ -20,20 +20,11 @@
 
                 <!-- Style Sheet-->
                 <link rel="stylesheet" href="style.css"/>
-                <link rel='stylesheet' id='bootstrap-css-css'  href='css/bootstrap.css?ver=1.0' type='text/css' media='all' />
+                <link rel='stylesheet' id='bootstrap-css-css'  href='css/bootstrap.css' type='text/css' media='all' />               
                 <link rel='stylesheet' id='responsive-css-css'  href='css/responsive.css?ver=1.0' type='text/css' media='all' />
                 <link rel='stylesheet' id='pretty-photo-css-css'  href='js/prettyphoto/prettyPhoto.css?ver=3.1.4' type='text/css' media='all' />
                 <link rel='stylesheet' id='main-css-css'  href='css/main.css?ver=1.0' type='text/css' media='all' />
-                <link rel="stylesheet" href="css/profile.css"/>
-
-                
-                
-    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-              <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
-              <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-              <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script> -->
+                <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
                 <!-- php5 shim, for IE6-8 support of php5 elements -->
                 <!--[if lt IE 9]>
                 <script src="js/php5.js"></script>
@@ -60,7 +51,7 @@
                 <li class="current-menu-item"><a href="index.php">Trang chủ</a></li>
                 <li><a href="home-categories-description.php">Danh mục câu hỏi</a></li>
                 <!-- <li><a href="home-categories-articles.php">Home 3</a></li> -->
-                <li><a href="articles-list.php">Articles List</a></li>
+                <li><a href="home-label-description.php">Tags</a></li>
                 <li><a href="faq.php">FAQs</a></li>
                 <li>
                   <a href="#">Skins</a>

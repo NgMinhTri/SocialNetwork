@@ -41,7 +41,7 @@ function readProductsTemplate(data, keywords){
         read_products_html+=`<tr>
  
             <td>` + val.Title + `</td>
-            <td><textarea rows="8" cols="100" name='description' class='form-control'>` + val.Description + `</textarea></td>
+            <td>` + val.Description + `/textarea></td>
             
             <!-- 'action' buttons -->
             
@@ -85,7 +85,7 @@ function readQuestionNotApproveTemplate(data, keywords){
  
         </div>
         </form>
- 
+        </br>
         <!-- when clicked, it will load the create product form -->
         <div id='approve-product' class='btn btn-primary pull-right m-b-15px read-products-button'>
             <span ></span> Danh sách tất cả câu hỏi
@@ -110,7 +110,7 @@ function readQuestionNotApproveTemplate(data, keywords){
         read_products_html+=`<tr>
  
             <td>` + val.Title + `</td>
-            <td><textarea rows="8" cols="100" name='description' class='form-control'>` + val.Description + `</textarea></td>
+            <td>` + val.Description + `</td>
             
             <!-- 'action' buttons -->
             

@@ -23,6 +23,7 @@ $question = new Question($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
+
 $jwt=isset($data->jwt) ? $data->jwt : "";
 
 if($jwt){
@@ -33,23 +34,23 @@ if($jwt){
         $question->Description = $data->Description;
         $question->catId = $data->catId;
         $question->userId = $decoded->data->id;
+        $question->labelName = $data->labelName;
 
-        foreach($data->labelName as $item) { 
-            $question->labelName = $item; 
-        }
-        
-        if($question->create()){
+        if($question->createQuestionTag()){
                
-            http_response_code(201);
+                http_response_code(201);
             
-            echo json_encode(array("message" => "Question đã được tạo."));
-            echo json_encode($data);
-        }                       
-        else{
-            http_response_code(401);
+                echo json_encode(array("message" => "Question đã được tạo."));
+               
+            }                       
+            else{
+                http_response_code(401);
+            
+                echo json_encode(array("message" => "Không thể tạo question."));
+            }
         
-            echo json_encode(array("message" => "Không thể tạo question."));
-        }
+        
+       
     }
     catch (Exception $e){
     

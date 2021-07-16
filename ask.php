@@ -66,22 +66,27 @@ $(document).ready(function() {
     $(document).on('submit', '#commentform', function(){           
         var addquestion_form = $(this);
         var jwt = getCookie('jwt');
-        var createQuestion = addquestion_form.serializeObject()
-        createQuestion.jwt = jwt;
+        if(jwt == ""){
+          $('#response').html("<div class='alert alert-danger'>Bạn phải đăng nhập để bình luận cho bài viết này!</div>");
+        }
+        else{
+          var createQuestion = addquestion_form.serializeObject()
+          createQuestion.jwt = jwt;
 
-        var form_data = JSON.stringify(createQuestion);
-        $.ajax({
-            url: "api/question/createTag.php",
-            type : "POST",
-            contentType : 'application/json',
-            data : form_data,
-            success : function(result){  
-                $('#response').html("<div class='alert alert-success'>Đặt câu hỏi thành công.Vui lòng đợi Admin duyệt </div>");                         
-            },
-            error: function(xhr, resp, text){
-                $('#response').html("<div class='alert alert-danger'>Đặt câu hỏi thất bại. Vui lòng thử lại.</div>");
-                }
-        });
+          var form_data = JSON.stringify(createQuestion);
+          $.ajax({
+              url: "api/question/createTag.php",
+              type : "POST",
+              contentType : 'application/json',
+              data : form_data,
+              success : function(result){  
+                  $('#response').html("<div class='alert alert-success'>Đặt câu hỏi thành công.Vui lòng đợi Admin duyệt </div>");                         
+              },
+              error: function(xhr, resp, text){
+                  $('#response').html("<div class='alert alert-danger'>Đặt câu hỏi thất bại. Vui lòng thử lại.</div>");
+              }
+          });
+        }
         return false;
     });
      

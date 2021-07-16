@@ -118,7 +118,7 @@ $(document).ready(function() {
         }
         return "";
     }
-    CKEDITOR.replace('Description');
+    // CKEDITOR.replace('Description');
     // $('#btn_add_attachment').off('click').on('click', function(){
     //   $('#attachment_items').prepend('<p><input type="file"  name="attachment" /></p>');
     //   return false;

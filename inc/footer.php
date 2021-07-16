@@ -120,7 +120,7 @@
                 </li>
                 <li class="rss"><a target="_blank" href="#"></a></li>
                 <li class="twitter"><a target="_blank" href="#"></a></li>
-                <li class="facebook"><a target="_blank" href="#"></a></li>
+                <li class="facebook"><a target="_blank" href="https://www.facebook.com/groups/485795942772826"></a></li>
               </ul>
             </div>
           </div>

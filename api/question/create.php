@@ -33,17 +33,12 @@ if($jwt){
         $question->Description = $data->Description;
         $question->catId = $data->catId;
         $question->userId = $decoded->data->id;
-
-        foreach($data->labelName as $item) { 
-            $question->labelName = $item; 
-        }
         
         if($question->create()){
                
             http_response_code(201);
             
             echo json_encode(array("message" => "Question đã được tạo."));
-            echo json_encode($data);
         }                       
         else{
             http_response_code(401);

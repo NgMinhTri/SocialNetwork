@@ -33,14 +33,14 @@ $user = new User($db);
 $user->id = isset($_GET['id']) ? $_GET['id'] : die();
 // get posted data
 
-$stmt = $user->questionOfUser();
+$stmt = $user->answerOfUser();
 
 $num = $stmt->rowCount();
 // update user will be here
 // update the user record
 if ($num>0) {
-    $question_arr=array();
-    $question_arr["records"]=array();
+    $answer_arr=array();
+    $answer_arr["records"]=array();
     // regenerate jwt will be here
     // we need to re-generate jwt because user details might be different
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -49,33 +49,31 @@ if ($num>0) {
         // just $name only
         extract($row);
     //q.id, q.Title, q.Description, q.CreateDate, q.NumberOfComments , q.Status 
-        $question_item=array(
-            "id" => $row['id'],
-            "Title" => $row['Title'],
-            "Description" => $row['Description'],
-            "CreateDate" => $row['CreateDate'],
-            "NumberOfComments" => $row['NumberOfComments'],
-            "Status" => $row['Status'], 
+        $answer_item=array(
+            "Question" => $row['Title'],
+            "Content" => $row['content'],
+            "CreateDate" => $row['createdDate'],
+            "Description" => $row['Description']
         );
-        array_push($question_arr["records"], $question_item);
+        array_push($answer_arr["records"], $answer_item);
     }
     
     // set response code - 200 OK
     http_response_code(200);
     
     // show products data in json format
-    echo json_encode($question_arr);
+    echo json_encode($answer_arr);
 }
     
 // no products found will be here
 else {
     
     // set response code - 404 Not found
-    http_response_code(404);
+    http_response_code(401);
     
     // tell the user no products found
     echo json_encode(
-        array("message" => "No question found.")
+        array("message" => "No answer found.")
     );
 }
  

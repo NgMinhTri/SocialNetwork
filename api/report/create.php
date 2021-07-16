@@ -6,20 +6,21 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
  // required to decode jwt
+// required to encode json web token
 include_once '../config/core.php';
-include_once '../libs/php-jwt-master/src/BeforeValidException.php';
-include_once '../libs/php-jwt-master/src/ExpiredException.php';
-include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
-include_once '../libs/php-jwt-master/src/JWT.php';
+include_once '../../lib/php-jwt-master/src/BeforeValidException.php';
+include_once '../../lib/php-jwt-master/src/ExpiredException.php';
+include_once '../../lib/php-jwt-master/src/SignatureInvalidException.php';
+include_once '../../lib/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 include_once '../config/database.php';
-include_once '../objects/comment.php';
+include_once '../objects/report.php';
   
 $database = new Database();
 $db = $database->getConnection();
   
-$comment = new Comment($db);
+$report = new Report($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -29,21 +30,20 @@ if($jwt){
  
     try {
         $decoded = JWT::decode($jwt, $key, array('HS256'));
-        $comment->ownerUserId = $decoded->data->id;
-        $comment->content = $data->content;
-        $comment->questionId = $data->questionId;
-       
-        
-        if($comment->create()){
+        $report->reportUserId = $decoded->data->id;
+        $report->content = $data->content;       
+        $report->Type = $data -> Type;
+        $report->commentId = $data->commentId;
+        if($report->create()){
                
             http_response_code(201);
             
-            echo json_encode(array("message" => "Comment đã được tạo."));
+            echo json_encode(array("message" => "Report đã được tạo."));
         }                       
         else{
             http_response_code(401);
         
-            echo json_encode(array("message" => "Không thể tạo comment."));
+            echo json_encode(array("message" => "Không thể tạo report."));
         }
     }
     catch (Exception $e){

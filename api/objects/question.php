@@ -249,42 +249,39 @@ class Question{
         $this->Status = $row['Status'];
     }  
 
-      // search products
-    function search($keywords){     
-      $query = "SELECT
-                    q.ID, c.catName, u.UserName, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.Status, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes
+    // search products
+    function search($keywords){
+    
+        // select all query
+        $query = "SELECT
+                    c.catName as category_name, q.id, q.Title, q.Description, q.CreateDate, q.NumberOfComments, q.NumberOfVotes,q.Status
                 FROM
                     " . $this->table_name . " q
-                    
                     LEFT JOIN
-                        categoryquestions c
-                            ON q.catId = c.ID
-                    LEFT JOIN
-                        dbuser u
-                            ON q.userId = u.ID
-                     WHERE
-                       q.Title LIKE ?  
-                       OR q.Description LIKE ? OR q.CreateDate LIKE ? OR q.LastModifiedDate LIKE ? OR c.catName LIKE ? OR u.UserName LIKE ?
-
-                    ORDER BY
-                    q.CreateDate DESC"; 
-       
+                    categoryquestions c
+                            ON q.catId = c.id
+                WHERE
+                    q.Title LIKE ? OR q.Description LIKE ? OR c.catName LIKE ?
+                ORDER BY
+                    q.CreateDate DESC";
+    
+        // prepare query statement
         $stmt = $this->conn->prepare($query);
-      
+    
+        // sanitize
         $keywords=htmlspecialchars(strip_tags($keywords));
         $keywords = "%{$keywords}%";
-      
+    
+        // bind
         $stmt->bindParam(1, $keywords);
         $stmt->bindParam(2, $keywords);
         $stmt->bindParam(3, $keywords);
-        $stmt->bindParam(4, $keywords);
-        $stmt->bindParam(5, $keywords);
-        $stmt->bindParam(6, $keywords);
-      
-        $stmt->execute();     
+    
+        // execute query
+        $stmt->execute();
+    
         return $stmt;
-    }     
-
+    }
     function delete(){
       
         $query = "DELETE FROM " . $this->table_name . " WHERE ID = ?";

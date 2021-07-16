@@ -1,57 +1,6 @@
-<?php //include 'inc/header.php';?>
+<?php include 'inc/header.php';?>
+<?php include 'inc/wrapper.php';?>
 
-
-
-<!doctype html>
-<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
-<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
-<!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en-US">
-<!--<![endif]-->
-
-<head>
-    <!-- META TAGS -->
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Social Network</title>
-    <link rel="shortcut icon" href="images/favicon.png" />
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- Google Web Fonts-->
-    <link
-        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-        rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
-        type='text/css'>
-
-    <!-- Style Sheet-->
-    <link rel="stylesheet" href="style.css" />
-    <!-- <link rel='stylesheet' id='bootstrap-css-css'  href='css/bootstrap.css?ver=1.0' type='text/css' media='all' /> -->
-    <!-- <link rel='stylesheet' id='responsive-css-css'  href='css/responsive.css?ver=1.0' type='text/css' media='all' /> -->
-    <link rel='stylesheet' id='pretty-photo-css-css' href='js/prettyphoto/prettyPhoto.css?ver=3.1.4' type='text/css'
-        media='all' />
-    <link rel='stylesheet' id='main-css-css' href='css/main.css?ver=1.0' type='text/css' media='all' />
-    <link rel="stylesheet" href="css/profile.css" />
-</head>
-<body>  
-          <!-- Start of Header -->
-    <div class="header-wrapper">
-      <header>
-        <div class="container">
-          <div class="logo-container">
-            <!-- Website Logo -->
-            <a href="index.php" title="Knowledge Base Theme">
-              <img src="images/logo.png" alt="Knowledge Base Theme" />
-            </a>
-            <span class="tag-line">Social Network</span>
-          </div>
 
     <!-- Start of Page Container -->
 <div class="page-container">

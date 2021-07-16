@@ -20,14 +20,15 @@
 $keywords=isset($_GET["keywords"]) ? $_GET["keywords"] : "";
 ?>
 
- 
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
+    
 var html = `<ul class="articles">`;
 // var keywords = $('#search-product-form').find(":input[name='keywords']").val();
 // console.log(keywords);
 var keywords= '<?php echo $keywords; ?>';
 // get data from the api based on search keywords
-$.getJSON("http://localhost/SOCIALNETWORK/api/question/search.php?s=" + keywords, function(
+$.getJSON("api/question/search.php?s=" + keywords, function(
     data) {
 
     // template in products.js

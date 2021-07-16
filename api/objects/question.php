@@ -254,12 +254,12 @@ class Question{
     
         // select all query
         $query = "SELECT
-                    c.catName as category_name, q.id, q.Title, q.Description, q.CreateDate, q.NumberOfComments, q.NumberOfVotes,q.Status
+                    c.catName as category_name, q.ID, q.Title, q.Description, q.CreateDate, q.NumberOfComments, q.NumberOfVotes,q.Status
                 FROM
                     " . $this->table_name . " q
                     LEFT JOIN
                     categoryquestions c
-                            ON q.catId = c.id
+                            ON q.catId = c.ID
                 WHERE
                     q.Title LIKE ? OR q.Description LIKE ? OR c.catName LIKE ?
                 ORDER BY

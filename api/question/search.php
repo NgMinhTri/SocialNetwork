@@ -23,19 +23,16 @@ if($num>0){
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
   
-        $question_item = array(
-            "ID" =>  $ID,
-            "catName" => $catName,
-            "UserName" => $UserName,
+        $question_item=array(
+            "ID" => $ID,
+            "category_name"=> $row['category_name'], 
             "Title" => $Title,
             "Description" => $Description,
             "CreateDate" => $CreateDate,
-            "LastModifiedDate" => $LastModifiedDate,
             "NumberOfComments" => $NumberOfComments,
-            "NumberOfVotes" => $NumberOfVotes,
-            "NumberOfReports" => $NumberOfReports,
+            "NumberOfVotes" => $NumberOfVotes, 
             "Status" => $Status 
-        ); 
+        );
         array_push($question_arr["records"], $question_item);
     }
 

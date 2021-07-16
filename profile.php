@@ -1,3 +1,19 @@
+<head>
+    <link rel="stylesheet" href="css/profile.css" />
+
+
+
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- php5 shim, for IE6-8 support of php5 elements -->
+    <!--[if lt IE 9]>
+            <script src="js/php5.js"></script>
+            <![endif]-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
 <?php include 'inc/header.php'; ?>
 
 
@@ -85,14 +101,16 @@
 <script>
 $(document).ready(function() {
     var jwt = getCookie('jwt');
-    $.post("http://localhost/SOCIALNETWORK/api/user/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
+    $.post("http://localhost/SOCIALNETWORK/api/user/validate_token.php", JSON.stringify({
+        jwt: jwt
+    })).done(function(result) {
         $("#fname").html(`<div>` + result.data.firstname + `</div>`);
         $("#lname").html(`<div>` + result.data.lastname + `</div>`);
         $("#email").html(`<div>` + result.data.email + `</div>`);
         $("#username").html(`<div>` + result.data.username + `</div>`);
         $("#phone").html(`<div>` + result.data.phonenumber + `</div>`);
         $("#fullname").html(`<div>` + result.data.firstname + `</div>`);
- // html form for updating user account will be here
+        // html form for updating user account will be here
     })
     // const xhr = new XMLHttpRequest();
     // xhr.open('GET', 'http://localhost/SOCIALNETWORK/api/user/read.php')

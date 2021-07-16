@@ -5,7 +5,7 @@ class Database{
     private $host = "localhost:3306";
     private $db_name = "socialnetworking";
     private $username = "root";
-    private $password = "123456789";
+    private $password = "";
     public $conn;
   
     // get the database connection

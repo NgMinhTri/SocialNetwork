@@ -59,6 +59,7 @@ $(document).ready(function() {
       showLastestApprovedQuestion(json_url);    
     }
 
+    
     function showAllApprovedQuestion(json_url){
 
      $.getJSON(json_url, function(data){
@@ -72,8 +73,7 @@ $(document).ready(function() {
                 <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
               </h4>
               <span class="article-meta">` + val.CreateDate +`</span>
-              <span class="like-count">0</span>         
-            </li>`;  
+              </li>`;  
                         
         });
          read_question_html+=`</ul>`; 
@@ -98,6 +98,7 @@ $(document).ready(function() {
               }
             read_question_html+="</ul>";
           }
+          console.log(read_question_html);  
           $("#readApproved").html(read_question_html);  
       });
     }
@@ -113,8 +114,7 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate +`</span>
-              <span class="like-count">0</span>         
+              <span class="article-meta">` + val.CreateDate +`</span>     
             </li>`;  
                         
         });

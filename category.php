@@ -53,8 +53,7 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate +`</span>
-              <span class="like-count">0</span>         
+              <span class="article-meta">` + val.CreateDate +`</span>      
             </li>`;  
                         
         });

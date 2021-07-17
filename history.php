@@ -47,7 +47,7 @@
 <script>
 $(document).ready(function() {
     var jwt = getCookie('jwt');
-    $.post("http://localhost/SOCIALNETWORK/api/user/validate_token.php", JSON.stringify({
+    $.post("api/user/validate_token.php", JSON.stringify({
         jwt: jwt
     })).done(function(result) {
         var html="";
@@ -55,7 +55,7 @@ $(document).ready(function() {
             $("#question").html("");
             // categories api call will be here
             console.log(result.data.id);
-            $.getJSON("http://localhost/SOCIALNETWORK/api/user/reportQuestions.php?id=" + result
+            $.getJSON("api/user/reportQuestions.php?id=" + result
                 .data.id,
                 function(data) {
                     html = `<tbody>
@@ -109,7 +109,7 @@ $(document).ready(function() {
             // categories api call will be here
             $("#question").html("");
             console.log(result.data.id);
-            $.getJSON("http://localhost/SOCIALNETWORK/api/user/reportAnswer.php?id=" + result
+            $.getJSON("api/user/reportAnswer.php?id=" + result
                 .data.id,
                 function(data) {
                     html = `<tbody>

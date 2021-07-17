@@ -101,7 +101,7 @@
 <script>
 $(document).ready(function() {
     var jwt = getCookie('jwt');
-    $.post("http://localhost/SOCIALNETWORK/api/user/validate_token.php", JSON.stringify({
+    $.post("api/user/validate_token.php", JSON.stringify({
         jwt: jwt
     })).done(function(result) {
         $("#fname").html(`<div>` + result.data.firstname + `</div>`);

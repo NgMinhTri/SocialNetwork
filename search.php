@@ -26,7 +26,7 @@ $(document).ready(function() {
     var html = `<ul class="articles">`;
     var keywords = '<?php echo $keywords; ?>';
     // get data from the api based on search keywords
-    $.getJSON("http://localhost/SOCIALNETWORK/api/question/search.php?s=" + keywords, function(data) {
+    $.getJSON("api/question/search.php?s=" + keywords, function(data) {
         // template in products.js
         $.each(data.records, function(key, val) {
             html += `<li class="article-entry standard">

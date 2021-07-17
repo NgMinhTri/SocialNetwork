@@ -1,5 +1,8 @@
 <?php include 'inc/header.php'; ?>
 
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
 
 <!------ Include the above in your HEAD tag ---------->
 <div class="page-container">
@@ -148,11 +151,11 @@ $(document).ready(function() {
                 if (xhr.responseJSON.message == "Unable to update user.") {
                     $('#response').html(
                         "<div class='alert alert-danger'>Unable to update account.</div>"
-                        );
+                    );
                 } else if (xhr.responseJSON.message == "Access denied.") {
                     $('#response').html(
                         "<div class='alert alert-success'>Access denied. Please login</div>"
-                        );
+                    );
                     window.location.replace('log-in.php');
                 }
             }

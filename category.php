@@ -38,9 +38,7 @@ $(document).ready(function() {
       var json_url="api/question/readByCatId.php?catId=" +ID;
       showQuestionByCategoryID(json_url);    
     }
-
     
-
     function showQuestionByCategoryID(json_url){
 
      $.getJSON(json_url, function(data){

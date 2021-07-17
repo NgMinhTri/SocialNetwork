@@ -224,7 +224,7 @@
 
 
         function LoadCommentFirstpage() {
-            var json_url = "http://localhost:8080/socialnetwork/api/comment/read_paging.php?questionId=" + ID;
+            var json_url = "http://localhost/socialnetwork/api/comment/read_paging.php?questionId=" + ID;
             LoadComment(json_url);
         }
 
@@ -267,6 +267,48 @@
               </article>
               <!-- end of comment -->
             </li>`;
+                    myfunction();
+                    read_comment_html +=
+                        `
+                    <button type="button" class="btn btn-link reportbtn" data-toggle="modal" data-target="#exampleModal" value=` +
+                        val.ID + ` onclick="myfunction()">Report this answer</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Report answer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST" id="reportform">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Loại report</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="Type">
+                                    <option value="Spam">Spam</option>
+                                    <option value="Bad Content">Bad Content</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Nội dung</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    name="content"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id ="close" class="btn btn-secondary" data-dismiss="modal" onclick ="deletemodel();">Close</button>
+                                <button type="submit" class="btn btn-primary">Send report</button>
+                            </div>
+                            <div id="responsereport"></div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+                `;
+
                     i = i + 1;
                 });
                 read_comment_html += ` </ol>`;
@@ -316,7 +358,7 @@
             if (jwt == "") {
                 $('#response').html(
                     "<div class='alert alert-danger'>Bạn phải đăng nhập để bình luận cho bài viết này!</div>"
-                    );
+                );
             } else {
                 var comment = createCommentForm.serializeObject()
                 comment.jwt = jwt;
@@ -331,14 +373,14 @@
                     success: function(result) {
                         $('#response').html(
                             "<div class='alert alert-success'>Gửi bình luận thành công!</div>"
-                            );
+                        );
                         LoadCommentFirstpage();
 
                     },
                     error: function(xhr, resp, text) {
                         $('#response').html(
                             "<div class='alert alert-danger'>Gửi bình luận thất bại!</div>"
-                            );
+                        );
                     }
                 });
             }
@@ -363,7 +405,7 @@
             if (jwt == "") {
                 $('#responsevote').html(
                     "<div class='alert alert-danger'>Bạn phải đăng nhập để vote cho bài viết này!</div>"
-                    );
+                );
             } else {
                 var comment = form.serializeObject()
                 comment.jwt = jwt;
@@ -381,7 +423,7 @@
 
                         $('#responsevote').html(
                             "<div class='alert alert-danger'>Bạn đã vote cho bài viết này !</div>"
-                            );
+                        );
                     }
                 });
             }
@@ -435,5 +477,76 @@
             }
             return "";
         }
+        //Ham report cau tra loi
+        $(document).on('submit', '#reportform', function() {
+
+            var createreportForm = $(this);
+            var jwt = getCookie('jwt');
+            if (jwt == "") {
+                $('#response').html(
+                    "<div class='alert alert-danger'>Bạn phải đăng nhập để report cho câu trả lời này!</div>"
+                );
+            } else {
+                var report = createreportForm.serializeObject()
+                report.jwt = jwt;
+
+                report.commentId = commentId;
+                //report.commentId = $("input[name=reportbtn]").val();
+                console.log(report.commentId);
+                var form_data = JSON.stringify(report);
+
+                $.ajax({
+                    url: "api/report/create.php",
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: form_data,
+                    success: function(result) {
+                        $('#responsereport').html(
+                            "<div class='alert alert-success'>Gửi report thành công!</div>"
+                        );
+
+
+                    },
+                    error: function(xhr, resp, text) {
+                        $('#responsereport').html(
+                            "<div class='alert alert-danger'>Gửi report thất bại!</div>"
+                        );
+                    }
+                });
+            }
+
+            return false;
+        });
+
     });
+
+    var commentId = $(".reportbtn").val();
+
+    function myfunction() {
+
+        $(document).ready(function() {
+
+            $(".reportbtn").on("click", function() {
+                // $(".reportbtn").click(function() {
+                commentId = $(this).val();
+                console.log(commentId);
+
+            });
+            //$(".reportbtn" ).on( "click");
+            //$( ".reportbtn" ).trigger( "click" );
+        });
+    }
+
+    function deletemodel() {
+        $('#exampleModal')
+            .find("input,textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
+            $('#responsereport').html("");
+    }
+
+    //$('.modal-body', '#exampleModal').empty();
     </script>

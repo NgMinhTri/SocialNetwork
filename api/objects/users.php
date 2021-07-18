@@ -218,7 +218,7 @@ class User{
     }
 
     public function answerOfUser(){
-        $query = "SELECT comments.createdDate,comments.content, questions.Title, questions.Description 
+        $query = "SELECT comments.createdDate,comments.content, questions.ID as questionID,questions.Title, questions.Description 
         FROM comments," . $this->table_name . ", questions  
         WHERE comments.questionId=questions.ID and comments.ownerUserId=" . $this->table_name . ".ID and " . $this->table_name . ".ID=? 
         ORDER BY

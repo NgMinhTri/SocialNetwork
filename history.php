@@ -50,7 +50,7 @@ $(document).ready(function() {
     $.post("api/user/validate_token.php", JSON.stringify({
         jwt: jwt
     })).done(function(result) {
-        var html="";
+        var html = "";
         $(document).on('click', '#Question-bnt', function() {
             $("#question").html("");
             // categories api call will be here
@@ -61,36 +61,45 @@ $(document).ready(function() {
                     html = `<tbody>
                     <tr data-status="question" class="selected">
                         <td class ="ta">
-                            <h5>Status</h5><hr>
+                            <h5>Trạng thái</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Number Of Comments</h5><hr>
+                            <h5>Số câu trả lời</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Title</h5><hr>
+                            <h5>Tiêu đề</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Description</h5><hr>
+                            <h5>Mô tả</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Created Date</h5><hr>
+                            <h5>Ngày đặt câu hỏi</h5><hr>
                         </td>
                     </tr></tbody>`;
                     $.each(data.records, function(key, val) {
                         // read products button will be here
                         html += `<tbody>
-                    <tr data-status="question" class="selected">
-                                        <td class ="ta">
-                                            <h6>` + val.Status + `</h6>
-                                        </td>
-                                        <td class ="ta">
+                    <tr data-status="question" class="selected">`;
+                        if (val.Status == 1) {
+                            html += `<td class ="ta">
+                                    <h6>Đã duyệt</h6>
+                                </td>`
+                        } else {
+                            html += `<td class ="ta">
+                                    <h6>Chờ duyệt</h6>
+                                </td>`
+                        }
+
+
+                        html+=`<td class ="ta">
                                             <h6>` + val.NumberOfComments + `</h6>
                                         </td>
                                         <td class ="ta">
                                             <div class="media">
-                                                <div class="media-body">                
-                                                    <h4> ` + val.Title + `
-                                                    </h4>                                                    
+                                                <div class="media-body">   
+                                                <u style="font-weight:bold;"> 
+                                                    <a href="single.php?questionId=` + val.id + `">` + val.Title + `</a>             
+                                                </u>                                                    
                                                 </div>
                                             </div>
                                         </td>
@@ -115,16 +124,16 @@ $(document).ready(function() {
                     html = `<tbody>
                     <tr data-status="question" class="selected">
                         <td class ="ta">
-                            <h5>Title</h5><hr>
+                            <h5>Tiêu đề</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Question</h5><hr>
+                            <h5>Câu hỏi</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Answer</h5><hr>
+                            <h5>Câu trả lời</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Created Date</h5><hr>
+                            <h5>Ngày trả lời</h5><hr>
                         </td>
                     </tr></tbody>`;
                     $.each(data.records, function(key, val) {
@@ -132,13 +141,13 @@ $(document).ready(function() {
                         html += `<tbody>
                     <tr data-status="question" class="selected">
                                         <td class ="ta">
-                                            <h5>` + val.Question + `</h5>
+                                            <u style="font-weight:bold;"><a href="single.php?questionId=` + val.QuestionId + `">` + val
+                            .Question + `</a>  </u>
                                         </td>
                                         <td class ="ta">
                                             <h5>` + val.Description + `</h5>
                                         </td>
-                                        <td class ="ta">
-                                                           
+                                        <td class ="ta">                                                          
                                             <h5> ` + val.Content + `
                                             </h5>                                                    
                         
@@ -150,9 +159,9 @@ $(document).ready(function() {
                     });
                     $("#question").html(html);
                 });
-                
+
         });
-        
+
     })
     // const xhr = new XMLHttpRequest();
     // xhr.open('GET', 'http://localhost/SOCIALNETWORK/api/user/read.php')

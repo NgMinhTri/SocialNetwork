@@ -35,7 +35,7 @@ $(document).ready(function() {
                             </h4>
                             <span class="article-meta">` + val.CreateDate + ` in
                                 <a href="#" title="View all posts in Server &amp; Database">` + val.catName + `</a></span>
-                            <span class="like-count">1</span>
+                            
                     </li>`;
         });
         html += `</ul>`;

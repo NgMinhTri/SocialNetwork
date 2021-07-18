@@ -72,7 +72,8 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate +`</span>
+              <span class="article-meta">` + val.CreateDate + ` in
+              <a href="#" title="View all posts in Server &amp; Database">` + val.catName + `</a></span>
               </li>`;  
                         
         });
@@ -114,7 +115,8 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate +`</span>     
+              <span class="article-meta">` + val.CreateDate + ` in
+               <a href="#" title="View all posts in Server &amp; Database">` + val.catName + `</a></span>     
             </li>`;  
                         
         });

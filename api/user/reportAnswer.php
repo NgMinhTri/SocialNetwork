@@ -50,6 +50,7 @@ if ($num>0) {
         extract($row);
     //q.id, q.Title, q.Description, q.CreateDate, q.NumberOfComments , q.Status 
         $answer_item=array(
+            "QuestionId"=>$row['questionID'],
             "Question" => $row['Title'],
             "Content" => $row['content'],
             "CreateDate" => $row['createdDate'],

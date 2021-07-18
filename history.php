@@ -58,13 +58,14 @@ $(document).ready(function() {
             $.getJSON("api/user/reportQuestions.php?id=" + result
                 .data.id,
                 function(data) {
+                    var i =1;
                     html = `<tbody>
                     <tr data-status="question" class="selected">
                         <td class ="ta">
-                            <h5>Trạng thái</h5><hr>
+                            <h5>Số thứ tự</h5><hr>
                         </td>
                         <td class ="ta">
-                            <h5>Số câu trả lời</h5><hr>
+                            <h5>Trạng thái</h5><hr>
                         </td>
                         <td class ="ta">
                             <h5>Tiêu đề</h5><hr>
@@ -79,7 +80,10 @@ $(document).ready(function() {
                     $.each(data.records, function(key, val) {
                         // read products button will be here
                         html += `<tbody>
-                    <tr data-status="question" class="selected">`;
+                    <tr data-status="question" class="selected">
+                        <td class ="ta">
+                            <h6>` + i + `</h6>
+                        </td>`;
                         if (val.Status == 1) {
                             html += `<td class ="ta">
                                     <h6>Đã duyệt</h6>
@@ -92,9 +96,6 @@ $(document).ready(function() {
 
 
                         html+=`<td class ="ta">
-                                            <h6>` + val.NumberOfComments + `</h6>
-                                        </td>
-                                        <td class ="ta">
                                             <div class="media">
                                                 <div class="media-body">   
                                                 <u style="font-weight:bold;"> 
@@ -110,6 +111,7 @@ $(document).ready(function() {
                                             <h5>` + val.CreateDate + `</h5>
                                         </td>
                             </tr> </tbody>`;
+                            i++;
                     });
                     $("#question").html(html);
                 });
@@ -121,8 +123,12 @@ $(document).ready(function() {
             $.getJSON("api/user/reportAnswer.php?id=" + result
                 .data.id,
                 function(data) {
+                    var i=1;
                     html = `<tbody>
                     <tr data-status="question" class="selected">
+                        <td class ="ta">
+                            <h5>Số thứ tự</h5><hr>
+                        </td>
                         <td class ="ta">
                             <h5>Tiêu đề</h5><hr>
                         </td>
@@ -141,6 +147,9 @@ $(document).ready(function() {
                         html += `<tbody>
                     <tr data-status="question" class="selected">
                                         <td class ="ta">
+                                                <h6>` + i + `</h6>
+                                        </td>
+                                        <td class ="ta">
                                             <u style="font-weight:bold;"><a href="single.php?questionId=` + val.QuestionId + `">` + val
                             .Question + `</a>  </u>
                                         </td>
@@ -156,6 +165,7 @@ $(document).ready(function() {
                                             <h5>` + val.CreateDate + `</h5>
                                         </td>
                             </tr> </tbody>`;
+                            i++;
                     });
                     $("#question").html(html);
                 });

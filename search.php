@@ -34,7 +34,7 @@ $(document).ready(function() {
                             <a href="single.php?questionId=` + val.ID + `">` + val.Title + `</a>
                             </h4>
                             <span class="article-meta">` + val.CreateDate + ` in
-                                <a href="#" title="View all posts in Server &amp; Database">` + val.category_name + `</a></span>
+                                <a href="#" title="View all posts in Server &amp; Database">` + val.catName + `</a></span>
                             <span class="like-count">1</span>
                     </li>`;
         });

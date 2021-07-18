@@ -224,7 +224,7 @@
 
 
         function LoadCommentFirstpage() {
-            var json_url = "http://localhost/socialnetwork/api/comment/read_paging.php?questionId=" + ID;
+            var json_url = "api/comment/read_paging.php?questionId=" + ID;
             LoadComment(json_url);
         }
 

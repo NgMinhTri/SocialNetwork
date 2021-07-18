@@ -254,7 +254,7 @@ class Question{
     
         // select all query
         $query = "SELECT
-                    c.catName as category_name, q.ID, q.Title, q.Description, q.CreateDate, q.NumberOfComments, q.NumberOfVotes,q.Status
+                    c.catName, q.ID, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfVotes, q.NumberOfReports, q.Status
                 FROM
                     " . $this->table_name . " q
                     LEFT JOIN
@@ -284,7 +284,7 @@ class Question{
     }
     function delete(){
       
-        $query = "DELETE FROM " . $this->table_name . " WHERE ID = ?";
+        $query = "DELETE FROM " . $this->table_name . " WHERE ID=?";
       
         $stmt = $this->conn->prepare($query);
       
@@ -297,7 +297,37 @@ class Question{
         }
       
         return false;
-    }  
+    }
+
+    function deleteNotApprovedQuestionForAdmin(){
+      
+        $query = "DELETE FROM labelinquestion WHERE questionId = ?";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+      
+        $stmt->bindParam(1, $this->ID);
+      
+        if($stmt->execute()){
+            $query = "DELETE FROM " . $this->table_name . " 
+                      WHERE ID = ? AND Status = 0";
+      
+            $stmt = $this->conn->prepare($query);
+          
+            $this->ID=htmlspecialchars(strip_tags($this->ID));
+          
+            $stmt->bindParam(1, $this->ID);
+
+            if($stmt->execute()){
+                return true;
+            }
+             return false;
+        }
+      
+        return false;
+    } 
+
 
     // approve the product
     function approve(){

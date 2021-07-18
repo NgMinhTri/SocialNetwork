@@ -23,9 +23,9 @@ if($num>0){
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
   
-        $question_item=array(
-            "ID" => $ID,
-            "category_name"=> $row['category_name'], 
+        $question_item = array(
+            "ID" =>  $ID,
+            "catName" => $catName,
             "Title" => $Title,
             "Description" => $Description,
             "CreateDate" => $CreateDate,

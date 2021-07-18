@@ -41,7 +41,7 @@ function readProductsTemplate(data, keywords){
         read_products_html+=`<tr>
  
             <td>` + val.Title + `</td>
-            <td>` + val.Description + `/textarea></td>
+            <td>` + val.Description + `</td>
             
             <!-- 'action' buttons -->
             
@@ -52,10 +52,7 @@ function readProductsTemplate(data, keywords){
                 </button>
  
                 
-                <!-- delete button -->
-                <button class='btn btn-danger delete-product-button' data-id='` + val.ID + `'>
-                    <span class='glyphicon glyphicon-remove'></span> Xóa
-                </button>
+                
             </td>
         </tr>`;
     });

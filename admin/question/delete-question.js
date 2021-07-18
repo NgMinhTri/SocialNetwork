@@ -19,7 +19,7 @@ $(document).ready(function(){
 		    callback: function (result) {
 		    	if(result == true){
 				    $.ajax({
-				        url: "../api/question/delete.php",
+				        url: "../api/question/deleteNotApproved.php",
 				        type : "DELETE",
 				        dataType : 'json',
 				        data : JSON.stringify({ ID: ID }),

@@ -38,10 +38,7 @@ $(document).ready(function(){
 					            <td><input value=\"` + CreateDate + `\" type='text' name='' class='form-control' required /></td>
 					        </tr>
 
-					        <tr>
-					            <td>Ngày sửa đổi</td>
-					            <td><input value=\"` + LastModifiedDate + `\" type='text' name='' class='form-control' required /></td>
-					        </tr>
+					        
 
 					        <tr>
 					            <td>Danh mục</td>
@@ -53,10 +50,7 @@ $(document).ready(function(){
 					            <td><input value=\"` + UserName + `\" type='text' name='' class='form-control' required /></td>
 					        </tr>
 
-					        <tr>
-					            <td>Trạng thái</td>
-					            <td><input value=\"` + Status + `\" type='text' name='Status' class='form-control' required /></td>
-					        </tr>
+					       
 					        <tr>
 					 
 					            <!-- hidden 'product id' to identify which record to delete -->

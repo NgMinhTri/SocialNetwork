@@ -29,22 +29,7 @@ $(document).ready(function(){
 				        <td class='w-30-pct'>Ngày tạo</td>
 				        <td class='w-70-pct'>` + data.CreateDate + `</td>
 				    </tr>
-				     <tr>
-				        <td class='w-30-pct'>Ngày sửa đổi</td>
-				        <td class='w-70-pct'>` + data.LastModifiedDate + `</td>
-				    </tr>
-				     <tr>
-				        <td class='w-30-pct'>Số lượng comment</td>
-				        <td class='w-70-pct'>` + data.NumberOfComments + `</td>
-				    </tr>
-				     <tr>
-				        <td class='w-30-pct'>Số lượng thích</td>
-				        <td class='w-70-pct'>` + data.NumberOfVotes + `</td>
-				    </tr>
-				     <tr>
-				        <td class='w-30-pct'>Số lượng báo cáo</td>
-				        <td class='w-70-pct'>` + data.NumberOfReports + `</td>
-				    </tr>
+				     
 				     <tr>
 				        <td class='w-30-pct'>Danh mục</td>
 				        <td class='w-70-pct'>` + data.catName + `</td>
@@ -54,11 +39,7 @@ $(document).ready(function(){
 				        <td class='w-70-pct'>` + data.UserName + `</td>
 				    </tr>
 				 
-				    <!-- product description -->
-				    <tr>
-				        <td class='w-30-pct'>Status</td>
-				        <td class='w-70-pct'>` + data.Status + `</td>
-				    </tr>
+				    
 				 
 				    				 
 				</table>`;

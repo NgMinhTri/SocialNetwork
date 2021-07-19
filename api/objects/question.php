@@ -20,8 +20,8 @@ class Question{
     public $Status;
     public $catName;
     public $UserName;
-    public $labelId;
-    public $labelName;
+    public $labelId=array();
+    public $labelName=array();
 
  
     // constructor
@@ -430,7 +430,7 @@ class Question{
       
         $stmt = $this->conn->prepare($query);
       
-        $this->Title=htmlspecialchars(strip_tags($this->Title));;
+        $this->Title=htmlspecialchars(strip_tags($this->Title));
         $this->Description=htmlspecialchars(strip_tags($this->Description));
         $this->catId=htmlspecialchars(strip_tags($this->catId));
         $this->userId=htmlspecialchars(strip_tags($this->userId));
@@ -443,66 +443,68 @@ class Question{
         if($stmt->execute()){
 
             $questionId = $this->conn->lastInsertId(); 
-            
-            $query = "SELECT *
-                FROM
-                    labels
-                WHERE
-                    labelName = :labelName";
+            foreach ($this->labelName as $label){
+                $query = "SELECT *
+                    FROM
+                        labels
+                    WHERE
+                        labelName = :labelName";
 
-            $stmt = $this->conn->prepare($query);
-            $this->labelName=htmlspecialchars(strip_tags($this->labelName));
-            $stmt->bindParam(":labelName", $this->labelName);
-            $stmt->execute();
-            
-
-            if($stmt->rowCount()>0){
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $this->labelId = $row['ID']; 
-
-                $query = "INSERT INTO labelinquestion
-                    SET
-                        labelId  = $this->labelId,
-                        questionId = $questionId";
-             
                 $stmt = $this->conn->prepare($query);
-             
-                if($stmt->execute()){
-                    return true;
-                }
-            }
-            else{
+                $stmt->bindParam(":labelName", $label);
+                $stmt->execute();
+                
 
-                $query = "INSERT INTO labels
-                    SET
-                        labelName  = :labelName";
-             
-                $stmt = $this->conn->prepare($query);
-             
-                $this->labelName=htmlspecialchars(strip_tags($this->labelName));
-
-                $stmt->bindParam(':labelName', $this->labelName);
-             
-                if($stmt->execute()){
-
-                    $labelId = $this->conn->lastInsertId(); 
+                if($stmt->rowCount()>0){
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sinlabelid=$row['ID'];
+                    $this->labelId[]=$row['ID']; 
 
                     $query = "INSERT INTO labelinquestion
                         SET
-                            labelId  = $labelId,
+                            labelId  = $sinlabelid,
                             questionId = $questionId";
-             
+                
                     $stmt = $this->conn->prepare($query);
-                 
+                
                     if($stmt->execute()){
-
-                        return true;
+                        $result=1;
                     }
                 }
-            }
-        }          
-        return false;
-          
+                else{
+
+                    $query = "INSERT INTO labels
+                        SET
+                            labelName  = :labelName";
+                
+                    $stmt = $this->conn->prepare($query);
+                
+                    $stmt->bindParam(':labelName', $label);
+                
+                    if($stmt->execute()){
+
+                        $labelId = $this->conn->lastInsertId(); 
+
+                        $query = "INSERT INTO labelinquestion
+                            SET
+                                labelId  = $labelId,
+                                questionId = $questionId";
+                
+                        $stmt = $this->conn->prepare($query);
+                    
+                        if($stmt->execute()){
+
+                            $result=1;
+                        }
+                    }
+                }
+            } 
+    }   
+        if ($result==1){
+            return true;
+        }  
+        else{
+            return false;
+        }    
     }
 }
-

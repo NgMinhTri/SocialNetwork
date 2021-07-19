@@ -99,7 +99,6 @@ $(document).ready(function() {
               }
             read_question_html+="</ul>";
           }
-          console.log(read_question_html);  
           $("#readApproved").html(read_question_html);  
       });
     }

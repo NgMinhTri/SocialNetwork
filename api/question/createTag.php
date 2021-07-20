@@ -39,7 +39,6 @@ if($jwt){
         if($question->createQuestionTag()){
                
                 http_response_code(201);
-            
                 echo json_encode(array("message" => "Question đã được tạo."));
                
             }                       

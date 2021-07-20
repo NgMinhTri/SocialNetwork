@@ -70,9 +70,7 @@ $(document).ready(function() {
                         <td class ="ta">
                             <h5>Tiêu đề</h5><hr>
                         </td>
-                        <td class ="ta">
-                            <h5>Mô tả</h5><hr>
-                        </td>
+                       
                         <td class ="ta">
                             <h5>Ngày đặt câu hỏi</h5><hr>
                         </td>
@@ -81,35 +79,32 @@ $(document).ready(function() {
                         // read products button will be here
                         html += `<tbody>
                     <tr data-status="question" class="selected">
-                        <td class ="ta">
+                        <td >
                             <h6>` + i + `</h6>
                         </td>`;
                         if (val.Status == 1) {
-                            html += `<td class ="ta">
-                                    <h6>Đã duyệt</h6>
+                            html += `<td >
+                                    <a>Đã duyệt</a>
                                 </td>`
                         } else {
-                            html += `<td class ="ta">
-                                    <h6>Chờ duyệt</h6>
+                            html += `<td >
+                                    <a>Chờ duyệt</a>
                                 </td>`
                         }
 
-
-                        html+=`<td class ="ta">
-                                            <div class="media">
-                                                <div class="media-body">   
-                                                <u style="font-weight:bold;"> 
-                                                    <a href="single.php?questionId=` + val.id + `">` + val.Title + `</a>             
-                                                </u>                                                    
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class ="ta">
-                                            <h5>` + val.Description + `</h5>
-                                        </td>
-                                        <td class ="ta">
-                                            <h5>` + val.CreateDate + `</h5>
-                                        </td>
+                        html+=`<td >
+                                <div class="media">
+                                    <div class="media-body">   
+                                    <u > 
+                                        <a href="single.php?questionId=` + val.id + `">` + val.Title + `</a>             
+                                    </u>                                                    
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td >
+                                <a>` + val.CreateDate + `</a>
+                            </td>
                             </tr> </tbody>`;
                             i++;
                     });

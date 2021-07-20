@@ -1,214 +1,95 @@
-<?php //include 'inc/header.php';?>
+ <?php include 'inc/header.php';?>
+<?php include 'inc/wrapper.php';?>
 
+<div class="page-container">
+    <div class="container">
+        <div class="row">
+            <!-- start of page content -->
+            <div class="span8 page-content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Knowledge Base Theme</a><span class="divider">/</span>
+                    </li>
+                    <li>
+                        <a href="#" class="catName"></a>
+                        <span class="divider">/</span>
+                    </li>
+                    <li class="active" id="Title"></li>
+                </ul>
 
+                <article class="type-post format-standard hentry clearfix">
+                    <h1 class="post-title" id="Title">
+                        <!-- <a href="#">Integrating WordPress with Your Website </a> -->
+                    </h1>
 
-<!doctype html>
-<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
-<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
-<!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en-US">
-<!--<![endif]-->
+                    <div class="post-meta clearfix">
+                        <span class="date" id="CreateDate"></span>
+                        <span class="category"><a href="#" class="catName"></a></span>
+                        <span class="comments"><a class="numberComment">0</a> comments</span>
+                        <span class="like-count">0</span>
+                    </div>
 
-<head>
-    <!-- META TAGS -->
+                    <h3>Nội dung</h3>
+                    <p id="Description">
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    </p>
 
-    <title>Social Network</title>
-    <link rel="shortcut icon" href="images/favicon.png" />
+                </article>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+                <div class="like-btn">
+                    <form id="frm_vote" action="#" method="post">
+                        <span class="like-it">0</span>
+                        <!-- <input  name="post_id" value="99" /> -->
+                        <input type="hidden" name="" />
+                    </form>
+                    <div id="responsevote"></div>
+                    <span class="tags">
+                        <strong>Tags:</strong>
+                        <a id="getLabelInQuestion"></a>
 
-    <!-- Google Web Fonts-->
-    <link
-        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-        rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
-        type='text/css'>
-
-    <!-- Style Sheet-->
-    <link rel="stylesheet" href="style.css" />
-    <!-- <link rel='stylesheet' id='bootstrap-css-css'  href='css/bootstrap.css?ver=1.0' type='text/css' media='all' /> -->
-    <!-- <link rel='stylesheet' id='responsive-css-css'  href='css/responsive.css?ver=1.0' type='text/css' media='all' /> -->
-    <link rel='stylesheet' id='pretty-photo-css-css' href='js/prettyphoto/prettyPhoto.css?ver=3.1.4' type='text/css'
-        media='all' />
-    <link rel='stylesheet' id='main-css-css' href='css/main.css?ver=1.0' type='text/css' media='all' />
-    <link rel="stylesheet" href="css/profile.css" />
-</head>
-
-<body>
-    <!-- Start of Header -->
-    <div class="header-wrapper">
-        <header>
-            <div class="container">
-                <div class="logo-container">
-                    <!-- Website Logo -->
-                    <a href="index.php" title="Knowledge Base Theme">
-                        <img src="images/logo.png" alt="Knowledge Base Theme" />
-                    </a>
-                    <span class="tag-line">Social Network</span>
+                    </span>
                 </div>
 
-                <!-- Start of Main Navigation -->
-                <nav class="main-nav">
-                    <div class="menu-top-menu-container">
-                        <ul id="menu-top-menu" class="clearfix">
-                            <li class="current-menu-item"><a href="index.php">Trang chủ</a></li>
-                            <li><a href="home-categories-description.php">Danh mục câu hỏi</a></li>
-                            <!-- <li><a href="home-categories-articles.php">Home 3</a></li> -->
-                            <li><a href="articles-list.php">Articles List</a></li>
-                            <li><a href="faq.php">FAQs</a></li>
-                            <li>
-                                <a href="#">Skins</a>
-                                <ul class="sub-menu">
-                                    <li><a href="./blue-skin.php">Blue Skin</a></li>
-                                    <li><a href="./green-skin.php">Green Skin</a></li>
-                                    <li><a href="./red-skin.php">Red Skin</a></li>
-                                    <li><a href="./index.php">Default Skin</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">More</a>
-                                <ul class="sub-menu">
-                                    <li><a href="full-width.php">Full Width</a></li>
-                                    <li><a href="elements.php">Elements</a></li>
-                                    <li><a href="page.php">Sample Page</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.php">Liên hệ</a></li>
-                            <?php if($_COOKIE['jwt']==""){
-                    echo "
-                      <li>
-                      <a href='#'>Login/ Register</a>
-                      <ul class='sub-menu'>
-                        <li><a href='log-in.php'>Login</a></li>
-                        <li><a href='register.php'>Register</a></li>
-                      </ul>
-                      </li>";
-                      
-                    }
-                    else {
-                      echo "
-                      <li>
-                      <a href='#'>";
-                      echo $_COOKIE['name'];
-                      echo
-                      "</a>
-                      <ul class='sub-menu'>
-                        <li><a href='profile.php'>Profile</a></li>
-                        <li><a href='history.php'>History</a></li>
-                        <li><a href='log-in.php'>Logout</a></li>
-                      </ul>
-                      </li>";}
-                ?>
+                <section id="comments">
+                    <h3 id="comments-title"><a class="numberComment">0</a> Bình luận</h3>
+                    <div id="listComment"></div>
+                </section>
 
-                        </ul>
+                <div id="respond">
+                    <h3>Để lại lời bình luận</h3>
+
+                    <div class="cancel-comment-reply">
+                        <a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display: none">Click here
+                            to cancel reply.</a>
                     </div>
-                </nav>
-                <!-- End of Main Navigation -->
-            </div>
-        </header>
-    </div>
-    <!-- End of Header -->
-    <?php include 'inc/wrapper.php';?>
 
-    <!-- Start of Page Container -->
-    <div class="page-container">
-        <div class="container">
-            <div class="row">
-                <!-- start of page content -->
-                <div class="span8 page-content">
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="#">Knowledge Base Theme</a><span class="divider">/</span>
-                        </li>
-                        <li>
-                            <a href="#" class="catName"></a>
-                            <span class="divider">/</span>
-                        </li>
-                        <li class="active" id="Title"></li>
-                    </ul>
-
-                    <article class="type-post format-standard hentry clearfix">
-                        <h1 class="post-title" id="Title">
-                            <!-- <a href="#">Integrating WordPress with Your Website </a> -->
-                        </h1>
-
-                        <div class="post-meta clearfix">
-                            <span class="date" id="CreateDate"></span>
-                            <span class="category"><a href="#" class="catName"></a></span>
-                            <span class="comments"><a class="numberComment">0</a> comments</span>
-                            <span class="like-count">0</span>
-                        </div>
-
-                        <h3>Nội dung</h3>
-                        <p id="Description">
-
+                    <form action="#" method="post" id="commentform">
+                        <p class="comment-notes">
+                            Bạn phải đăng nhập để bình luận cho bài viết này<span class="required">*</span>
                         </p>
 
-                    </article>
-
-                    <div class="like-btn">
-                        <form id="frm_vote" action="#" method="post">
-                            <span class="like-it">0</span>
-                            <!-- <input  name="post_id" value="99" /> -->
-                            <input type="hidden" name="" />
-                        </form>
-                        <div id="responsevote"></div>
-                        <span class="tags">
-                            <strong>Tags:</strong>
-                            <a id="getLabelInQuestion"></a>
-
-                        </span>
-                    </div>
-
-                    <section id="comments">
-                        <h3 id="comments-title"><a class="numberComment">0</a> Bình luận</h3>
-                        <div id="listComment"></div>
-                    </section>
-
-                    <div id="respond">
-                        <h3>Để lại lời bình luận</h3>
-
-                        <div class="cancel-comment-reply">
-                            <a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display: none">Click here
-                                to cancel reply.</a>
+                        <div>
+                            <label for="comment">Comment *</label>
+                            <textarea class="span8" name="content" cols="58" rows="10" required></textarea>
                         </div>
 
-                        <form action="#" method="post" id="commentform">
-                            <p class="comment-notes">
-                                Bạn phải đăng nhập để bình luận cho bài viết này<span class="required">*</span>
-                            </p>
-
-                            <div>
-                                <label for="comment">Comment *</label>
-                                <textarea class="span8" name="content" cols="58" rows="10" required></textarea>
-                            </div>
-
-                            <div>
-                                <input class="btn" type="submit" value="Submit Comment" />
-                            </div>
-                            </br>
-                            <div id="response"></div>
-                        </form>
-                    </div>
+                        <div>
+                            <input class="btn" type="submit" value="Submit Comment" />
+                        </div>
+                        </br>
+                        <div id="response"></div>
+                    </form>
                 </div>
-                </aside>
             </div>
+           <?php include 'inc/sidebar.php';?>
         </div>
     </div>
+</div>
 
-    <?php include 'inc/footer.php';?>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-
-    <script type="text/javascript">
-    $(document).ready(function() {
+<?php include 'inc/footer.php';?>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
 
         var ID = location.search.replace('?questionId=', '');
         LoadCommentFirstpage();
@@ -314,7 +195,7 @@
                 read_comment_html += ` </ol>`;
                 // pagination
                 if (data.paging) {
-                    read_comment_html += "<ul class='pagination'>";
+                    read_comment_html += "<ul class='pagination pagination-large'>";
 
                     // first page
                     if (data.paging.first != "") {

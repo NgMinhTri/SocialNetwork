@@ -1,11 +1,10 @@
  <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">Bản quyền &copy; SocialNetwork 2021</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="https://www.facebook.com/groups/485795942772826">Về môn học</a>
+                                
                             </div>
                         </div>
                     </div>

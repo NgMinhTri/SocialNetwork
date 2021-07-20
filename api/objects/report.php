@@ -44,6 +44,31 @@ class Report{
         return false;
           
     }
+
+    public function readByCommentId(){
+        $query = "SELECT
+                    r.ID, r.CreatedDate, r.content, r.Type, u.UserName
+                FROM
+                    " . $this->table_name . " r
+
+                    LEFT JOIN
+                        dbuser u
+                            ON r.reportUserId = u.ID
+
+                    WHERE r.commentId = ?
+
+                ORDER BY
+                    r.CreatedDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->commentId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
     
 
     

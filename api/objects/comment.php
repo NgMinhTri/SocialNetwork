@@ -38,6 +38,26 @@ class Comment{
         return $stmt;
     }
 
+     public function readIsReported(){
+        $query = "SELECT distinct
+                    c.ID, c.questionId, c.ownerUserId, c.content, c.createdDate 
+                FROM
+                    " . $this->table_name . " c
+                    LEFT JOIN
+                        reports r
+                            ON c.ID = r.commentId
+                    WHERE c.ID = r.commentId
+
+                ORDER BY
+                    c.createdDate DESC";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
     public function readCommentsByQuestionId(){
         $query = "SELECT
                     u.UserName,c.ID, c.questionId, c.ownerUserId, c.content, c.createdDate, c.LastModifiedDate
@@ -191,6 +211,33 @@ class Comment{
       
         return $row['total_rows'];
     }
+
+    function deleteCommentIsReported(){
+      
+        $query = "DELETE FROM reports WHERE commentId = ?";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+      
+        $stmt->bindParam(1, $this->ID);
+      
+        if($stmt->execute()){
+            $query = "DELETE FROM " . $this->table_name . " WHERE ID = ?";
+      
+            $stmt = $this->conn->prepare($query);
+          
+            $this->ID=htmlspecialchars(strip_tags($this->ID));
+          
+            $stmt->bindParam(1, $this->ID);
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }
+      
+        return false;
+    } 
     
 }
 

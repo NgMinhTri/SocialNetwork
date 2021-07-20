@@ -20,17 +20,8 @@ $vote->questionId = isset($_GET['questionId']) ? $_GET['questionId'] : die();
 $stmt = $vote->countNumberVotesPerQuestion();
   
 $num = $stmt->rowCount();
-  
-if($num>0){
 
-    http_response_code(200);
+http_response_code(200);
 
-    echo json_encode($num);
-}
-  
-else{
-    http_response_code(404);
-
-    echo json_encode(array("message" => "Vote does not exist."));
-}
+echo json_encode($num);
 ?>

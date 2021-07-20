@@ -20,6 +20,21 @@ class User{
     public function __construct($db){
         $this->conn = $db;
     }
+     public function readListUserForAdmin(){
+        //select all data
+        $query = "SELECT
+                    ID, firstname, lastname, username, email, phonenumber
+                FROM
+                    " . $this->table_name . "
+                ORDER BY
+                    firstname";
+  
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+  
+        return $stmt;
+    }
+
     function read(){
         // select all query
         $query = "SELECT id, firstname, lastname, username, email, password, phonenumber
@@ -229,6 +244,63 @@ class User{
         $stmt->bindParam(1, $this->id);        
 
         
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+      function readOne(){      
+        $query = "SELECT
+                    ID, firstname, lastname, username, email, phonenumber 
+                FROM
+                    " . $this->table_name . " 
+                           
+                WHERE
+                    ID =  ?
+                LIMIT
+                    0,1";
+      
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->bindParam(1, $this->ID);
+      
+        $stmt->execute();
+      
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        $this->firstname = $row['firstname'];
+        $this->lastname = $row['lastname'];
+        $this->username = $row['username'];
+        $this->email = $row['email'];
+        $this->phonenumber = $row['phonenumber'];
+    }
+
+        function search($keywords){
+      
+        $query = "SELECT
+                    ID, firstname, lastname, username, email, phonenumber 
+                FROM
+                    " . $this->table_name . " 
+                    
+                WHERE
+                    firstname LIKE ? OR lastname LIKE ? OR username LIKE ? OR email LIKE ? OR phonenumber LIKE ?
+                ";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $keywords=htmlspecialchars(strip_tags($keywords));
+        $keywords = "%{$keywords}%";
+      
+        // bind
+        $stmt->bindParam(1, $keywords);
+        $stmt->bindParam(2, $keywords);
+        $stmt->bindParam(3, $keywords);
+        $stmt->bindParam(4, $keywords);
+        $stmt->bindParam(5, $keywords);
+      
         // execute query
         $stmt->execute();
       

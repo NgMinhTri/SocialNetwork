@@ -2,6 +2,7 @@ $(document).ready(function(){
  
     // app html
     var app_html=`
+        <div class="container-fluid px-4">
         <div class='container'>
  
             <div class='page-header'>
@@ -11,6 +12,7 @@ $(document).ready(function(){
             <!-- this is where the contents will be shown. -->
             <div id='page-content'></div>
  
+        </div>
         </div>`;
  
     // inject to 'app' in index.html

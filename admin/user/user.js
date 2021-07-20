@@ -26,10 +26,10 @@ function readProductsTemplate(data, keywords){
             <!-- creating our table heading -->
             <tr>
                 <th class='w-10-pct'>Username</th>
-                <th class='w-25-pct'>Email</th>
+                <th class='w-15-pct'>Email</th>
                 <th class='w-10-pct'>Số điện thoại</th>
 
-                <th class='w-15-pct text-align-center'>Action</th>
+                <th class='w-5-pct text-align-center'>Action</th>
             </tr>`;
  
  
@@ -50,10 +50,6 @@ function readProductsTemplate(data, keywords){
                     <span class='glyphicon glyphicon-eye-open'></span> Chi tiết
                 </button>
  
-                <!-- delete button -->
-                <button class='btn btn-danger delete-product-button' data-id='` + val.ID + `'>
-                    <span class='glyphicon glyphicon-remove'></span> Xóa
-                </button>
             </td>
         </tr>`;
     });

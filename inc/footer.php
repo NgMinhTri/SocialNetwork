@@ -1,5 +1,5 @@
 <!-- Start of Footer -->
-    <footer id="footer-wrapper">
+<footer id="footer-wrapper">
       <div id="footer" class="container">
         <div class="row">
           <div class="span3">
@@ -19,7 +19,6 @@
               </div>
             </section>
           </div>
-
           <div class="span3">
             <section class="widget">
               <h3 class="title">Categories</h3>
@@ -62,7 +61,6 @@
               </ul>
             </section>
           </div>
-
           <div class="span3">
             <section class="widget">
               <h3 class="title">Latest Tweets</h3>
@@ -87,7 +85,6 @@
               </script>
             </section>
           </div>
-
           <div class="span3">
             <section class="widget">
               <h3 class="title">Flickr Photos</h3>
@@ -97,7 +94,6 @@
         </div>
       </div>
       <!-- end of #footer -->
-
       <!-- Footer Bottom -->
       <div id="footer-bottom-wrapper">
         <div id="footer-bottom" class="container">
@@ -120,7 +116,7 @@
                 </li>
                 <li class="rss"><a target="_blank" href="#"></a></li>
                 <li class="twitter"><a target="_blank" href="#"></a></li>
-                <li class="facebook"><a target="_blank" href="#"></a></li>
+                <li class="facebook"><a target="_blank" href="https://www.facebook.com/groups/485795942772826"></a></li>
               </ul>
             </div>
           </div>
@@ -129,11 +125,11 @@
       <!-- End of Footer Bottom -->
     </footer>
     <!-- End of Footer -->
-
     <a href="#top" id="scroll-top"></a>
-
     <!-- script -->
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script
       type="text/javascript"
@@ -145,5 +141,7 @@
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/jquery-twitterFetcher.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
   </body>
 </html>

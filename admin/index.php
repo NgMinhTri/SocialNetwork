@@ -1,11 +1,14 @@
-﻿<?php include 'inc/header.php';?>
-<?php include 'inc/sidebar.php';?>
-        <div class="grid_10">
-            <div class="box round first grid">
-                <h2> Dashbord</h2>
-                <div class="block">               
-                  Welcome admin panel        
-                </div>
-            </div>
-        </div>
-<?php include 'inc/footer.php';?>
+
+
+<?php include 'inc/header.php';?>
+                <main>
+                    <div class="container-fluid px-4">
+                        <h2 class="mt-4">Trang chủ</h2>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Trang chủ</li>
+                        </ol>
+                       
+                          
+                    </div>
+                </main>
+<?php include 'inc/footer.php';?>              

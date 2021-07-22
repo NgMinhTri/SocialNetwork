@@ -2,6 +2,7 @@
 <?php include 'inc/header.php';?>
 <?php include 'inc/wrapper.php';?>
 
+
     <!-- Start of Page Container -->
     <div class="page-container">
       <div class="container">
@@ -236,7 +237,7 @@
           <!-- end of page content -->
 
           <!-- start of sidebar -->
-          <aside class="span4 page-sidebar">
+          <!-- <aside class="span4 page-sidebar">
             <section class="widget">
               <div class="support-widget">
                 <h3 class="title">Support</h3>
@@ -361,7 +362,8 @@
                 </li>
               </ul>
             </section>
-          </aside>
+          </aside> -->
+          <?php include 'inc/sidebar.php';?>
           <!-- end of sidebar -->
         </div>
       </div>

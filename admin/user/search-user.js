@@ -1,0 +1,18 @@
+$(document).ready(function(){
+ 
+    $(document).on('submit', '#search-product-form', function(){
+ 
+        var keywords = $(this).find(":input[name='keywords']").val();
+ 
+        $.getJSON("../api/user/search.php?s=" + keywords, function(data){
+ 
+            readProductsTemplate(data, keywords);
+ 
+            changePageTitle("Tìm kiếm User: " + keywords);
+ 
+        });
+ 
+        return false;
+    });
+ 
+});

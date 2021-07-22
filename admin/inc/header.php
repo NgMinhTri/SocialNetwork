@@ -1,77 +1,92 @@
-<?php
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache"); 
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
-  header("Cache-Control: max-age=2592000");
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Admin</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
-    <link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
-    <!-- BEGIN: load jquery -->
-    <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jquery-ui/jquery.ui.core.min.js"></script>
-    <script src="js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
-    <script src="js/table/jquery.dataTables.min.js" type="text/javascript"></script>
-    <!-- END: load jquery -->
-    <script type="text/javascript" src="js/table/table.js"></script>
-    <script src="js/setup.js" type="text/javascript"></script>
-	 <script type="text/javascript">
-        $(document).ready(function () {
-            setupLeftMenu();
-		    setSidebarHeight();
-        });
-    </script>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
+        <!-- bootstrap CSS -->
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 </head>
-<body>
-    <div class="container_12">
-        <div class="grid_12 header-repeat">
-            <div id="branding">
-                <div class="floatleft logo">
-                    <img src="img/livelogo.png" alt="Logo" />
-				</div>
-				<div class="floatleft middle">
-					<h1>Social Network</h1>
-					<p>Môn Ứng dụng phân tán</p>
-				</div>
-                <div class="floatright">
-                    <div class="floatleft">
-                        <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
-                    <div class="floatleft marginleft10">
-                        <ul class="inline-ul floatleft">
-                            <li>Hello Admin</li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </div>
+<body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.php">Social Network</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
+                    <<!-- button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
                 </div>
-                <div class="clear">
-                </div>
-            </div>
-        </div>
-        <div class="clear">
-        </div>
-        <div class="grid_12">
-            <ul class="nav main">
-                <li class="ic-dashboard"><a href="index.php"><span>Dashboard</span></a> </li>
-                <li class="ic-form-style"><a href=""><span>User Profile</span></a></li>
-				<li class="ic-typography"><a href="changepassword.php"><span>Change Password</span></a></li>
-				<li class="ic-grid-tables"><a href="inbox.php"><span>Inbox</span></a></li>
-                <li class="ic-charts"><a href="../user/index.php"><span>Visit Website</span></a></li>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="./profileInfo.php">Thông tin cá nhân</a></li>
+                        <li><a class="dropdown-item" href="./change-password.php">Cập nhật mật khẩu</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="./login.php">Đăng xuất</a></li>
+                    </ul>
+                </li>
             </ul>
-        </div>
-        <div class="clear">
-        </div>
-    
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="index.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Trang chủ
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Giao diện</div>
+                            <a class="nav-link" href="Question.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Bài viết
+                            </a>
+                            
+                           <a class="nav-link" href="listCategory.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Danh mục
+                            </a>
+
+                             <a class="nav-link" href="Report.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-comment"></i></div>
+                                Report
+                            </a>
+
+                            <a class="nav-link" href="users.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                User
+                            </a>
+                            <!-- <div class="sb-sidenav-menu-heading">Addons</div>
+                            <a class="nav-link" href="users.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                User
+                            </a>
+                            <a class="nav-link" href="tables.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tables
+                            </a> -->
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        UDPT-10
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">

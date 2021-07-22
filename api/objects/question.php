@@ -81,6 +81,22 @@ class Question{
         return $stmt;
     }
 
+    public function readByCatIdOrderByVote(){
+        $query="SELECT " . $this->table_name . ".*, categoryquestions.catName,COUNT(votes.questionId) from votes, " . $this->table_name . "
+        , categoryquestions
+        WHERE votes.questionId=" . $this->table_name . ".ID and " . $this->table_name . ".catId=categoryquestions.ID 
+        and categoryquestions.ID=42
+        GROUP BY votes.questionId
+        ORDER BY COUNT(votes.questionId) DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->catId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
     public function readByLabelId(){
         $query = "SELECT
                     q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.Status

@@ -28,11 +28,12 @@ class Comment{
                     LEFT JOIN
                         dbuser u
                             ON c.ownerUserId = u.ID
+                    WHERE c.questionId = ?
                 ORDER BY
                     c.CreateDate DESC";
       
         $stmt = $this->conn->prepare($query);
-      
+        $stmt->bindParam(1, $this->questionId);
         $stmt->execute();
       
         return $stmt;
@@ -52,6 +53,7 @@ class Comment{
                     c.createdDate DESC";
       
         $stmt = $this->conn->prepare($query);
+
       
         $stmt->execute();
       
@@ -109,17 +111,14 @@ class Comment{
     function readOne(){
 
         $query = "SELECT
-                    c.catName, u.ID, u.UserName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                    u.UserName,c.ID, c.questionId, c.ownerUserId, c.content, c.createdDate, c.lastModifiedDate
                 FROM
-                    " . $this->table_name . " q
-                    LEFT JOIN
-                        categoryquestions c
-                            ON q.catId = c.ID
+                    " . $this->table_name . " c
                     LEFT JOIN
                         dbuser u
-                            ON q.userId = u.ID
+                            ON c.ownerUserId = u.ID
                      WHERE
-                        q.ID =  ?
+                        c.ID =  ?
                     LIMIT
                         0,1";     
       
@@ -132,19 +131,38 @@ class Comment{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
       
         // set values to object properties
-        $this->catName = $row['catName'];
-        $this->Description = $row['Description'];
-        $this->Title = $row['Title'];
-        $this->UserName = $row['UserName'];
-        $this->CreateDate = $row['CreateDate'];
-        $this->LastModifiedDate = $row['LastModifiedDate'];
-        $this->NumberOfVotes = $row['NumberOfVotes'];
-        $this->NumberOfReports = $row['NumberOfReports'];
-        $this->NumberOfComments = $row['NumberOfComments'];
-        $this->Status = $row['Status'];
+        $this->ID = $row['ID'];
+        $this->questionId = $row['questionId'];
+        $this->ownerUserId = $row['ownerUserId'];
+        $this->content = $row['content'];
+        $this->createDate = $row['createdDate'];
+        $this->lastModifiedDate = $row['lastModifiedDate'];
     }  
 
         
+    function update(){
+      
+        $query = "UPDATE
+                    " . $this->table_name . "
+                SET
+                    content = :content,
+                    lastModifiedDate = NOW()
+                WHERE
+                    ID = :ID";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->content=htmlspecialchars(strip_tags($this->content));
+        $this->ID=htmlspecialchars(strip_tags($this->ID));
+        
+        $stmt->bindParam(':content', $this->content);
+        $stmt->bindParam(':ID', $this->ID);
+        
+        if($stmt->execute()){
+            return true;
+        }     
+        return false;
+    }
 
     function delete(){
       
@@ -164,7 +182,7 @@ class Comment{
     }  
 
 
-// read products with pagination
+    // read products with pagination
     public function readPaging($from_record_num, $records_per_page){
 
         $query = "SELECT

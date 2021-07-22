@@ -51,8 +51,14 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID +`">` + val.Title +`</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate +`</span>      
-            </li>`;  
+              <span class="article-meta">` + val.CreateDate +`</span>  
+              <span class="like-count" name="`+val.ID+`">0</span>`; 
+               
+                $.getJSON("api/vote/countNumberPerQuestion.php?questionId=" + val.ID, function(
+                    data) {
+                    $('span[name="'+val.ID+'"]').text(data);
+                }); 
+             read_question_html+=`</li>`;   
                         
         });
           $("#showQuestionByCategoryID").html(read_question_html);  

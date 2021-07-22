@@ -67,7 +67,8 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID + `">` + val.Title + `</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate + `</span>
+              <span class="article-meta">` + val.CreateDate + ` in
+                <a href="#" >` + val.catName + `</a></span>
               <span class="like-count" name="`+val.ID+`"></span>`;
                 $.getJSON("api/vote/countNumberPerQuestion.php?questionId=" + val.ID, function(
                     data) {
@@ -116,7 +117,9 @@ $(document).ready(function() {
               <h4>
                 <a href="single.php?questionId=` + val.ID + `">` + val.Title + `</a>
               </h4>
-              <span class="article-meta">` + val.CreateDate + `</span>
+              <span class="article-meta">` + val.CreateDate + ` in
+                <a href="#" >` + val.catName + `</a></span>
+                
               <span class="like-count" name="`+val.ID+`"></span>`;
               $.getJSON("api/vote/countNumberPerQuestion.php?questionId=" + val.ID, function(
                     data) {

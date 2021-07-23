@@ -1,6 +1,6 @@
-// product list html
+
 function readProductsTemplate(data, keywords){
- 
+    var i = 0;
     var read_products_html=`
         <!-- search products form -->
         <form id='search-product-form' action='#' method='post'>
@@ -25,6 +25,7 @@ function readProductsTemplate(data, keywords){
  
             <!-- creating our table heading -->
             <tr>
+                <th class='w-5-pct'>STT</th>
                 <th class='w-10-pct'>Username</th>
                 <th class='w-15-pct'>Email</th>
                 <th class='w-10-pct'>Số điện thoại</th>
@@ -32,13 +33,11 @@ function readProductsTemplate(data, keywords){
                 <th class='w-5-pct text-align-center'>Action</th>
             </tr>`;
  
- 
-    // loop through returned list of data
     $.each(data.records, function(key, val) {
- 
-        // creating new table row per record
+        i = i + 1;
         read_products_html+=`<tr>
  
+            <td>` + i + `</td>
             <td>` + val.username + `</td>
             <td>` + val.email + `</td>
             <td>` + val.phonenumber + `</td>
@@ -54,9 +53,7 @@ function readProductsTemplate(data, keywords){
         </tr>`;
     });
  
-    // end table
     read_products_html+=`</table>`;
  
-    // inject to 'page-content' of our app
     $("#page-content").html(read_products_html);
 }

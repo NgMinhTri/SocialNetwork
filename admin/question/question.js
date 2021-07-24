@@ -22,7 +22,7 @@ function readProductsTemplate(data, keywords){
  
         <table class='table table-bordered table-hover'>
             <tr>
-                <th class='w-2-pct text-align-center'>STT</th>
+                <th class='w-5-pct text-align-center'>STT</th>
                 <th class='w-10-pct text-align-center'>Tiêu đề</th>
                 <th class='w-25-pct text-align-center'>Mô tả</th>
                 

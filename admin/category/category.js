@@ -28,7 +28,7 @@ function readProductsTemplate(data, keywords){
  
             <!-- creating our table heading -->
             <tr>
-                <th class='w-2-pct text-align-center'>STT</th>
+                <th class='w-5-pct text-align-center'>STT</th>
                 <th class='w-10-pct text-align-center'>Tên danh mục</th>
                 <th class='w-25-pct text-align-center'>Mô tả</th>
 

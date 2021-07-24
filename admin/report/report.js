@@ -5,7 +5,7 @@ function readReportTemplate(data){
 
         <table class='table table-bordered table-hover'>
             <tr>
-                <th class='w-2-pct text-align-center'>STT</th>
+                <th class='w-5-pct text-align-center'>STT</th>
                 <th class='w-15-pct text-align-center'>Nội dung</th>
                 <th class='w-10-pct text-align-center'>Ngày tạo</th>
                 

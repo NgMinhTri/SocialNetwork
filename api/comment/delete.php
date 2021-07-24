@@ -19,7 +19,7 @@ $data = json_decode(file_get_contents("php://input"));
   
 $comment->ID = $data->ID;
   
-if($comment->delete()){
+if($comment->deleteCommentByUser()){
   
     http_response_code(200);
   

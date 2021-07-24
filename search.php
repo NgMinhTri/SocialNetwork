@@ -34,9 +34,12 @@ $(document).ready(function() {
                             <a href="single.php?questionId=` + val.ID + `">` + val.Title + `</a>
                             </h4>
                             <span class="article-meta">` + val.CreateDate + ` in
-                                <a href="#" title="View all posts in Server &amp; Database">` + val.catName + `</a></span>
-                            
-                    </li>`;
+                                <a href="#">` + val.catName + `</a></span>
+                                 <span class="like-count" name="`+val.ID+`"></span>`;
+                            $.getJSON("api/vote/countNumberPerQuestion.php?questionId=" + val.ID, function(data) {
+                                $('span[name="'+val.ID+'"]').text(data);
+                            });                          
+            html +=`</li>`;
         });
         html += `</ul>`;
         $("#search").html(html);

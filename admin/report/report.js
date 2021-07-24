@@ -1,20 +1,21 @@
 // product list html
 function readReportTemplate(data){
- 
+    var i = 0;
     var read_report_html=`
 
         <table class='table table-bordered table-hover'>
             <tr>
-                <th class='w-20-pct text-align-center'>Nội dung</th>
+                <th class='w-5-pct text-align-center'>STT</th>
+                <th class='w-15-pct text-align-center'>Nội dung</th>
                 <th class='w-10-pct text-align-center'>Ngày tạo</th>
                 
                 <th class='w-5-pct text-align-center'>Action</th>
             </tr>`;
  
     $.each(data.records, function(key, val) {
- 
+        i = i + 1;
         read_report_html+=`<tr>
- 
+            <td>` + i + `</td>
             <td>` + val.content + `</td>
             <td>` + val.createdDate + `</td>
             

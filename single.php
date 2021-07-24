@@ -94,7 +94,7 @@ $(document).ready(function() {
     LoadCommentFirstpage();
     LoadVotePerQuestion();
     LoadNumberOfComment();
-    reportComment();
+    // reportComment();
 
     function LoadNumberOfComment() {
         $.getJSON("api/comment/readByQuestionId.php?questionId=" +ID, function(data) {
@@ -162,7 +162,7 @@ $(document).ready(function() {
                     </li>
                     <div id='page-content'></div>`;
 
-                    
+                    reportComment();
                     read_comment_html +=`
 
                     <button type="button" class="btn btn-link reportbtn" data-toggle="modal" data-target="#exampleModal" value=` +
@@ -390,18 +390,14 @@ $(document).ready(function() {
         var createreportForm = $(this);
         var jwt = getCookie('jwt');
         if (jwt == "") {
-            $('#response').html(
+            $('#responsereport').html(
                 "<div class='alert alert-danger'>Bạn phải đăng nhập để report cho câu trả lời này!</div>"
             );
         } else {
             var report = createreportForm.serializeObject()
             report.jwt = jwt;
-
             report.commentId = commentId;
-            //report.commentId = $("input[name=reportbtn]").val();
-            console.log(report.commentId);
             var form_data = JSON.stringify(report);
-
             $.ajax({
                 url: "api/report/create.php",
                 type: "POST",
@@ -411,8 +407,6 @@ $(document).ready(function() {
                     $('#responsereport').html(
                         "<div class='alert alert-success'>Gửi report thành công!</div>"
                     );
-
-
                 },
                 error: function(xhr, resp, text) {
                     $('#responsereport').html(

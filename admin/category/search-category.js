@@ -9,10 +9,7 @@ $(document).ready(function(){
             readProductsTemplate(data, keywords);
  
             changePageTitle("Tìm kiếm danh mục: " + keywords);
- 
-        });
- 
+        }); 
         return false;
-    });
- 
+    }); 
 });

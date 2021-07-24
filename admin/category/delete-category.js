@@ -1,13 +1,7 @@
 $(document).ready(function(){
- 
-    // will run if the delete button was clicked
     $(document).on('click', '.delete-product-button', function(){
-        // product id will be here
-        // get the product id
 		var ID = $(this).attr('data-id');
-		// bootbox for good looking 'confirm pop up'
-		bootbox.confirm({
-		 
+		bootbox.confirm({		 
 		    message: "<h4>Bạn có chắc muốn xóa?</h4>",
 		    buttons: {
 		        confirm: {
@@ -21,15 +15,12 @@ $(document).ready(function(){
 		    },
 		    callback: function (result) {
 		    	if(result==true){
-				    // send delete request to api / remote server
 				    $.ajax({
 				        url: "../api/category/delete.php",
 				        type : "DELETE",
 				        dataType : 'json',
 				        data : JSON.stringify({ ID: ID }),
 				        success : function(result) {
-				 
-				            // re-load list of products
 				            showProducts();
 				        },
 				        error: function(xhr, resp, text) {

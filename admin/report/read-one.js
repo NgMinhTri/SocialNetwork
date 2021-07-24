@@ -3,6 +3,7 @@ $(document).ready(function(){
     $(document).on('click', '.read-one-report-button', function(){
 
 		var ID = $(this).attr('data-id');
+        var i = 0;
         $.getJSON("../api/report/readByCommentId.php?commentId=" + ID, function(data){
 
 		var read_report_html=`
@@ -12,6 +13,7 @@ $(document).ready(function(){
 
         <table class='table table-bordered table-hover'>
             <tr>
+                <th class='w-5-pct text-align-center'>STT</th>
                 <th class='w-15-pct text-align-center'>Nội dung</th>
                 <th class='w-10-pct text-align-center'>Ngày tạo</th>
                 <th class='w-5-pct text-align-center'>Loại</th>
@@ -19,8 +21,9 @@ $(document).ready(function(){
             </tr>`;
 
             $.each(data.records, function(key, val) {
+                i = i + 1;
     			read_report_html+=`<tr>
-     
+                <td>` + i + `</td>
 	            <td>` + val.content + `</td>
 	            <td>` + val.CreatedDate + `</td>
             	<td>` + val.Type + `</td>

@@ -14,13 +14,16 @@
                         <h3>Các câu hỏi thuộc danh mục: <a id="catName"></a></h3>
                     </section>
                     <section class="span8 articles-list">
+
                         <label for="sort">Sắp xếp theo:</label>
-                        <select id="sort">                      
-                            <option value="newest">Mới nhất</option>
-                            <option value="oldest">Cũ nhất</option>
-                            <option value="mostlike">Nhiều lượt vote nhất</option>
-                            <option value="today">Hôm nay</option>
+                        <select id="sort">
+                            <option class="op" value="newest">Mới nhất</option>
+                            <option class="op" value="oldest">Cũ nhất</option>
+                            <option class="op" value="mostlike">Nhiều lượt vote nhất</option>
+                            <option class="op" value="today">Hôm nay</option>
                         </select>
+
+
                     </section>
                     <section class="span4 articles-list">
                         <div id="showQuestionByCategoryID"></div>
@@ -43,12 +46,25 @@ $(document).ready(function() {
 
     function showQuestionByCategoryIDFirstpage() {
         var json_url = "api/question/readByCatId.php?catId=" + ID;
-        if ($("#sort").val()=="mostlike"){
-            showQuestionByCategoryID("api/question/readByCatIdOrderByVote.php?catId=" + ID);
-        }
-        else{
         showQuestionByCategoryID(json_url);
-        }
+        // var selectedOptionVal = $('#sort').find(":selected").val();
+        // console.log(selectedOptionVal);
+        $('select').on('change', function() {
+            $("#showQuestionByCategoryID").html("");
+            if (this.value =="mostlike"){
+                showQuestionByCategoryID("api/question/readByCatIdOrderByVote.php?catId=" + ID);
+            }
+            else if(this.value=="newest"){
+                showQuestionByCategoryID(json_url);
+            }
+            else if(this.value=="today"){
+                showQuestionByCategoryID("api/question/readLastestByCatId.php?catId=" + ID);
+            }
+            else if(this.value=="oldest"){
+                showQuestionByCategoryID("api/question/readByCatIdFromOldest.php?catId=" + ID);
+            }
+        });
+        //showQuestionByCategoryID(json_url);
     }
 
     function showQuestionByCategoryID(json_url) {

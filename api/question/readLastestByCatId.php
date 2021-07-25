@@ -1,12 +1,8 @@
 <?php
-// required headers
+// required header
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Credentials: true");
-header('Content-Type: application/json');
+header("Content-Type: application/json; charset=UTF-8");
   
-// include database and object files
 include_once '../config/database.php';
 include_once '../objects/question.php';
   
@@ -14,11 +10,8 @@ $database = new Database();
 $db = $database->getConnection();
   
 $question = new Question($db);
-  
-$question->catId = isset($_GET['catId']) ? $_GET['catId'] : die();
-  
-$stmt = $question->readByCatIdOrderByVote();
-  
+
+$stmt = $question->readLastestByCatId();
 $num = $stmt->rowCount();
   
 if($num>0){
@@ -31,7 +24,6 @@ if($num>0){
         $question_item=array(
             "ID" => $ID,
             "catId" => $catId,
-            "userId" => $userId,
             "Title" => $Title,
             "Description" => $Description,
             "CreateDate" => $CreateDate,
@@ -39,9 +31,8 @@ if($num>0){
             "NumberOfComments" => $NumberOfComments,
             "NumberOfVotes" => $NumberOfVotes,
             "NumberOfReports" => $NumberOfReports,
-            "catName" => $catName,
-            "likes"=> $row['likes']
-        );
+            "catName" => $catName
+            );
         array_push($question_arr["records"], $question_item);
     }
 
@@ -51,8 +42,11 @@ if($num>0){
 }
   
 else{
+  
     http_response_code(404);
-
-    echo json_encode(array("message" => "Question does not exist."));
+  
+    echo json_encode(
+        array("message" => "No Question found.")
+    );
 }
 ?>

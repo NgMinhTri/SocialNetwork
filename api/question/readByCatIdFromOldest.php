@@ -17,7 +17,7 @@ $question = new Question($db);
   
 $question->catId = isset($_GET['catId']) ? $_GET['catId'] : die();
   
-$stmt = $question->readByCatIdOrderByVote();
+$stmt = $question->readByCatIdFromOldest();
   
 $num = $stmt->rowCount();
   
@@ -31,7 +31,6 @@ if($num>0){
         $question_item=array(
             "ID" => $ID,
             "catId" => $catId,
-            "userId" => $userId,
             "Title" => $Title,
             "Description" => $Description,
             "CreateDate" => $CreateDate,
@@ -39,9 +38,8 @@ if($num>0){
             "NumberOfComments" => $NumberOfComments,
             "NumberOfVotes" => $NumberOfVotes,
             "NumberOfReports" => $NumberOfReports,
-            "catName" => $catName,
-            "likes"=> $row['likes']
-        );
+            "catName" => $catName
+            );
         array_push($question_arr["records"], $question_item);
     }
 

@@ -309,8 +309,41 @@ class Comment{
         }
     }
 
+    function deleteCommentAutomatically(){
 
-       
-    
+        $query = "SELECT commentId FROM reports WHERE commentId = ?";
+        $stmt = $this->conn->prepare($query);     
+        $this->ID=htmlspecialchars(strip_tags($this->ID));    
+        $stmt->bindParam(1, $this->ID);
+
+        $stmt->execute();
+
+        if($stmt->rowCount() >= 5)
+        {
+            $query = "DELETE FROM reports WHERE commentId = ?";
+      
+            $stmt = $this->conn->prepare($query);
+          
+            $this->ID=htmlspecialchars(strip_tags($this->ID));
+          
+            $stmt->bindParam(1, $this->ID);
+
+            if($stmt->execute()){
+
+                $query = "DELETE FROM " . $this->table_name . " WHERE ID = ?";
+          
+                $stmt = $this->conn->prepare($query);
+              
+                $this->ID=htmlspecialchars(strip_tags($this->ID));
+              
+                $stmt->bindParam(1, $this->ID);
+                if($stmt->execute()){
+
+                    return true;
+                }
+                return false;
+            }
+        }       
+    }    
 }
 

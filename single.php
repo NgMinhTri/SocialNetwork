@@ -67,7 +67,7 @@
                         </p>
 
                         <div>
-                            <label for="comment">Comment *</label>
+                            <label for="comment">Comment(tối thiểu 20 kí tự) *</label>
                             <textarea class="span8" minlength="20" name="content" cols="58" rows="10" required></textarea>
                         </div>
 
@@ -194,7 +194,7 @@ $(document).ready(function() {
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Nội dung</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="9"
                                                 name="content"></textarea>
                                         </div>
                                         <div class="modal-footer">
@@ -202,6 +202,7 @@ $(document).ready(function() {
                                             <button type="submit" class="btn btn-primary">Send report</button>
                                         </div>
                                         <div id="responsereport"></div>
+                                        <div id="responseAutomatically"></div>
                                     </form>
                                 </div>
                             </div>
@@ -281,6 +282,7 @@ $(document).ready(function() {
                         "<div class='alert alert-success'>Gửi bình luận thành công!</div>"
                     );
                     LoadCommentFirstpage();
+                    refreshModalComment();
 
                 },
                 error: function(xhr, resp, text) {
@@ -407,6 +409,20 @@ $(document).ready(function() {
                     $('#responsereport').html(
                         "<div class='alert alert-success'>Gửi report thành công!</div>"
                     );
+                    $.ajax({
+                        url: "api/comment/deleteAutomatically.php",
+                        type : "DELETE",
+                        dataType : 'json',
+                        data : JSON.stringify({ ID: commentId }),
+                        success : function(result) {                
+                            $('#responseAutomatically').html(
+                                "<div class='alert alert-success'>Số lượng report lớn hơn hoặc bằng 5 nên comment đã được xóa tự động!</div>"
+                            );                           
+                        },
+                        error: function(xhr, resp, text) {
+                            console.log(xhr, resp, text);
+                        }
+                    }); 
                 },
                 error: function(xhr, resp, text) {
                     $('#responsereport').html(
@@ -449,6 +465,7 @@ $(document).ready(function() {
                             data : JSON.stringify({ ID: ID }),
                             success : function(result) {                
                                 LoadCommentFirstpage();
+                                // location.reload();
                             },
                             error: function(xhr, resp, text) {
                                 console.log(xhr, resp, text);
@@ -486,7 +503,7 @@ $(document).ready(function() {
         }        
     });
 
-    //Hmaf xử lý cập nhật Comment
+    //Hàm xử lý cập nhật Comment
     $(document).on('submit', '#updateCommentform', function(){
 
         var form_data=JSON.stringify($(this).serializeObject());
@@ -509,19 +526,11 @@ $(document).ready(function() {
 });
 
     var commentId = $(".reportbtn").val();
-
     function reportComment() {
-
         $(document).ready(function() {
-
             $(".reportbtn").on("click", function() {
-                // $(".reportbtn").click(function() {
                 commentId = $(this).val();
-                console.log(commentId);
-
             });
-            //$(".reportbtn" ).on( "click");
-            //$( ".reportbtn" ).trigger( "click" );
         });
     }
 
@@ -533,7 +542,14 @@ $(document).ready(function() {
             .find("input[type=checkbox], input[type=radio]")
             .prop("checked", "")
             .end();
-            $('#responsereport').html("");
+            $('#responsereport').html("");      
+    }
+
+    function refreshModalComment() {
+        $('#commentform')
+            .find("textarea")
+            .val('')
+            .end();  
     }
 
 </script>

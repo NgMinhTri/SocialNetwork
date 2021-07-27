@@ -37,8 +37,15 @@ if($jwt){
         if($question->create()){
                
             http_response_code(201);
-            
-            echo json_encode(array("message" => "Question đã được tạo."));
+         
+            $to_email = "buingocbaohan75@gmail.com";
+            $subject = "A question created";
+            $body = "A question with title = `$data->Title` is just created!";
+            $headers = "From: sender\'s email";
+
+            if (mail($to_email, $subject, $body, $headers)){$result= "success";} 
+            else {$result= "fail";}
+            echo json_encode(array("message" => "Question đã được tạo.", "sendmail"=>$result));
         }                       
         else{
             http_response_code(401);
@@ -65,4 +72,3 @@ else{
 }
 
 ?>
-    

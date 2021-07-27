@@ -183,6 +183,9 @@ class Category{
         $stmt->execute();
       
         return $stmt;
-    }          
+    }   
+    function sortVotes(){
+        
+    }
 }
 ?>

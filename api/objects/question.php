@@ -82,6 +82,52 @@ class Question{
         return $stmt;
     }
 
+    public function readByCatIdFromOldest(){
+        // select all query
+        $query = "SELECT
+                    c.catName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    WHERE catId = ? AND q.Status = 1
+                ORDER BY
+                    q.CreateDate ASC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->catId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    public function readByCatIdOrderByVote(){
+        $query="SELECT
+        c.catName, q.*, u.questionId, COUNT(u.questionId) as likes
+    FROM
+        " . $this->table_name . " q
+        LEFT JOIN
+            votes u
+                ON q.ID = u.questionId
+         JOIN
+            categoryquestions c
+                ON q.catId = c.ID
+        WHERE catId = 40 AND q.Status = 1
+        GROUP BY u.questionId
+        ORDER BY COUNT(u.questionId) DESC;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->catId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+    
     public function readByLabelId(){
         $query = "SELECT
                     q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.Status
@@ -144,6 +190,29 @@ class Question{
                             ON q.userId = u.ID
 
                     WHERE q.CreateDate = current_date() AND q.Status = 1
+
+                    ORDER BY
+                    q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    public function readLastestByCatId(){
+        // select all query
+        $query = "SELECT
+                    c.catName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    WHERE q.CreateDate = current_date() AND q.Status = 1 AND c.ID=?
 
                     ORDER BY
                     q.CreateDate DESC";

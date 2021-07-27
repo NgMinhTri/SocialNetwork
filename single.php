@@ -24,7 +24,7 @@
 
                     <div class="post-meta clearfix">
                         <span class="date" id="CreateDate"></span>
-                        <span class="category"><a href="#" class="catName"></a></span>
+                        <span class="category"><a  class="catName"></a></span>
                         <span class="comments"><a class="numberComment">0</a> comments</span>
                         <span class="like-count">0</span>
                     </div>
@@ -111,9 +111,8 @@ $(document).ready(function() {
         $("#Title").html(`<div>` + data.Title + `</div>`);
         $("#Description").html(`<div>` + data.Description + `</div>`);
         $("#CreateDate").html(`<div>` + data.CreateDate + `</div>`);
-        $(".catName").html(`<a>` + data.catName + `</a>`);
+        $(".catName").html(`<a href="category.php?catId=` +data.catId+ `">` +data.catName+ `</a>`);
     });
-
 
     function LoadCommentFirstpage() {
         var json_url = "api/comment/read_paging.php?questionId=" + ID;

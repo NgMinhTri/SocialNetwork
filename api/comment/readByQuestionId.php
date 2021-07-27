@@ -47,6 +47,6 @@ if($num>0){
 else{
     http_response_code(404);
 
-    echo json_encode(array("message" => "Category does not exist."));
+    echo json_encode(array("message" => "Comment does not exist."));
 }
 ?>

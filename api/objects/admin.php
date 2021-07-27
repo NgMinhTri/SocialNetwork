@@ -29,8 +29,22 @@ class Admin{
       
     //     return $stmt;
     // }
+        function getAdmin(){
+            $query = "SELECT
+                    Id, firstname, lastname, email
+                FROM
+                    " . $this->table_name . "";
+      
+        $stmt = $this->conn->prepare( $query );
+      
+        $stmt->execute();
+      
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        return $row['email'];
+        }
 
-    function readOne(){
+        function readOne(){
         
         $query = "SELECT
                     Id, firstname, lastname, email

@@ -308,6 +308,7 @@ class Question{
       
         // set values to object properties
         $this->catName = $row['catName'];
+        $this->catId = $row['catId'];
         $this->Description = $row['Description'];
         $this->Title = $row['Title'];
         $this->UserName = $row['UserName'];

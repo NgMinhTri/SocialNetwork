@@ -211,8 +211,11 @@
     $(document).ready(function() {
 
         var ID = location.search.replace('?questionId=', '');
-        LoadCommentFirstpage();
-        LoadVotePerQuestion();
+        setInterval(function() {
+            LoadCommentFirstpage();
+            LoadVotePerQuestion();
+        }, 1000);
+
 
         $.getJSON("api/question/read_one.php?ID=" + ID, function(data) {
 
@@ -545,7 +548,7 @@
             .find("input[type=checkbox], input[type=radio]")
             .prop("checked", "")
             .end();
-            $('#responsereport').html("");
+        $('#responsereport').html("");
     }
 
     //$('.modal-body', '#exampleModal').empty();

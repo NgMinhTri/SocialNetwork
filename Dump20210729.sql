@@ -123,7 +123,7 @@ CREATE TABLE `comments` (
   KEY `ownerUserId` (`ownerUserId`),
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`questionId`) REFERENCES `questions` (`ID`),
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`ownerUserId`) REFERENCES `dbuser` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (75,83,11,'sakfgdsjfgdsgfsgfss','2021-07-17 20:38:04','2021-07-22 21:18:10'),(76,83,11,'ádgfhgyjuh','2021-07-17 20:38:20',NULL),(78,83,11,'oki\r\n\r\n','2021-07-18 10:59:29',NULL),(109,84,10,'dfgdfhgfjjhkjljlk;lkkl;l;','2021-07-23 20:25:47','2021-07-24 12:18:18'),(110,90,10,'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj','2021-07-23 21:16:01','2021-07-23 21:16:07'),(111,86,10,'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff','2021-07-24 19:07:34','2021-07-24 19:07:43');
+INSERT INTO `comments` VALUES (144,112,10,'For dictionaries x and y, z becomes a shallowly-merged dictionary with values from y replacing those from x.','2021-07-28 21:49:14','2021-07-28 21:49:35'),(146,142,10,'If you just want to check whether there\'s any value, you can do if (strValue) {\r\n    //do something\r\n}','2021-07-29 19:21:54',NULL),(147,142,10,'I have tried several of the examples suggested here. My goal was to not only be able to check for empty, but also !empty. This was the result The only thing I could not find in any of these solutions is how to detect an undefined within the function if it has not, at least, been declared. perhaps that is not possible.','2021-07-29 19:22:23',NULL),(148,141,10,'I have a function that does a foreach loop in a list of views and needs to send an AJAX request for each view in the loop. When it gets the results in the success function, it checked if a specific Id is returned and, if it is, adds this view to a selectBox. The problem is that when I tried to define the .change event on the selectBox it gave me an error as no option have been added. I have thought about adding ajaxStop, but I have other different AJAX request. Does anybody knows how could i wait till those Ajax request have been finished, but no others','2021-07-29 19:23:34',NULL),(149,141,10,'Think of it like you\'re just calling JavaScript functions. You can\'t use a for loop where the arguments to a function call would go:','2021-07-29 19:23:56',NULL),(150,138,10,'phải port này không bạn','2021-07-29 19:25:05',NULL),(151,138,10,'Bạn thử bỏ s ở https đi xem','2021-07-29 19:25:15',NULL),(152,139,10,'Dùng hẳn VNPay cho tiện bác ơi','2021-07-29 19:25:39',NULL),(153,139,10,'có quá nhiều id cùng tên \'frmMaintainance\' sao ý bạn','2021-07-29 19:25:51',NULL),(154,140,10,'Quá ngon luôn anh.aaaaaaaaaaaaaa','2021-07-29 19:26:45',NULL),(155,140,10,'Em mở f12 lên rồi xem tab network xem request đẩy lên lỗi gì','2021-07-29 19:26:53',NULL);
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `labelinquestion` (
   KEY `questionId` (`questionId`),
   CONSTRAINT `labelinquestion_ibfk_1` FOREIGN KEY (`labelId`) REFERENCES `labels` (`ID`),
   CONSTRAINT `labelinquestion_ibfk_2` FOREIGN KEY (`questionId`) REFERENCES `questions` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `labelinquestion` (
 
 LOCK TABLES `labelinquestion` WRITE;
 /*!40000 ALTER TABLE `labelinquestion` DISABLE KEYS */;
-INSERT INTO `labelinquestion` VALUES (7,18,77),(14,19,83),(15,19,84),(16,18,85),(17,2,86),(20,1,88),(21,8,89),(22,12,89),(23,1,90),(24,2,90);
+INSERT INTO `labelinquestion` VALUES (47,4,112),(48,22,112),(49,4,113),(75,1,138),(76,1,139),(77,1,140),(78,23,140),(79,2,141),(80,24,142);
 /*!40000 ALTER TABLE `labelinquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +205,7 @@ CREATE TABLE `labels` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `labelName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +214,7 @@ CREATE TABLE `labels` (
 
 LOCK TABLES `labels` WRITE;
 /*!40000 ALTER TABLE `labels` DISABLE KEYS */;
-INSERT INTO `labels` VALUES (1,'C#'),(2,'Java'),(3,'Business Inteligence'),(4,'Python'),(5,'Javascript'),(6,'PHP'),(7,'iPhone'),(8,'SQL'),(9,'Microsoft SQL Server'),(10,'MySQL'),(11,'NoSQL'),(12,'RDBMS'),(13,'Exel'),(14,'Word'),(15,'Win10'),(16,'iOS 14'),(17,'DataWarehouse'),(18,'JUnit '),(19,'HCMUTE ');
+INSERT INTO `labels` VALUES (1,'C#'),(2,'Java'),(3,'Business Inteligence'),(4,'Python'),(5,'Javascript'),(6,'PHP'),(7,'iPhone'),(8,'SQL'),(9,'Microsoft SQL Server'),(10,'MySQL'),(11,'NoSQL'),(12,'RDBMS'),(13,'Exel'),(14,'Word'),(15,'Win10'),(16,'iOS 14'),(17,'DataWarehouse'),(18,'JUnit '),(19,'HCMUTE '),(20,'Android'),(21,'listview'),(22,'extend'),(23,' asp.net'),(24,'JS');
 /*!40000 ALTER TABLE `labels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +242,7 @@ CREATE TABLE `questions` (
   KEY `userId` (`userId`),
   CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`catId`) REFERENCES `categoryquestions` (`ID`),
   CONSTRAINT `questions_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `dbuser` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (6,40,10,'Outlook 2016 Dropping Connectivity','We are having issues where users are losing connection to their Outlook mailboxes. This is happening frequently and then resolving itself. It is unrepeatable. I believe it is ADFS related as we have just implemented adfs WAP servers.','2014-06-01','2014-06-01',NULL,NULL,NULL,'1'),(77,40,10,'học JUnit ','Ac cho e xin review ngành này của HCMUTE với ? Ngành này có liên quan nhiều đến lập trình ko hay chỉ phần cứng thôi ?','2021-07-15',NULL,NULL,NULL,NULL,'1'),(83,41,10,'Ac cho e xin review ngành này của HCMUTE ','tryhgfhgjhbjhkmjnkjkjkjkjkjkjk','2021-07-17',NULL,NULL,NULL,NULL,'1'),(84,41,11,'Ac cho e xin review ngành này của HCMUTE ','r6utyuty','2021-07-18',NULL,NULL,NULL,NULL,'1'),(85,41,11,'OKie','jytjjk','2021-07-18',NULL,NULL,NULL,NULL,'1'),(86,41,11,'Ac cho e xin review ngành này của HCMUTE ','gjgjghkh','2021-07-18',NULL,NULL,NULL,NULL,'1'),(88,41,10,'hhihihhihihihih','àdghmjgfdsfg','2021-07-20',NULL,NULL,NULL,NULL,'1'),(89,41,10,'fdsghgjhgghkjk','ghkhjkhjkjhkhj','2021-07-20',NULL,NULL,NULL,NULL,'1'),(90,41,10,'test ngày thứ 4 21/7/2021','dfghjklhg','2021-07-21',NULL,NULL,NULL,NULL,'1');
+INSERT INTO `questions` VALUES (112,40,10,'What is the difference between Python\'s list methods append and extend?','What\'s the difference between the list methods append() and extend()','2021-07-28',NULL,NULL,NULL,NULL,'1'),(113,40,10,'What is the difference between __str__ and __repr__?','What is the difference between __str__ and __repr__ in Python?','2021-07-28',NULL,NULL,NULL,NULL,'1'),(114,40,10,'Issues with the QNA Maker REST API Get Operation Details','We are using Qna Maker REST API V4.0 API and using the Create Knowledgebase API for creating a new knowledgebase. We got the Response code 200 and &quot;operationState&quot;: &quot;NotStarted&quot;, In the Next Step, without any delay we are calling the next API Get Operation Details to get the operation details and mostly, We are getting &quot;operationState&quot;: &quot;NotStarted&quot;, But after retry in sometime, we are getting response &quot;operationState&quot;: &quot;Succeeded&quot; Do we Need to Put any delay between this API Call, Because in the API documentation It’s not mentioned for any delay or wait.','2021-07-28',NULL,NULL,NULL,NULL,'1'),(138,41,10,'Ac cho e xin review ngành này của HCMUTE ','Ac cho e xin review ngành này của HCMUTE ','2021-07-29',NULL,NULL,NULL,NULL,'1'),(139,40,10,'Windows authentication for SignalR service hosted in Kestrel (AspNet Core 5.0)','I have a SignalR (AspNet Core 5.0) hosted in a console app using Kestrel as the web host.\r\n\r\nI want to access the user Identity of any request in a Hub implementation, when accessing the following the Identity values are NULL.\r\n\r\nI\'ve looked at the available documentation on MSDN and made the following changes, but not getting the Identity populated as I expected, also not finding any examples for AspNet Core 5.0 anywhere.','2021-07-29',NULL,NULL,NULL,NULL,'1'),(140,40,10,'SignalR .NET Client connecting to Azure SignalR Service in a Blazor .NET Core 3 application','I\'m trying to make a connection between my ASP.NET Core 3.0 Blazor (server-side) application and the Azure SignalR Service. I\'ll end up injecting my SignalR client (service) in to a few Blazor components so they\'ll update my UI/DOM in realtime.\r\n\r\nMy issue is that I\'m receiving the following message when I call my .StartAsync() method on the hub connection:','2021-07-29',NULL,NULL,NULL,NULL,'1'),(141,40,10,'How to identify new element appear on the exixting webpage using selenide','I did automation for a React web application.\r\nLooking for help to achieve the below scenario,\r\n\r\nI\'m Clicking a button on the page. After clicking the button there is an image load to the page. To load the image it will take around 5 seconds.\r\nAlso, image load to newly created element,\r\n(In the page before click there is no div for the image load, but after I clicked on the button it appears on the page, and inside of that div image loaded).\r\nIn my method I\'m trying to verify the image is loaded after the button click.\r\nBut always it returns NoSuchElementException.','2021-07-29',NULL,NULL,NULL,NULL,'1'),(142,40,10,'How can I check for an empty/undefined/null string in JavaScript?','I saw this question, but I didn\'t see a JavaScript specific example. Is there a simple string.Empty available in JavaScript, or is it just a case of checking for &quot;&quot;?','2021-07-29',NULL,NULL,NULL,NULL,'1');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +276,7 @@ CREATE TABLE `reports` (
   KEY `reportUserId` (`reportUserId`),
   CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`commentId`) REFERENCES `comments` (`ID`),
   CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`reportUserId`) REFERENCES `dbuser` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +304,7 @@ CREATE TABLE `votes` (
   KEY `userId` (`userId`),
   CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`questionId`) REFERENCES `questions` (`ID`),
   CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `dbuser` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `votes` (
 
 LOCK TABLES `votes` WRITE;
 /*!40000 ALTER TABLE `votes` DISABLE KEYS */;
-INSERT INTO `votes` VALUES (50,77,10),(51,6,10),(52,83,10),(53,83,11),(54,6,11),(55,77,11),(56,84,11),(57,84,10),(58,88,10),(59,86,10);
+INSERT INTO `votes` VALUES (62,112,10),(63,139,10),(64,142,10),(65,141,10),(66,140,10);
 /*!40000 ALTER TABLE `votes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-24 19:41:17
+-- Dump completed on 2021-07-29 19:29:16

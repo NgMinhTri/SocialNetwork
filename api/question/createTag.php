@@ -64,9 +64,8 @@ if($jwt){
                 $mail->IsHTML(true); // send as HTML
                 $mail->Subject = "Question created Notification";
                 $mail->Body = "<b>A question with the info below has been created.</b>
-                <h5>Title: $data->Title</h5>
-                <h5>Description: $data->Description</h5>
-                <h5>Category ID: $data->catId</h5>
+                <p>Title: $data->Title</p>
+                <p>Description: $data->Description</p>
                 <p>Please take a look!</p>"; //HTML Body
                 $mail->AltBody = "This mail is sent from Nhom 4"; //Text Body
                 //$mail->SMTPDebug = 2;

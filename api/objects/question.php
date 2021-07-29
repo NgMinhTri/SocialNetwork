@@ -333,7 +333,7 @@ class Question{
                     categoryquestions c
                             ON q.catId = c.ID
                 WHERE
-                    q.Title LIKE ? OR q.Description LIKE ? OR c.catName LIKE ?
+                    (q.Title LIKE ? AND q.Status =1) OR (q.Description LIKE ? AND q.Status =1) OR (c.catName LIKE ? AND q.Status =1)
                 ORDER BY
                     q.CreateDate DESC";
     

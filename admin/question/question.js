@@ -73,9 +73,9 @@ function readQuestionNotApproveTemplate(data, keywords){
  
             <!-- creating our table heading -->
             <tr>
-                <th class='w-2-pct text-align-center'>STT</th>
+                <th class='w-5-pct text-align-center'>STT</th>
                 <th class='w-10-pct text-align-center'>Tiêu đề</th>
-                <th class='w-20-pct text-align-center'>Mô tả</th>
+                <th class='w-15-pct text-align-center'>Mô tả</th>
                 
                 <th class='w-10-pct text-align-center'>Action</th>
             </tr>`;

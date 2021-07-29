@@ -21,10 +21,10 @@
                 <div class="panel-body">
                     <div class="pull-right">
                         <div class="btn-group">
-                            <button id="Question-bnt" type="button" class="btn btn-success btn-filter"
-                                data-target="pagado">Question</button>
+                            <button id="Question-bnt" type="button" class="btn btn-success btn-filter"data-target="pagado">DS câu hỏi đã Post</button>
+                            
                             <button id="Answer-bnt" type="button" class="btn btn-warning btn-filter"
-                                data-target="pendiente">Answer</button>
+                                data-target="pendiente"> DS câu hỏi đã bình luận</button>
                         </div>
                     </div></br> </br> </br></br>
                     <div class="table-container">
@@ -47,9 +47,7 @@
 <script>
 $(document).ready(function() {
     var jwt = getCookie('jwt');
-    $.post("api/user/validate_token.php", JSON.stringify({
-        jwt: jwt
-    })).done(function(result) {
+    $.post("api/user/validate_token.php", JSON.stringify({jwt: jwt})).done(function(result) {
         var html = "";
         $(document).on('click', '#Question-bnt', function() {
             $("#question").html("");
@@ -120,53 +118,43 @@ $(document).ready(function() {
                 function(data) {
                     var i=1;
                     html = `<tbody>
-                    <tr data-status="question" class="selected">
-                        <td class ="ta">
-                            <h5>Số thứ tự</h5><hr>
-                        </td>
-                        <td class ="ta">
-                            <h5>Tiêu đề</h5><hr>
-                        </td>
-                        <td class ="ta">
-                            <h5>Câu hỏi</h5><hr>
-                        </td>
-                        <td class ="ta">
-                            <h5>Câu trả lời</h5><hr>
-                        </td>
-                        <td class ="ta">
-                            <h5>Ngày trả lời</h5><hr>
-                        </td>
-                    </tr></tbody>`;
+                        <tr data-status="question" class="selected">
+                            <td class ="ta">
+                                <h5>Số thứ tự</h5><hr>
+                            </td>
+                            <td class ="ta">
+                                <h5>Tiêu đề</h5><hr>
+                            </td>
+                            
+                            
+                            <td class ="ta">
+                                <h5>Lần comment mới nhất</h5><hr>
+                            </td>
+                        </tr>
+                    </tbody>`;
                     $.each(data.records, function(key, val) {
                         // read products button will be here
-                        html += `<tbody>
-                    <tr data-status="question" class="selected">
-                                        <td class ="ta">
-                                                <h6>` + i + `</h6>
-                                        </td>
-                                        <td class ="ta">
-                                            <u style="font-weight:bold;"><a href="single.php?questionId=` + val.QuestionId + `">` + val
-                            .Question + `</a>  </u>
-                                        </td>
-                                        <td class ="ta">
-                                            <h5>` + val.Description + `</h5>
-                                        </td>
-                                        <td class ="ta">                                                          
-                                            <h5> ` + val.Content + `
-                                            </h5>                                                    
-                        
-                                        </td>
-                                        <td class ="ta">
-                                            <h5>` + val.CreateDate + `</h5>
-                                        </td>
-                            </tr> </tbody>`;
-                            i++;
+                    html += `<tbody>
+                        <tr data-status="question" class="selected">
+                            <td >\
+                                <h6>` + i + `</h6>
+                            </td>
+                            <td >
+                                <u>
+                                    <a href="single.php?questionId=` + val.QuestionId + `">` + val.Question + `</a>  
+                                </u>
+                            </td>
+                                            
+                            <td >
+                                <a>` + val.CreateDate + `</a>
+                            </td>
+                        </tr> 
+                    </tbody>`;
+                    i++;
                     });
                     $("#question").html(html);
                 });
-
         });
-
     })
     // const xhr = new XMLHttpRequest();
     // xhr.open('GET', 'http://localhost/SOCIALNETWORK/api/user/read.php')

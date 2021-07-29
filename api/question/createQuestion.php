@@ -24,11 +24,10 @@ $question = new Question($db);
 $target_dir = $_SERVER['DOCUMENT_ROOT'].'/socialnetwork/images/';
 
 $data = json_decode(file_get_contents("php://input"));
-print_r($data);
 
 $jwt=isset($data->jwt) ? $data->jwt : "";
 
-// if($jwt){
+if($jwt){
     if(!$_FILES['filetoupload']['name'] ){
         try {
             $decoded = JWT::decode($jwt, $key, array('HS256'));
@@ -98,10 +97,12 @@ $jwt=isset($data->jwt) ? $data->jwt : "";
             }
         }
     }
-// }
-// else{
+}
  
-//     http_response_code(401);
-//     echo json_encode(array("message" => "Access denied.", "jwt"=> $data));
-// }
+else{
+ 
+    http_response_code(401);
+    echo json_encode(array("message" => "Access denied."));
+}
 ?>
+    

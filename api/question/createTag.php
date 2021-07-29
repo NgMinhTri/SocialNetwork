@@ -15,11 +15,18 @@ use \Firebase\JWT\JWT;
 
 include_once '../config/database.php';
 include_once '../objects/question.php';
+include_once '../objects/admin.php';
+
+include "../mailclass/class.phpmailer.php"; 
+include "../mailclass/class.smtp.php";
+
+
   
 $database = new Database();
 $db = $database->getConnection();
   
 $question = new Question($db);
+$admin=new Admin($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -37,19 +44,47 @@ if($jwt){
         $question->labelName = $data->labelName;
 
         if($question->createQuestionTag()){
-               
                 http_response_code(201);
-                echo json_encode(array("message" => "Question đã được tạo."));
+                $mail = new PHPMailer();
+                $mail->IsSMTP(); // set mailer to use SMTP
+                $mail->Host = "smtp.gmail.com"; // specify main and backup server
+                $mail->Port = 465; // set the port to use
+                $mail->SMTPAuth = true; // turn on SMTP authentication
+                $mail->SMTPSecure = 'ssl';
+                $mail->Username = "udptnhom4@gmail.com"; // your SMTP username or your gmail username
+                $mail->Password = "UdptNhom4@"; // your SMTP password or your gmail password
+                $from = "udptnhom4@gmail.com"; // Reply to this email
+                $to=$admin->getAdmin(); // Recipients email ID
+                $name="Nhom 4"; // Recipient's name
+                $mail->From = $from;
+                $mail->FromName = "Nhom 4"; // Name to indicate where the email came from when the recepient received
+                $mail->AddAddress($to,$name);
+                $mail->AddReplyTo($from,"Nhom 4");
+                $mail->WordWrap = 50; // set word wrap
+                $mail->IsHTML(true); // send as HTML
+                $mail->Subject = "Question created Notification";
+                $mail->Body = "<b>A question with the info below has been created.</b>
+                <p>Title: $data->Title</p>
+                <p>Description: $data->Description</p>
+                <p>Please take a look!</p>"; //HTML Body
+                $mail->AltBody = "This mail is sent from Nhom 4"; //Text Body
+                //$mail->SMTPDebug = 2;
+                if(!$mail->Send())
+                {
+                    $result="fail";
+                }
+                else
+                {
+                    $result="success";
+                }
+                echo json_encode(array("message" => "Question đã được tạo.", "sendmail"=>$result));
                
             }                       
             else{
                 http_response_code(401);
             
                 echo json_encode(array("message" => "Không thể tạo question."));
-            }
-        
-        
-       
+            }      
     }
     catch (Exception $e){
     
@@ -70,4 +105,3 @@ else{
 }
 
 ?>
-    

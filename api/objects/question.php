@@ -20,8 +20,10 @@ class Question{
     public $Status;
     public $catName;
     public $UserName;
+    public $fileName;
     public $labelId=array();
     public $labelName=array();
+   
 
  
     // constructor
@@ -81,6 +83,52 @@ class Question{
         return $stmt;
     }
 
+    public function readByCatIdFromOldest(){
+        // select all query
+        $query = "SELECT
+                    c.catName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    WHERE catId = ? AND q.Status = 1
+                ORDER BY
+                    q.CreateDate ASC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->catId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    public function readByCatIdOrderByVote(){
+        $query="SELECT
+        c.catName, q.*, u.questionId, COUNT(u.questionId) as likes
+    FROM
+        " . $this->table_name . " q
+        LEFT JOIN
+            votes u
+                ON q.ID = u.questionId
+         JOIN
+            categoryquestions c
+                ON q.catId = c.ID
+        WHERE catId = ? AND q.Status = 1
+        GROUP BY u.questionId
+        ORDER BY COUNT(u.questionId) DESC;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->catId);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+    
     public function readByLabelId(){
         $query = "SELECT
                     q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.Status
@@ -143,6 +191,29 @@ class Question{
                             ON q.userId = u.ID
 
                     WHERE q.CreateDate = current_date() AND q.Status = 1
+
+                    ORDER BY
+                    q.CreateDate DESC";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    public function readLastestByCatId(){
+        // select all query
+        $query = "SELECT
+                    c.catName, q.ID, q.catId, q.userId, q.Title, q.Description, q.CreateDate, q.LastModifiedDate, q.NumberOfComments, q.NumberOfReports, q.NumberOfVotes, q.Status
+                FROM
+                    " . $this->table_name . " q
+                    LEFT JOIN
+                        categoryquestions c
+                            ON q.catId = c.ID
+                    WHERE q.CreateDate = current_date() AND q.Status = 1 AND c.ID=?
 
                     ORDER BY
                     q.CreateDate DESC";
@@ -238,6 +309,7 @@ class Question{
       
         // set values to object properties
         $this->catName = $row['catName'];
+        $this->catId = $row['catId'];
         $this->Description = $row['Description'];
         $this->Title = $row['Title'];
         $this->UserName = $row['UserName'];
@@ -261,7 +333,7 @@ class Question{
                     categoryquestions c
                             ON q.catId = c.ID
                 WHERE
-                    q.Title LIKE ? OR q.Description LIKE ? OR c.catName LIKE ?
+                    (q.Title LIKE ? AND q.Status =1) OR (q.Description LIKE ? AND q.Status =1) OR (c.catName LIKE ? AND q.Status =1)
                 ORDER BY
                     q.CreateDate DESC";
     
@@ -529,12 +601,143 @@ class Question{
                     }
                 }
             } 
-    }   
+        }   
         if ($result==1){
             return true;
         }  
         else{
             return false;
         }    
+    }
+
+
+
+
+
+    function createQuestion(){
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET
+                    Title=:Title, Description=:Description, catId=:catId, userId=:userId,
+                    CreateDate = CURDATE() , Status = 0 ";
+      
+        $stmt = $this->conn->prepare($query);
+      
+        $this->Title=htmlspecialchars(strip_tags($this->Title));
+        $this->Description=htmlspecialchars(strip_tags($this->Description));
+        $this->catId=htmlspecialchars(strip_tags($this->catId));
+        $this->userId=htmlspecialchars(strip_tags($this->userId));
+      
+        $stmt->bindParam(":Title", $this->Title);
+        $stmt->bindParam(":Description", $this->Description);
+        $stmt->bindParam(":catId", $this->catId);
+        $stmt->bindParam(":userId", $this->userId);
+      
+        if($stmt->execute()){
+
+            $questionId = $this->conn->lastInsertId(); 
+            foreach ($this->labelName as $label)
+            {
+                $query = "SELECT *
+                    FROM
+                        labels
+                    WHERE
+                        labelName = :labelName";
+
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(":labelName", $label);
+                $stmt->execute();
+                
+
+                if($stmt->rowCount()>0){
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sinlabelid=$row['ID'];
+                    $this->labelId[]=$row['ID']; 
+
+                    $query = "INSERT INTO labelinquestion
+                        SET
+                            labelId  = $sinlabelid,
+                            questionId = $questionId";
+                
+                    $stmt = $this->conn->prepare($query);
+                
+                    if($stmt->execute()){
+
+                       $query = "INSERT INTO attachments
+                        SET
+                            questionId = $questionId,
+                            fileName = :fileName";
+                
+                        $stmt = $this->conn->prepare($query);
+                        $stmt->bindParam(':fileName', $this->fileName);
+                    
+                        if($stmt->execute()){
+                           return true;
+                        }
+                    }
+                }
+                else{
+
+                    $query = "INSERT INTO labels
+                        SET
+                            labelName  = :labelName";
+                
+                    $stmt = $this->conn->prepare($query);
+                
+                    $stmt->bindParam(':labelName', $label);
+                
+                    if($stmt->execute()){
+
+                        $labelId = $this->conn->lastInsertId(); 
+
+                        $query = "INSERT INTO labelinquestion
+                            SET
+                                labelId  = $labelId,
+                                questionId = $questionId";
+                
+                        $stmt = $this->conn->prepare($query);
+                    
+                        if($stmt->execute()){
+
+                            $query = "INSERT INTO attachments
+                            SET
+                                questionId = $questionId,
+                                fileName = :fileName";
+                    
+                            $stmt = $this->conn->prepare($query);
+                            $stmt->bindParam(':fileName', $this->fileName);
+                        
+                            if($stmt->execute()){
+                               return true;
+                            }
+                        }
+                    }
+                }
+            } 
+        }   
+        return false; 
+    }
+
+    public function topQuestionInMonth(){
+        $query="SELECT
+        c.catName, q.*, u.questionId, COUNT(u.questionId) as likes
+    FROM
+    " . $this->table_name . " q
+        LEFT JOIN
+            votes u
+                ON q.ID = u.questionId
+         JOIN
+            categoryquestions c
+                ON q.catId = c.ID
+        WHERE q.Status = 1 and YEAR(q.CreateDate)=YEAR(CURRENT_DATE()) and MONTH(q.CreateDate)=MONTH(CURRENT_DATE())
+        GROUP BY u.questionId
+        ORDER BY COUNT(u.questionId) DESC
+        LIMIT 0, 5;";
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
     }
 }

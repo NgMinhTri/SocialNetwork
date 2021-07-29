@@ -12,6 +12,14 @@ $(document).ready(function(){
 		    var Status = data.Status;
 		    var catName = data.catName;
 		    var UserName = data.UserName;
+		    $.getJSON("../api/label/readByQuestionId.php?questionId=" + ID, function(data) {
+			    var read_tag_html = `<a>`;
+			    $.each(data.records, function(key, val) {
+			        read_tag_html += `<a>` + val.labelName + `</a>, `;
+			    });
+			    read_tag_html += `</a>`;
+			    var a= $("#getLabelInQuestionApprove").html(read_tag_html);
+		    });
 		     
 				var update_product_html=`
 				    <div id='read-products' class='btn btn-primary pull-right m-b-15px read-products-button'>
@@ -46,6 +54,11 @@ $(document).ready(function(){
 					        </tr>
 
 					        <tr>
+					            <td>Tag</td>
+					            <td id='getLabelInQuestionApprove'></td>
+					        </tr>
+
+					        <tr>
 					            <td>UserName</td>
 					            <td><input value=\"` + UserName + `\" type='text' name='' class='form-control' required /></td>
 					        </tr>
@@ -67,6 +80,9 @@ $(document).ready(function(){
 					 
 					    </table>
 					</form>`;
+
+					
+
 					$("#page-content").html(update_product_html);
 					 
 					changePageTitle("Duyệt câu hỏi: " +Title);

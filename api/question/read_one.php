@@ -24,6 +24,7 @@ if($question->Title != null){
     $question_arr = array(
         "ID" =>  $question->ID,
         "catName" => $question->catName,
+        "catId" => $question->catId,
         "UserName" => $question->UserName,
         "Title" => $question->Title,
         "Description" => $question->Description,

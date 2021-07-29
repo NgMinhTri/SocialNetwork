@@ -30,10 +30,16 @@ $(document).ready(function(){
 				        <td class='w-70-pct'>` + data.CreateDate + `</td>
 				    </tr>
 				     
-				     <tr>
+				    <tr>
 				        <td class='w-30-pct'>Danh mục</td>
 				        <td class='w-70-pct'>` + data.catName + `</td>
 				    </tr>
+
+				    <tr>
+				        <td class='w-30-pct'>Tag</td>
+				        <td class='w-70-pct' id='getLabelInQuestion'></td>
+				    </tr>
+
 				     <tr>
 				        <td class='w-30-pct'>UserName</td>
 				        <td class='w-70-pct'>` + data.UserName + `</td>
@@ -43,12 +49,24 @@ $(document).ready(function(){
 				 
 				    				 
 				</table>`;
+			$.getJSON("../api/label/readByQuestionId.php?questionId=" + ID, function(data) {
+			    var read_tag_html = `<a>`;
+			    $.each(data.records, function(key, val) {
+			        read_tag_html += `<a>` + val.labelName + `</a>, `;
+			    });
+			    read_tag_html += `</a>`;
+			    $("#getLabelInQuestion").html(read_tag_html);
+    		});
 			// inject html to 'page-content' of our app
 			$("#page-content").html(read_one_product_html);
 			 
 			// chage page title
 			changePageTitle("Câu hỏi: " + data.Title);
 		});
+
+		
     });
+
+    
  
 });

@@ -20,9 +20,10 @@ class Question{
     public $Status;
     public $catName;
     public $UserName;
+    public $fileName;
     public $labelId=array();
     public $labelName=array();
-    public $fileName;
+   
 
  
     // constructor
@@ -116,7 +117,7 @@ class Question{
          JOIN
             categoryquestions c
                 ON q.catId = c.ID
-        WHERE catId = 40 AND q.Status = 1
+        WHERE catId = ? AND q.Status = 1
         GROUP BY u.questionId
         ORDER BY COUNT(u.questionId) DESC;";
         $stmt = $this->conn->prepare($query);
@@ -610,6 +611,9 @@ class Question{
     }
 
 
+
+
+
     function createQuestion(){
         $query = "INSERT INTO
                     " . $this->table_name . "
@@ -665,7 +669,7 @@ class Question{
                             fileName = :fileName";
                 
                         $stmt = $this->conn->prepare($query);
-                        $stmt->bindParam(':fileName', $fileName);
+                        $stmt->bindParam(':fileName', $this->fileName);
                     
                         if($stmt->execute()){
                            return true;
@@ -701,7 +705,7 @@ class Question{
                                 fileName = :fileName";
                     
                             $stmt = $this->conn->prepare($query);
-                            $stmt->bindParam(':fileName', $fileName);
+                            $stmt->bindParam(':fileName', $this->fileName);
                         
                             if($stmt->execute()){
                                return true;
@@ -712,5 +716,28 @@ class Question{
             } 
         }   
         return false; 
+    }
+
+    public function topQuestionInMonth(){
+        $query="SELECT
+        c.catName, q.*, u.questionId, COUNT(u.questionId) as likes
+    FROM
+    " . $this->table_name . " q
+        LEFT JOIN
+            votes u
+                ON q.ID = u.questionId
+         JOIN
+            categoryquestions c
+                ON q.catId = c.ID
+        WHERE q.Status = 1 and YEAR(q.CreateDate)=YEAR(CURRENT_DATE()) and MONTH(q.CreateDate)=MONTH(CURRENT_DATE())
+        GROUP BY u.questionId
+        ORDER BY COUNT(u.questionId) DESC
+        LIMIT 0, 5;";
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
     }
 }

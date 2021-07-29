@@ -4,7 +4,7 @@
         <div class="row">
           <div class="span3">
             <section class="widget">
-              <h3 class="title">How it works</h3>
+              <h3 class="title">Social Network</h3>
               <div class="textwidget">
                 <p>
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
@@ -21,49 +21,45 @@
           </div>
           <div class="span3">
             <section class="widget">
-              <h3 class="title">Categories</h3>
+              <h3 class="title">Về Website</h3>
               <ul>
                 <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet,"
-                    >Advanced Techniques</a
+                  <a href="index.php" title="Lorem ipsum dolor sit amet,"
+                    >Home</a
                   >
                 </li>
                 <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet,"
-                    >Designing in WordPress</a
+                  <a href="ask.php" title="Lorem ipsum dolor sit amet,"
+                    >Tạo câu hỏi</a
                   >
                 </li>
                 <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet,"
-                    >Server &amp; Database</a
+                  <a href="home-categories-description.php.php" title="Lorem ipsum dolor sit amet,"
+                    >Danh mục</a
                   >
                 </li>
                 <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet, "
-                    >Theme Development</a
+                  <a href="home-label-description.php" title="Lorem ipsum dolor sit amet,"
+                    >Tag</a
                   >
                 </li>
                 <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet,"
-                    >Website Dev</a
+                  <a href="profile.php" title="Lorem ipsum dolor sit amet, "
+                    >Profile</a
                   >
                 </li>
                 <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet,"
-                    >WordPress for Beginners</a
+                  <a href="history.php" title="Lorem ipsum dolor sit amet,"
+                    >History</a
                   >
                 </li>
-                <li>
-                  <a href="#" title="Lorem ipsum dolor sit amet, "
-                    >WordPress Plugins</a
-                  >
-                </li>
+                
               </ul>
             </section>
           </div>
           <div class="span3">
             <section class="widget">
-              <h3 class="title">Latest Tweets</h3>
+              <h3 class="title">Tweet mới nhất</h3>
               <div id="twitter_update_list">
                 <ul>
                   <li>No Tweets loaded !</li>

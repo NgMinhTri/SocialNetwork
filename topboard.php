@@ -8,7 +8,7 @@
 <?php include 'inc/wrapper.php';?>
 <div class="page-container">
     <div class="container">
-        <h2>Bảng xếp hạng theo tháng</h2>
+        <h2>Bảng xếp hạng tháng <?php echo date('m')?></h2>
         <div class="container-table100">
             <div class="wrap-table100">
                 <div class="table100 ver1 m-b-110">

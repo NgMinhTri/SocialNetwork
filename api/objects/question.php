@@ -118,7 +118,7 @@ class Question{
             categoryquestions c
                 ON q.catId = c.ID
         WHERE catId = ? AND q.Status = 1
-        GROUP BY u.questionId
+        GROUP BY q.ID
         ORDER BY COUNT(u.questionId) DESC;";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->catId);
@@ -730,7 +730,7 @@ class Question{
             categoryquestions c
                 ON q.catId = c.ID
         WHERE q.Status = 1 and YEAR(q.CreateDate)=YEAR(CURRENT_DATE()) and MONTH(q.CreateDate)=MONTH(CURRENT_DATE())
-        GROUP BY u.questionId
+        GROUP BY q.ID
         ORDER BY COUNT(u.questionId) DESC
         LIMIT 0, 5;";
         $stmt = $this->conn->prepare($query);

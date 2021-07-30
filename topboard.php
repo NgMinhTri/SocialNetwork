@@ -17,7 +17,6 @@
                             <thead>
                                 <tr class="row100 head">
                                     <th class="cell100 column1">Tiêu đề</th>
-                                    <th class="cell100 column2">Mô Tả</th>
                                     <th class="cell100 column3">Danh mục</th>
                                     <th class="cell100 column4">Ngày tạo</th>
                                     <th class="cell100 column5">Số vote</th>
@@ -48,8 +47,7 @@ $(document).ready(function() {
             $.each(data.records, function(key, val) {
                 read_question_html += `
                 <tr class="row100 body">
-                                    <td class="cell100 column1">` + val.Title + `</td>
-                                    <td class="cell100 column2">` + val.Description + `</td>
+                                    <td class="cell100 column1"><a href="single.php?questionId=` + val.ID + `">` + val.Title + `</a></td>
                                     <td class="cell100 column3">` + val.catName + `</td>
                                     <td class="cell100 column4">` + val.CreateDate + `</td>
                                     <td class="cell100 column5">` + val.likes + `</td>

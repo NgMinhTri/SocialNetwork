@@ -9,6 +9,7 @@
         <li><a href="home-categories-description.php">Danh mục</a></li>
         <li><a href="home-label-description.php">Tag</a></li>
         <li><a href="ask.php">Đặt câu hỏi</a></li>
+        <li><a href="topboard.php">Top bài viết</a></li>
       </ul>
     </div>
   </section>
